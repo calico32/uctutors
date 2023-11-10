@@ -1,0 +1,9 @@
+syntax = "proto3";
+package api.v1;
+
+enum AuthSessionError {
+  AUTH_SESSION_ERROR_UNSPECIFIED = 0;
+  AUTH_SESSION_ERROR_NO_SESSION = 1;
+  AUTH_SESSION_ERROR_INVALID = 2;
+  AUTH_SESSION_ERROR_VALIDATION_FAILED = 3;
+}

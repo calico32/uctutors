@@ -1,0 +1,64 @@
+syntax = "proto3";
+package api.v1;
+
+import "google/protobuf/timestamp.proto";
+import "google/type/dayofweek.proto";
+import "google/type/interval.proto";
+
+message User {
+  string id = 1;
+  google.protobuf.Timestamp joined = 2;
+  google.protobuf.Timestamp updated = 3;
+
+  string email = 4;
+  string first_name = 5;
+  string last_name = 6;
+  School school = 7;
+  uint32 class_of = 8;
+  string bio = 9;
+  string avatar_id = 10;
+  string banner_id = 11;
+
+  repeated CampusAvailability campus_availability = 12;
+  repeated VirtualAvailability virtual_availability = 13;
+
+  repeated string topics = 14;
+
+  uint32 tutor_score = 15;
+  uint32 tutee_score = 16;
+
+  repeated Experience experiences = 17;
+}
+
+enum School {
+  SCHOOL_UNSPECIFIED = 0;
+  SCHOOL_MHS = 1;
+  SCHOOL_AAHS = 2;
+  SCHOOL_AIT = 3;
+  SCHOOL_APA = 4;
+  SCHOOL_UCTECH = 5;
+}
+
+message CampusAvailability {
+  bool p5 = 1;
+  bool p6 = 2;
+}
+
+message VirtualAvailability {
+  google.type.DayOfWeek day = 1;
+  google.type.Interval interval = 2;
+}
+
+message Experience {
+  string id = 1;
+  google.protobuf.Timestamp created = 2;
+  google.protobuf.Timestamp updated = 3;
+
+  string title = 4;
+  string description = 5;
+  repeated string skills = 6;
+  string image_id = 7;
+}
+
+service UserService {
+}

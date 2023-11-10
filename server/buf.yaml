@@ -1,0 +1,14 @@
+version: v1
+deps:
+  - buf.build/googleapis/googleapis
+breaking:
+  use:
+    - FILE
+lint:
+  use:
+    - DEFAULT
+  ignore_only:
+    PACKAGE_VERSION_SUFFIX:
+      - api/info.proto
+build:
+  excludes: [node_modules]

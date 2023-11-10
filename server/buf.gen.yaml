@@ -1,0 +1,25 @@
+version: v1
+managed:
+  enabled: true
+  java_package_prefix:
+    default: lol.calico.uctutors.generated
+    except:
+      - buf.build/googleapis/googleapis
+plugins:
+  - plugin: ts
+    out: ./lib/generated
+    strategy: all
+    path: ./node_modules/ts-proto/protoc-gen-ts_proto
+    opt:
+      - paths=source_relative
+      # - importSuffix=.js
+      - outputServices=nice-grpc
+      - outputServices=generic-definitions
+      - useExactTypes=false
+      - esModuleInterop=true
+  - plugin: buf.build/grpc/kotlin:v1.4.0
+    out: ../app/src/main/java
+  - plugin: buf.build/grpc/java
+    out: ../app/src/main/java
+  - plugin: buf.build/protocolbuffers/kotlin
+    out: ../app/src/main/java

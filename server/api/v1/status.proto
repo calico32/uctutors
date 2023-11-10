@@ -1,0 +1,17 @@
+syntax = "proto3";
+package api.v1;
+
+message GetStatusResponse {
+  string status = 1;
+  AuthInfo auth_info = 2;
+}
+
+message GetStatusRequest {}
+
+service StatusService {
+  rpc GetStatus(GetStatusRequest) returns (GetStatusResponse);
+}
+
+message AuthInfo {
+  bool authenticated = 1;
+}

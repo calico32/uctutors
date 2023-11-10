@@ -1,0 +1,12 @@
+syntax = "proto3";
+package api.v1;
+
+service AuthService {
+  rpc Login(LoginRequest) returns (LoginResponse) {}
+}
+
+message LoginRequest {}
+
+message LoginResponse {
+  string url = 1;
+}
