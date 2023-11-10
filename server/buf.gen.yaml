@@ -23,3 +23,5 @@ plugins:
     out: ../app/src/main/java
   - plugin: buf.build/protocolbuffers/kotlin
     out: ../app/src/main/java
+  - plugin: buf.build/protocolbuffers/java
+    out: ../app/src/main/java

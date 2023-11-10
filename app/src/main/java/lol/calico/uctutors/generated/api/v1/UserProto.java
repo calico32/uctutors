@@ -85,8 +85,8 @@ public final class UserProto {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.google.protobuf.TimestampProto.getDescriptor(),
-          lol.calico.uctutors.generated.google.type.DayofweekProto.getDescriptor(),
-          lol.calico.uctutors.generated.google.type.IntervalProto.getDescriptor(),
+          com.google.type.DayofweekProto.getDescriptor(),
+          com.google.type.IntervalProto.getDescriptor(),
         });
     internal_static_api_v1_User_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -113,8 +113,8 @@ public final class UserProto {
         internal_static_api_v1_Experience_descriptor,
         new java.lang.String[] { "Id", "Created", "Updated", "Title", "Description", "Skills", "ImageId", });
     com.google.protobuf.TimestampProto.getDescriptor();
-    lol.calico.uctutors.generated.google.type.DayofweekProto.getDescriptor();
-    lol.calico.uctutors.generated.google.type.IntervalProto.getDescriptor();
+    com.google.type.DayofweekProto.getDescriptor();
+    com.google.type.IntervalProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

@@ -54,13 +54,13 @@ private static final long serialVersionUID = 0L;
    * <code>.google.type.DayOfWeek day = 1 [json_name = "day"];</code>
    * @return The day.
    */
-  @java.lang.Override public lol.calico.uctutors.generated.google.type.DayOfWeek getDay() {
-    lol.calico.uctutors.generated.google.type.DayOfWeek result = lol.calico.uctutors.generated.google.type.DayOfWeek.forNumber(day_);
-    return result == null ? lol.calico.uctutors.generated.google.type.DayOfWeek.UNRECOGNIZED : result;
+  @java.lang.Override public com.google.type.DayOfWeek getDay() {
+    com.google.type.DayOfWeek result = com.google.type.DayOfWeek.forNumber(day_);
+    return result == null ? com.google.type.DayOfWeek.UNRECOGNIZED : result;
   }
 
   public static final int INTERVAL_FIELD_NUMBER = 2;
-  private lol.calico.uctutors.generated.google.type.Interval interval_;
+  private com.google.type.Interval interval_;
   /**
    * <code>.google.type.Interval interval = 2 [json_name = "interval"];</code>
    * @return Whether the interval field is set.
@@ -74,15 +74,15 @@ private static final long serialVersionUID = 0L;
    * @return The interval.
    */
   @java.lang.Override
-  public lol.calico.uctutors.generated.google.type.Interval getInterval() {
-    return interval_ == null ? lol.calico.uctutors.generated.google.type.Interval.getDefaultInstance() : interval_;
+  public com.google.type.Interval getInterval() {
+    return interval_ == null ? com.google.type.Interval.getDefaultInstance() : interval_;
   }
   /**
    * <code>.google.type.Interval interval = 2 [json_name = "interval"];</code>
    */
   @java.lang.Override
-  public lol.calico.uctutors.generated.google.type.IntervalOrBuilder getIntervalOrBuilder() {
-    return interval_ == null ? lol.calico.uctutors.generated.google.type.Interval.getDefaultInstance() : interval_;
+  public com.google.type.IntervalOrBuilder getIntervalOrBuilder() {
+    return interval_ == null ? com.google.type.Interval.getDefaultInstance() : interval_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -99,7 +99,7 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (day_ != lol.calico.uctutors.generated.google.type.DayOfWeek.DAY_OF_WEEK_UNSPECIFIED.getNumber()) {
+    if (day_ != com.google.type.DayOfWeek.DAY_OF_WEEK_UNSPECIFIED.getNumber()) {
       output.writeEnum(1, day_);
     }
     if (((bitField0_ & 0x00000001) != 0)) {
@@ -114,7 +114,7 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (day_ != lol.calico.uctutors.generated.google.type.DayOfWeek.DAY_OF_WEEK_UNSPECIFIED.getNumber()) {
+    if (day_ != com.google.type.DayOfWeek.DAY_OF_WEEK_UNSPECIFIED.getNumber()) {
       size += com.google.protobuf.CodedOutputStream
         .computeEnumSize(1, day_);
     }
@@ -478,16 +478,16 @@ private static final long serialVersionUID = 0L;
      * @return The day.
      */
     @java.lang.Override
-    public lol.calico.uctutors.generated.google.type.DayOfWeek getDay() {
-      lol.calico.uctutors.generated.google.type.DayOfWeek result = lol.calico.uctutors.generated.google.type.DayOfWeek.forNumber(day_);
-      return result == null ? lol.calico.uctutors.generated.google.type.DayOfWeek.UNRECOGNIZED : result;
+    public com.google.type.DayOfWeek getDay() {
+      com.google.type.DayOfWeek result = com.google.type.DayOfWeek.forNumber(day_);
+      return result == null ? com.google.type.DayOfWeek.UNRECOGNIZED : result;
     }
     /**
      * <code>.google.type.DayOfWeek day = 1 [json_name = "day"];</code>
      * @param value The day to set.
      * @return This builder for chaining.
      */
-    public Builder setDay(lol.calico.uctutors.generated.google.type.DayOfWeek value) {
+    public Builder setDay(com.google.type.DayOfWeek value) {
       if (value == null) {
         throw new NullPointerException();
       }
@@ -507,9 +507,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private lol.calico.uctutors.generated.google.type.Interval interval_;
+    private com.google.type.Interval interval_;
     private com.google.protobuf.SingleFieldBuilderV3<
-        lol.calico.uctutors.generated.google.type.Interval, lol.calico.uctutors.generated.google.type.Interval.Builder, lol.calico.uctutors.generated.google.type.IntervalOrBuilder> intervalBuilder_;
+        com.google.type.Interval, com.google.type.Interval.Builder, com.google.type.IntervalOrBuilder> intervalBuilder_;
     /**
      * <code>.google.type.Interval interval = 2 [json_name = "interval"];</code>
      * @return Whether the interval field is set.
@@ -521,9 +521,9 @@ private static final long serialVersionUID = 0L;
      * <code>.google.type.Interval interval = 2 [json_name = "interval"];</code>
      * @return The interval.
      */
-    public lol.calico.uctutors.generated.google.type.Interval getInterval() {
+    public com.google.type.Interval getInterval() {
       if (intervalBuilder_ == null) {
-        return interval_ == null ? lol.calico.uctutors.generated.google.type.Interval.getDefaultInstance() : interval_;
+        return interval_ == null ? com.google.type.Interval.getDefaultInstance() : interval_;
       } else {
         return intervalBuilder_.getMessage();
       }
@@ -531,7 +531,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.google.type.Interval interval = 2 [json_name = "interval"];</code>
      */
-    public Builder setInterval(lol.calico.uctutors.generated.google.type.Interval value) {
+    public Builder setInterval(com.google.type.Interval value) {
       if (intervalBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -548,7 +548,7 @@ private static final long serialVersionUID = 0L;
      * <code>.google.type.Interval interval = 2 [json_name = "interval"];</code>
      */
     public Builder setInterval(
-        lol.calico.uctutors.generated.google.type.Interval.Builder builderForValue) {
+        com.google.type.Interval.Builder builderForValue) {
       if (intervalBuilder_ == null) {
         interval_ = builderForValue.build();
       } else {
@@ -561,11 +561,11 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.google.type.Interval interval = 2 [json_name = "interval"];</code>
      */
-    public Builder mergeInterval(lol.calico.uctutors.generated.google.type.Interval value) {
+    public Builder mergeInterval(com.google.type.Interval value) {
       if (intervalBuilder_ == null) {
         if (((bitField0_ & 0x00000002) != 0) &&
           interval_ != null &&
-          interval_ != lol.calico.uctutors.generated.google.type.Interval.getDefaultInstance()) {
+          interval_ != com.google.type.Interval.getDefaultInstance()) {
           getIntervalBuilder().mergeFrom(value);
         } else {
           interval_ = value;
@@ -595,7 +595,7 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.google.type.Interval interval = 2 [json_name = "interval"];</code>
      */
-    public lol.calico.uctutors.generated.google.type.Interval.Builder getIntervalBuilder() {
+    public com.google.type.Interval.Builder getIntervalBuilder() {
       bitField0_ |= 0x00000002;
       onChanged();
       return getIntervalFieldBuilder().getBuilder();
@@ -603,23 +603,23 @@ private static final long serialVersionUID = 0L;
     /**
      * <code>.google.type.Interval interval = 2 [json_name = "interval"];</code>
      */
-    public lol.calico.uctutors.generated.google.type.IntervalOrBuilder getIntervalOrBuilder() {
+    public com.google.type.IntervalOrBuilder getIntervalOrBuilder() {
       if (intervalBuilder_ != null) {
         return intervalBuilder_.getMessageOrBuilder();
       } else {
         return interval_ == null ?
-            lol.calico.uctutors.generated.google.type.Interval.getDefaultInstance() : interval_;
+            com.google.type.Interval.getDefaultInstance() : interval_;
       }
     }
     /**
      * <code>.google.type.Interval interval = 2 [json_name = "interval"];</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
-        lol.calico.uctutors.generated.google.type.Interval, lol.calico.uctutors.generated.google.type.Interval.Builder, lol.calico.uctutors.generated.google.type.IntervalOrBuilder> 
+        com.google.type.Interval, com.google.type.Interval.Builder, com.google.type.IntervalOrBuilder> 
         getIntervalFieldBuilder() {
       if (intervalBuilder_ == null) {
         intervalBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-            lol.calico.uctutors.generated.google.type.Interval, lol.calico.uctutors.generated.google.type.Interval.Builder, lol.calico.uctutors.generated.google.type.IntervalOrBuilder>(
+            com.google.type.Interval, com.google.type.Interval.Builder, com.google.type.IntervalOrBuilder>(
                 getInterval(),
                 getParentForChildren(),
                 isClean());

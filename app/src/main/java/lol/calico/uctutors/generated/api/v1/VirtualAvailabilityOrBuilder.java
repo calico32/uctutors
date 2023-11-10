@@ -17,7 +17,7 @@ public interface VirtualAvailabilityOrBuilder extends
    * <code>.google.type.DayOfWeek day = 1 [json_name = "day"];</code>
    * @return The day.
    */
-  lol.calico.uctutors.generated.google.type.DayOfWeek getDay();
+  com.google.type.DayOfWeek getDay();
 
   /**
    * <code>.google.type.Interval interval = 2 [json_name = "interval"];</code>
@@ -28,9 +28,9 @@ public interface VirtualAvailabilityOrBuilder extends
    * <code>.google.type.Interval interval = 2 [json_name = "interval"];</code>
    * @return The interval.
    */
-  lol.calico.uctutors.generated.google.type.Interval getInterval();
+  com.google.type.Interval getInterval();
   /**
    * <code>.google.type.Interval interval = 2 [json_name = "interval"];</code>
    */
-  lol.calico.uctutors.generated.google.type.IntervalOrBuilder getIntervalOrBuilder();
+  com.google.type.IntervalOrBuilder getIntervalOrBuilder();
 }
