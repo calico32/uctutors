@@ -26,23 +26,6 @@ public object LoginResponseKt {
     @kotlin.jvm.JvmSynthetic
     @kotlin.PublishedApi
     internal fun _build(): lol.calico.uctutors.generated.api.v1.LoginResponse = _builder.build()
-
-    /**
-     * `string url = 1 [json_name = "url"];`
-     */
-    public var url: kotlin.String
-      @JvmName("getUrl")
-      get() = _builder.getUrl()
-      @JvmName("setUrl")
-      set(value) {
-        _builder.setUrl(value)
-      }
-    /**
-     * `string url = 1 [json_name = "url"];`
-     */
-    public fun clearUrl() {
-      _builder.clearUrl()
-    }
   }
 }
 @kotlin.jvm.JvmSynthetic

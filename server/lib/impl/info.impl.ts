@@ -8,6 +8,7 @@ export const ApiInfoService: ApiInfoServiceImplementation = {
         version: 1,
         commit: COMMIT_HASH,
         buildTime: BUILD_TIME,
+        currentTime: new Date(),
       },
     }
   },

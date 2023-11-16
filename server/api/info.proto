@@ -17,4 +17,5 @@ message ApiInfo {
   uint32 version = 1;
   string commit = 2;
   google.protobuf.Timestamp build_time = 3;
+  google.protobuf.Timestamp current_time = 4;
 }

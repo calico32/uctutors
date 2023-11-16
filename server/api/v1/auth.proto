@@ -5,8 +5,8 @@ service AuthService {
   rpc Login(LoginRequest) returns (LoginResponse) {}
 }
 
-message LoginRequest {}
-
-message LoginResponse {
-  string url = 1;
+message LoginRequest {
+  string id_token = 1;
 }
+
+message LoginResponse {}

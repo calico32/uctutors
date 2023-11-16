@@ -84,6 +84,30 @@ public object ApiInfoKt {
     public fun hasBuildTime(): kotlin.Boolean {
       return _builder.hasBuildTime()
     }
+
+    /**
+     * `.google.protobuf.Timestamp current_time = 4 [json_name = "currentTime"];`
+     */
+    public var currentTime: com.google.protobuf.Timestamp
+      @JvmName("getCurrentTime")
+      get() = _builder.getCurrentTime()
+      @JvmName("setCurrentTime")
+      set(value) {
+        _builder.setCurrentTime(value)
+      }
+    /**
+     * `.google.protobuf.Timestamp current_time = 4 [json_name = "currentTime"];`
+     */
+    public fun clearCurrentTime() {
+      _builder.clearCurrentTime()
+    }
+    /**
+     * `.google.protobuf.Timestamp current_time = 4 [json_name = "currentTime"];`
+     * @return Whether the currentTime field is set.
+     */
+    public fun hasCurrentTime(): kotlin.Boolean {
+      return _builder.hasCurrentTime()
+    }
   }
 }
 @kotlin.jvm.JvmSynthetic
@@ -92,4 +116,7 @@ public inline fun lol.calico.uctutors.generated.api.ApiInfo.copy(block: `lol.cal
 
 public val lol.calico.uctutors.generated.api.ApiInfoOrBuilder.buildTimeOrNull: com.google.protobuf.Timestamp?
   get() = if (hasBuildTime()) getBuildTime() else null
+
+public val lol.calico.uctutors.generated.api.ApiInfoOrBuilder.currentTimeOrNull: com.google.protobuf.Timestamp?
+  get() = if (hasCurrentTime()) getCurrentTime() else null
 

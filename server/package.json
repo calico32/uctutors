@@ -3,8 +3,9 @@
   "module": "lib/index.ts",
   "type": "module",
   "scripts": {
-    "generate": "prisma generate --no-engine",
-    "dev": "vite-node --watch lib/index.ts | pino-pretty"
+    "--generate": "prisma generate --no-engine",
+    "dev": "vite-node --watch lib/index.ts | pino-pretty",
+    "generate": "buf generate && grep -rl 'Dayofweek' ../app/src/main/java/lol/calico/uctutors/generated | xargs sed -i 's/Dayofweek/DayOfWeek/g'"
   },
   "devDependencies": {
     "bun-types": "latest",
@@ -19,6 +20,7 @@
     "@googleapis/oauth2": "^1.0.5",
     "@prisma/client": "5.5.2",
     "@prisma/extension-accelerate": "^0.6.2",
+    "cheerio": "^1.0.0-rc.12",
     "elysia": "^0.7.21",
     "iron-webcrypto": "^1.0.0",
     "long": "^5.2.3",

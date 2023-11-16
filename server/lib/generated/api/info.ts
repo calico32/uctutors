@@ -16,6 +16,7 @@ export interface ApiInfo {
   version: number;
   commit: string;
   buildTime: Date | undefined;
+  currentTime: Date | undefined;
 }
 
 function createBaseGetApiInfoRequest(): GetApiInfoRequest {
@@ -121,7 +122,7 @@ export const GetApiInfoResponse = {
 };
 
 function createBaseApiInfo(): ApiInfo {
-  return { version: 0, commit: "", buildTime: undefined };
+  return { version: 0, commit: "", buildTime: undefined, currentTime: undefined };
 }
 
 export const ApiInfo = {
@@ -134,6 +135,9 @@ export const ApiInfo = {
     }
     if (message.buildTime !== undefined) {
       Timestamp.encode(toTimestamp(message.buildTime), writer.uint32(26).fork()).ldelim();
+    }
+    if (message.currentTime !== undefined) {
+      Timestamp.encode(toTimestamp(message.currentTime), writer.uint32(34).fork()).ldelim();
     }
     return writer;
   },
@@ -166,6 +170,13 @@ export const ApiInfo = {
 
           message.buildTime = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           continue;
+        case 4:
+          if (tag !== 34) {
+            break;
+          }
+
+          message.currentTime = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -180,6 +191,7 @@ export const ApiInfo = {
       version: isSet(object.version) ? globalThis.Number(object.version) : 0,
       commit: isSet(object.commit) ? globalThis.String(object.commit) : "",
       buildTime: isSet(object.buildTime) ? fromJsonTimestamp(object.buildTime) : undefined,
+      currentTime: isSet(object.currentTime) ? fromJsonTimestamp(object.currentTime) : undefined,
     };
   },
 
@@ -194,6 +206,9 @@ export const ApiInfo = {
     if (message.buildTime !== undefined) {
       obj.buildTime = message.buildTime.toISOString();
     }
+    if (message.currentTime !== undefined) {
+      obj.currentTime = message.currentTime.toISOString();
+    }
     return obj;
   },
 
@@ -205,6 +220,7 @@ export const ApiInfo = {
     message.version = object.version ?? 0;
     message.commit = object.commit ?? "";
     message.buildTime = object.buildTime ?? undefined;
+    message.currentTime = object.currentTime ?? undefined;
     return message;
   },
 };

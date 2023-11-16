@@ -1,140 +1,168 @@
 package lol.calico.uctutors
 
-import android.content.Intent
-import android.content.IntentSender
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.tooling.preview.Preview
-import com.google.android.gms.auth.api.identity.BeginSignInRequest
-import com.google.android.gms.auth.api.identity.Identity
-import com.google.android.gms.auth.api.identity.SignInClient
-import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.common.api.CommonStatusCodes
+import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navOptions
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import lol.calico.uctutors.data.common.GrpcConnection
+import lol.calico.uctutors.generated.api.ApiInfo
+import lol.calico.uctutors.generated.api.getApiInfoRequest
+import lol.calico.uctutors.impl.toDate
+import lol.calico.uctutors.ui.compose.LocalGrpcConnection
+import lol.calico.uctutors.ui.page.HomePage
+import lol.calico.uctutors.ui.page.LoginPage
 import lol.calico.uctutors.ui.theme.UCTutorsTheme
+import javax.inject.Inject
 
+
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            UCTutorsTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
-                }
-            }
-        }
+  @Inject
+  lateinit var grpc: GrpcConnection
 
-        beginSignIn(savedInstanceState)
+  companion object {
+    const val TAG = "UCTutors/MainActivity"
+  }
+
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContent {
+      CompositionLocalProvider(LocalGrpcConnection provides grpc) {
+        App()
+      }
     }
-
-    private lateinit var oneTapClient: SignInClient
-    private lateinit var signInRequest: BeginSignInRequest
-
-    private fun beginSignIn(savedInstanceState: Bundle?) {
-        oneTapClient = Identity.getSignInClient(this)
-        signInRequest = BeginSignInRequest.builder()
-            .setGoogleIdTokenRequestOptions(
-                BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
-                    .setSupported(true)
-                    .setServerClientId(getString(R.string.web_client_id))
-                    .setFilterByAuthorizedAccounts(false)
-                    .build()
-            )
-            // Automatically sign in when exactly one credential is retrieved.
-            .setAutoSelectEnabled(true).build()
-
-        oneTapClient.beginSignIn(signInRequest).addOnSuccessListener(this) { result ->
-            try {
-                startIntentSenderForResult(
-                    result.pendingIntent.intentSender,
-                    REQ_ONE_TAP,
-                    null,
-                    0,
-                    0,
-                    0,
-                    null
-                )
-            } catch (e: IntentSender.SendIntentException) {
-                Log.e(TAG, "Couldn't start One Tap UI: ${e.localizedMessage}")
-            }
-        }.addOnFailureListener(this) { e ->
-            // No saved credentials found. Launch the One Tap sign-up flow, or
-            // do nothing and continue presenting the signed-out UI.
-            Log.d(TAG, e.localizedMessage ?: "Unknown error")
-        }
-
-    }
+  }
 
 
-    companion object {
-        const val TAG = "UCTutors/MainActivity"
-        const val REQ_ONE_TAP = 2  // Can be any integer unique to the Activity
-    }
-
-    @Deprecated("ActivityResultContract")
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        when (requestCode) {
-            REQ_ONE_TAP -> {
-                try {
-                    val credential = oneTapClient.getSignInCredentialFromIntent(data)
-                    val idToken = credential.googleIdToken
-                    if (idToken != null) {
-                        // Got an ID token from Google. Use it to authenticate
-                        // with your backend.
-                        Log.d(TAG, "Got ID token.")
-                    } else {
-                        // Shouldn't happen.
-                        Log.d(TAG, "No ID token or password!")
-                    }
-                } catch (e: ApiException) {
-                    when (e.statusCode) {
-                        CommonStatusCodes.CANCELED -> {
-                            Log.d(TAG, "One-tap dialog was closed.")
-                        }
-
-                        CommonStatusCodes.NETWORK_ERROR -> {
-                            Log.d(TAG, "One-tap encountered a network error.")
-                            // Try again or just ignore.
-                        }
-
-                        else -> {
-                            Log.d(
-                                TAG, "Couldn't get credential from result." +
-                                        " (${e.localizedMessage})"
-                            )
-                        }
-                    }
-                }
-            }
-        }
-    }
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+fun App() {
+  val navController = rememberNavController()
+  val view = LocalView.current
+  var account by remember { mutableStateOf(GoogleSignIn.getLastSignedInAccount(view.context)) }
+
+  UCTutorsTheme {
+    LaunchedEffect(account) {
+      val navOptions = navOptions {
+        popUpTo("loading") { inclusive = true }
+        anim {
+          enter = android.R.anim.fade_in
+          exit = android.R.anim.fade_out
+        }
+      }
+      if (account == null) {
+        navController.navigate("login", navOptions)
+      } else {
+        navController.navigate("home", navOptions)
+      }
+    }
+    NavHost(navController, startDestination = "loading") {
+      composable("loading") {
+        Surface(
+          modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
+        ) {
+          Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+          ) {
+            CircularProgressIndicator(
+              modifier = Modifier.width(64.dp),
+              color = MaterialTheme.colorScheme.surfaceVariant,
+              trackColor = MaterialTheme.colorScheme.secondary,
+            )
+          }
+        }
+      }
+      composable("home") {
+        HomePage(onSignOut = {
+
+        })
+      }
+      composable("login") {
+        LoginPage(onSignIn = {
+          account = it
+        })
+      }
+    }
+  }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    UCTutorsTheme {
-        Greeting("Android")
+  UCTutorsTheme {
+    Surface(
+      modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
+    ) {
+      Greeting()
     }
+  }
+}
+
+@Composable
+fun Greeting() {
+  var apiInfo by remember { mutableStateOf<ApiInfo?>(null) }
+  val scope = rememberCoroutineScope()
+  val grpc = LocalGrpcConnection.current
+
+  Column(
+    modifier = Modifier
+      .fillMaxWidth()
+      .fillMaxHeight(),
+    verticalArrangement = Arrangement.Top,
+    horizontalAlignment = Alignment.CenterHorizontally
+  ) {
+    Button({
+      scope.launch {
+        try {
+          val request = getApiInfoRequest {}
+          val response = grpc.apiInfo.getApiInfo(request)
+          apiInfo = response.apiInfo
+        } catch (e: Exception) {
+          e.printStackTrace()
+        }
+      }
+    }, Modifier.padding(10.dp)) {
+      Text("Get API Info")
+    }
+
+    if (apiInfo != null) {
+      Text("Commit " + apiInfo!!.commit, modifier = Modifier.padding(top = 10.dp))
+      Text("Built at " + apiInfo!!.buildTime.toDate().toString())
+      Text("Version v" + apiInfo!!.version.toString())
+      Text("Current time: " + apiInfo!!.currentTime.toDate().toString())
+    }
+  }
 }

@@ -26,6 +26,23 @@ public object LoginRequestKt {
     @kotlin.jvm.JvmSynthetic
     @kotlin.PublishedApi
     internal fun _build(): lol.calico.uctutors.generated.api.v1.LoginRequest = _builder.build()
+
+    /**
+     * `string id_token = 1 [json_name = "idToken"];`
+     */
+    public var idToken: kotlin.String
+      @JvmName("getIdToken")
+      get() = _builder.getIdToken()
+      @JvmName("setIdToken")
+      set(value) {
+        _builder.setIdToken(value)
+      }
+    /**
+     * `string id_token = 1 [json_name = "idToken"];`
+     */
+    public fun clearIdToken() {
+      _builder.clearIdToken()
+    }
   }
 }
 @kotlin.jvm.JvmSynthetic

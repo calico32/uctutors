@@ -23,7 +23,7 @@ for (const [def, impl] of services) {
   }
 }
 
-const port = await server.listen('0.0.0.0:3000')
+const port = await server.listen('0.0.0.0:8000')
 
 logger.info('🚀 gRPC started on port ' + port)
 
