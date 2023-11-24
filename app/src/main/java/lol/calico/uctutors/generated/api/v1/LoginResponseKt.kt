@@ -26,9 +26,94 @@ public object LoginResponseKt {
     @kotlin.jvm.JvmSynthetic
     @kotlin.PublishedApi
     internal fun _build(): lol.calico.uctutors.generated.api.v1.LoginResponse = _builder.build()
+
+    /**
+     * `.api.v1.LoginStatus status = 1 [json_name = "status"];`
+     */
+    public var status: lol.calico.uctutors.generated.api.v1.LoginStatus
+      @JvmName("getStatus")
+      get() = _builder.getStatus()
+      @JvmName("setStatus")
+      set(value) {
+        _builder.setStatus(value)
+      }
+    public var statusValue: kotlin.Int
+      @JvmName("getStatusValue")
+      get() = _builder.getStatusValue()
+      @JvmName("setStatusValue")
+      set(value) {
+        _builder.setStatusValue(value)
+      }
+    /**
+     * `.api.v1.LoginStatus status = 1 [json_name = "status"];`
+     */
+    public fun clearStatus() {
+      _builder.clearStatus()
+    }
+
+    /**
+     * `.api.v1.LoginResponseNewUser new_user = 2 [json_name = "newUser"];`
+     */
+    public var newUser: lol.calico.uctutors.generated.api.v1.LoginResponseNewUser
+      @JvmName("getNewUser")
+      get() = _builder.getNewUser()
+      @JvmName("setNewUser")
+      set(value) {
+        _builder.setNewUser(value)
+      }
+    /**
+     * `.api.v1.LoginResponseNewUser new_user = 2 [json_name = "newUser"];`
+     */
+    public fun clearNewUser() {
+      _builder.clearNewUser()
+    }
+    /**
+     * `.api.v1.LoginResponseNewUser new_user = 2 [json_name = "newUser"];`
+     * @return Whether the newUser field is set.
+     */
+    public fun hasNewUser(): kotlin.Boolean {
+      return _builder.hasNewUser()
+    }
+
+    /**
+     * `.api.v1.LoginResponseExistingUser existing_user = 3 [json_name = "existingUser"];`
+     */
+    public var existingUser: lol.calico.uctutors.generated.api.v1.LoginResponseExistingUser
+      @JvmName("getExistingUser")
+      get() = _builder.getExistingUser()
+      @JvmName("setExistingUser")
+      set(value) {
+        _builder.setExistingUser(value)
+      }
+    /**
+     * `.api.v1.LoginResponseExistingUser existing_user = 3 [json_name = "existingUser"];`
+     */
+    public fun clearExistingUser() {
+      _builder.clearExistingUser()
+    }
+    /**
+     * `.api.v1.LoginResponseExistingUser existing_user = 3 [json_name = "existingUser"];`
+     * @return Whether the existingUser field is set.
+     */
+    public fun hasExistingUser(): kotlin.Boolean {
+      return _builder.hasExistingUser()
+    }
+    public val detailsCase: lol.calico.uctutors.generated.api.v1.LoginResponse.DetailsCase
+      @JvmName("getDetailsCase")
+      get() = _builder.getDetailsCase()
+
+    public fun clearDetails() {
+      _builder.clearDetails()
+    }
   }
 }
 @kotlin.jvm.JvmSynthetic
 public inline fun lol.calico.uctutors.generated.api.v1.LoginResponse.copy(block: `lol.calico.uctutors.generated.api.v1`.LoginResponseKt.Dsl.() -> kotlin.Unit): lol.calico.uctutors.generated.api.v1.LoginResponse =
   `lol.calico.uctutors.generated.api.v1`.LoginResponseKt.Dsl._create(this.toBuilder()).apply { block() }._build()
+
+public val lol.calico.uctutors.generated.api.v1.LoginResponseOrBuilder.newUserOrNull: lol.calico.uctutors.generated.api.v1.LoginResponseNewUser?
+  get() = if (hasNewUser()) getNewUser() else null
+
+public val lol.calico.uctutors.generated.api.v1.LoginResponseOrBuilder.existingUserOrNull: lol.calico.uctutors.generated.api.v1.LoginResponseExistingUser?
+  get() = if (hasExistingUser()) getExistingUser() else null
 

@@ -17,6 +17,7 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private LoginResponse() {
+    status_ = 0;
   }
 
   @java.lang.Override
@@ -39,6 +40,128 @@ private static final long serialVersionUID = 0L;
             lol.calico.uctutors.generated.api.v1.LoginResponse.class, lol.calico.uctutors.generated.api.v1.LoginResponse.Builder.class);
   }
 
+  private int detailsCase_ = 0;
+  @SuppressWarnings("serial")
+  private java.lang.Object details_;
+  public enum DetailsCase
+      implements com.google.protobuf.Internal.EnumLite,
+          com.google.protobuf.AbstractMessage.InternalOneOfEnum {
+    NEW_USER(2),
+    EXISTING_USER(3),
+    DETAILS_NOT_SET(0);
+    private final int value;
+    private DetailsCase(int value) {
+      this.value = value;
+    }
+    /**
+     * @param value The number of the enum to look for.
+     * @return The enum associated with the given number.
+     * @deprecated Use {@link #forNumber(int)} instead.
+     */
+    @java.lang.Deprecated
+    public static DetailsCase valueOf(int value) {
+      return forNumber(value);
+    }
+
+    public static DetailsCase forNumber(int value) {
+      switch (value) {
+        case 2: return NEW_USER;
+        case 3: return EXISTING_USER;
+        case 0: return DETAILS_NOT_SET;
+        default: return null;
+      }
+    }
+    public int getNumber() {
+      return this.value;
+    }
+  };
+
+  public DetailsCase
+  getDetailsCase() {
+    return DetailsCase.forNumber(
+        detailsCase_);
+  }
+
+  public static final int STATUS_FIELD_NUMBER = 1;
+  private int status_ = 0;
+  /**
+   * <code>.api.v1.LoginStatus status = 1 [json_name = "status"];</code>
+   * @return The enum numeric value on the wire for status.
+   */
+  @java.lang.Override public int getStatusValue() {
+    return status_;
+  }
+  /**
+   * <code>.api.v1.LoginStatus status = 1 [json_name = "status"];</code>
+   * @return The status.
+   */
+  @java.lang.Override public lol.calico.uctutors.generated.api.v1.LoginStatus getStatus() {
+    lol.calico.uctutors.generated.api.v1.LoginStatus result = lol.calico.uctutors.generated.api.v1.LoginStatus.forNumber(status_);
+    return result == null ? lol.calico.uctutors.generated.api.v1.LoginStatus.UNRECOGNIZED : result;
+  }
+
+  public static final int NEW_USER_FIELD_NUMBER = 2;
+  /**
+   * <code>.api.v1.LoginResponseNewUser new_user = 2 [json_name = "newUser"];</code>
+   * @return Whether the newUser field is set.
+   */
+  @java.lang.Override
+  public boolean hasNewUser() {
+    return detailsCase_ == 2;
+  }
+  /**
+   * <code>.api.v1.LoginResponseNewUser new_user = 2 [json_name = "newUser"];</code>
+   * @return The newUser.
+   */
+  @java.lang.Override
+  public lol.calico.uctutors.generated.api.v1.LoginResponseNewUser getNewUser() {
+    if (detailsCase_ == 2) {
+       return (lol.calico.uctutors.generated.api.v1.LoginResponseNewUser) details_;
+    }
+    return lol.calico.uctutors.generated.api.v1.LoginResponseNewUser.getDefaultInstance();
+  }
+  /**
+   * <code>.api.v1.LoginResponseNewUser new_user = 2 [json_name = "newUser"];</code>
+   */
+  @java.lang.Override
+  public lol.calico.uctutors.generated.api.v1.LoginResponseNewUserOrBuilder getNewUserOrBuilder() {
+    if (detailsCase_ == 2) {
+       return (lol.calico.uctutors.generated.api.v1.LoginResponseNewUser) details_;
+    }
+    return lol.calico.uctutors.generated.api.v1.LoginResponseNewUser.getDefaultInstance();
+  }
+
+  public static final int EXISTING_USER_FIELD_NUMBER = 3;
+  /**
+   * <code>.api.v1.LoginResponseExistingUser existing_user = 3 [json_name = "existingUser"];</code>
+   * @return Whether the existingUser field is set.
+   */
+  @java.lang.Override
+  public boolean hasExistingUser() {
+    return detailsCase_ == 3;
+  }
+  /**
+   * <code>.api.v1.LoginResponseExistingUser existing_user = 3 [json_name = "existingUser"];</code>
+   * @return The existingUser.
+   */
+  @java.lang.Override
+  public lol.calico.uctutors.generated.api.v1.LoginResponseExistingUser getExistingUser() {
+    if (detailsCase_ == 3) {
+       return (lol.calico.uctutors.generated.api.v1.LoginResponseExistingUser) details_;
+    }
+    return lol.calico.uctutors.generated.api.v1.LoginResponseExistingUser.getDefaultInstance();
+  }
+  /**
+   * <code>.api.v1.LoginResponseExistingUser existing_user = 3 [json_name = "existingUser"];</code>
+   */
+  @java.lang.Override
+  public lol.calico.uctutors.generated.api.v1.LoginResponseExistingUserOrBuilder getExistingUserOrBuilder() {
+    if (detailsCase_ == 3) {
+       return (lol.calico.uctutors.generated.api.v1.LoginResponseExistingUser) details_;
+    }
+    return lol.calico.uctutors.generated.api.v1.LoginResponseExistingUser.getDefaultInstance();
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -53,6 +176,15 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
+    if (status_ != lol.calico.uctutors.generated.api.v1.LoginStatus.LOGIN_STATUS_UNSPECIFIED.getNumber()) {
+      output.writeEnum(1, status_);
+    }
+    if (detailsCase_ == 2) {
+      output.writeMessage(2, (lol.calico.uctutors.generated.api.v1.LoginResponseNewUser) details_);
+    }
+    if (detailsCase_ == 3) {
+      output.writeMessage(3, (lol.calico.uctutors.generated.api.v1.LoginResponseExistingUser) details_);
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -62,6 +194,18 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
+    if (status_ != lol.calico.uctutors.generated.api.v1.LoginStatus.LOGIN_STATUS_UNSPECIFIED.getNumber()) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeEnumSize(1, status_);
+    }
+    if (detailsCase_ == 2) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(2, (lol.calico.uctutors.generated.api.v1.LoginResponseNewUser) details_);
+    }
+    if (detailsCase_ == 3) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(3, (lol.calico.uctutors.generated.api.v1.LoginResponseExistingUser) details_);
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -77,6 +221,20 @@ private static final long serialVersionUID = 0L;
     }
     lol.calico.uctutors.generated.api.v1.LoginResponse other = (lol.calico.uctutors.generated.api.v1.LoginResponse) obj;
 
+    if (status_ != other.status_) return false;
+    if (!getDetailsCase().equals(other.getDetailsCase())) return false;
+    switch (detailsCase_) {
+      case 2:
+        if (!getNewUser()
+            .equals(other.getNewUser())) return false;
+        break;
+      case 3:
+        if (!getExistingUser()
+            .equals(other.getExistingUser())) return false;
+        break;
+      case 0:
+      default:
+    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -88,6 +246,20 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
+    hash = (37 * hash) + STATUS_FIELD_NUMBER;
+    hash = (53 * hash) + status_;
+    switch (detailsCase_) {
+      case 2:
+        hash = (37 * hash) + NEW_USER_FIELD_NUMBER;
+        hash = (53 * hash) + getNewUser().hashCode();
+        break;
+      case 3:
+        hash = (37 * hash) + EXISTING_USER_FIELD_NUMBER;
+        hash = (53 * hash) + getExistingUser().hashCode();
+        break;
+      case 0:
+      default:
+    }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -218,6 +390,16 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
+      bitField0_ = 0;
+      status_ = 0;
+      if (newUserBuilder_ != null) {
+        newUserBuilder_.clear();
+      }
+      if (existingUserBuilder_ != null) {
+        existingUserBuilder_.clear();
+      }
+      detailsCase_ = 0;
+      details_ = null;
       return this;
     }
 
@@ -244,8 +426,30 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public lol.calico.uctutors.generated.api.v1.LoginResponse buildPartial() {
       lol.calico.uctutors.generated.api.v1.LoginResponse result = new lol.calico.uctutors.generated.api.v1.LoginResponse(this);
+      if (bitField0_ != 0) { buildPartial0(result); }
+      buildPartialOneofs(result);
       onBuilt();
       return result;
+    }
+
+    private void buildPartial0(lol.calico.uctutors.generated.api.v1.LoginResponse result) {
+      int from_bitField0_ = bitField0_;
+      if (((from_bitField0_ & 0x00000001) != 0)) {
+        result.status_ = status_;
+      }
+    }
+
+    private void buildPartialOneofs(lol.calico.uctutors.generated.api.v1.LoginResponse result) {
+      result.detailsCase_ = detailsCase_;
+      result.details_ = this.details_;
+      if (detailsCase_ == 2 &&
+          newUserBuilder_ != null) {
+        result.details_ = newUserBuilder_.build();
+      }
+      if (detailsCase_ == 3 &&
+          existingUserBuilder_ != null) {
+        result.details_ = existingUserBuilder_.build();
+      }
     }
 
     @java.lang.Override
@@ -292,6 +496,22 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(lol.calico.uctutors.generated.api.v1.LoginResponse other) {
       if (other == lol.calico.uctutors.generated.api.v1.LoginResponse.getDefaultInstance()) return this;
+      if (other.status_ != 0) {
+        setStatusValue(other.getStatusValue());
+      }
+      switch (other.getDetailsCase()) {
+        case NEW_USER: {
+          mergeNewUser(other.getNewUser());
+          break;
+        }
+        case EXISTING_USER: {
+          mergeExistingUser(other.getExistingUser());
+          break;
+        }
+        case DETAILS_NOT_SET: {
+          break;
+        }
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -318,6 +538,25 @@ private static final long serialVersionUID = 0L;
             case 0:
               done = true;
               break;
+            case 8: {
+              status_ = input.readEnum();
+              bitField0_ |= 0x00000001;
+              break;
+            } // case 8
+            case 18: {
+              input.readMessage(
+                  getNewUserFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              detailsCase_ = 2;
+              break;
+            } // case 18
+            case 26: {
+              input.readMessage(
+                  getExistingUserFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              detailsCase_ = 3;
+              break;
+            } // case 26
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -332,6 +571,359 @@ private static final long serialVersionUID = 0L;
         onChanged();
       } // finally
       return this;
+    }
+    private int detailsCase_ = 0;
+    private java.lang.Object details_;
+    public DetailsCase
+        getDetailsCase() {
+      return DetailsCase.forNumber(
+          detailsCase_);
+    }
+
+    public Builder clearDetails() {
+      detailsCase_ = 0;
+      details_ = null;
+      onChanged();
+      return this;
+    }
+
+    private int bitField0_;
+
+    private int status_ = 0;
+    /**
+     * <code>.api.v1.LoginStatus status = 1 [json_name = "status"];</code>
+     * @return The enum numeric value on the wire for status.
+     */
+    @java.lang.Override public int getStatusValue() {
+      return status_;
+    }
+    /**
+     * <code>.api.v1.LoginStatus status = 1 [json_name = "status"];</code>
+     * @param value The enum numeric value on the wire for status to set.
+     * @return This builder for chaining.
+     */
+    public Builder setStatusValue(int value) {
+      status_ = value;
+      bitField0_ |= 0x00000001;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.api.v1.LoginStatus status = 1 [json_name = "status"];</code>
+     * @return The status.
+     */
+    @java.lang.Override
+    public lol.calico.uctutors.generated.api.v1.LoginStatus getStatus() {
+      lol.calico.uctutors.generated.api.v1.LoginStatus result = lol.calico.uctutors.generated.api.v1.LoginStatus.forNumber(status_);
+      return result == null ? lol.calico.uctutors.generated.api.v1.LoginStatus.UNRECOGNIZED : result;
+    }
+    /**
+     * <code>.api.v1.LoginStatus status = 1 [json_name = "status"];</code>
+     * @param value The status to set.
+     * @return This builder for chaining.
+     */
+    public Builder setStatus(lol.calico.uctutors.generated.api.v1.LoginStatus value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+      bitField0_ |= 0x00000001;
+      status_ = value.getNumber();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.api.v1.LoginStatus status = 1 [json_name = "status"];</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearStatus() {
+      bitField0_ = (bitField0_ & ~0x00000001);
+      status_ = 0;
+      onChanged();
+      return this;
+    }
+
+    private com.google.protobuf.SingleFieldBuilderV3<
+        lol.calico.uctutors.generated.api.v1.LoginResponseNewUser, lol.calico.uctutors.generated.api.v1.LoginResponseNewUser.Builder, lol.calico.uctutors.generated.api.v1.LoginResponseNewUserOrBuilder> newUserBuilder_;
+    /**
+     * <code>.api.v1.LoginResponseNewUser new_user = 2 [json_name = "newUser"];</code>
+     * @return Whether the newUser field is set.
+     */
+    @java.lang.Override
+    public boolean hasNewUser() {
+      return detailsCase_ == 2;
+    }
+    /**
+     * <code>.api.v1.LoginResponseNewUser new_user = 2 [json_name = "newUser"];</code>
+     * @return The newUser.
+     */
+    @java.lang.Override
+    public lol.calico.uctutors.generated.api.v1.LoginResponseNewUser getNewUser() {
+      if (newUserBuilder_ == null) {
+        if (detailsCase_ == 2) {
+          return (lol.calico.uctutors.generated.api.v1.LoginResponseNewUser) details_;
+        }
+        return lol.calico.uctutors.generated.api.v1.LoginResponseNewUser.getDefaultInstance();
+      } else {
+        if (detailsCase_ == 2) {
+          return newUserBuilder_.getMessage();
+        }
+        return lol.calico.uctutors.generated.api.v1.LoginResponseNewUser.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.api.v1.LoginResponseNewUser new_user = 2 [json_name = "newUser"];</code>
+     */
+    public Builder setNewUser(lol.calico.uctutors.generated.api.v1.LoginResponseNewUser value) {
+      if (newUserBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        details_ = value;
+        onChanged();
+      } else {
+        newUserBuilder_.setMessage(value);
+      }
+      detailsCase_ = 2;
+      return this;
+    }
+    /**
+     * <code>.api.v1.LoginResponseNewUser new_user = 2 [json_name = "newUser"];</code>
+     */
+    public Builder setNewUser(
+        lol.calico.uctutors.generated.api.v1.LoginResponseNewUser.Builder builderForValue) {
+      if (newUserBuilder_ == null) {
+        details_ = builderForValue.build();
+        onChanged();
+      } else {
+        newUserBuilder_.setMessage(builderForValue.build());
+      }
+      detailsCase_ = 2;
+      return this;
+    }
+    /**
+     * <code>.api.v1.LoginResponseNewUser new_user = 2 [json_name = "newUser"];</code>
+     */
+    public Builder mergeNewUser(lol.calico.uctutors.generated.api.v1.LoginResponseNewUser value) {
+      if (newUserBuilder_ == null) {
+        if (detailsCase_ == 2 &&
+            details_ != lol.calico.uctutors.generated.api.v1.LoginResponseNewUser.getDefaultInstance()) {
+          details_ = lol.calico.uctutors.generated.api.v1.LoginResponseNewUser.newBuilder((lol.calico.uctutors.generated.api.v1.LoginResponseNewUser) details_)
+              .mergeFrom(value).buildPartial();
+        } else {
+          details_ = value;
+        }
+        onChanged();
+      } else {
+        if (detailsCase_ == 2) {
+          newUserBuilder_.mergeFrom(value);
+        } else {
+          newUserBuilder_.setMessage(value);
+        }
+      }
+      detailsCase_ = 2;
+      return this;
+    }
+    /**
+     * <code>.api.v1.LoginResponseNewUser new_user = 2 [json_name = "newUser"];</code>
+     */
+    public Builder clearNewUser() {
+      if (newUserBuilder_ == null) {
+        if (detailsCase_ == 2) {
+          detailsCase_ = 0;
+          details_ = null;
+          onChanged();
+        }
+      } else {
+        if (detailsCase_ == 2) {
+          detailsCase_ = 0;
+          details_ = null;
+        }
+        newUserBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>.api.v1.LoginResponseNewUser new_user = 2 [json_name = "newUser"];</code>
+     */
+    public lol.calico.uctutors.generated.api.v1.LoginResponseNewUser.Builder getNewUserBuilder() {
+      return getNewUserFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.api.v1.LoginResponseNewUser new_user = 2 [json_name = "newUser"];</code>
+     */
+    @java.lang.Override
+    public lol.calico.uctutors.generated.api.v1.LoginResponseNewUserOrBuilder getNewUserOrBuilder() {
+      if ((detailsCase_ == 2) && (newUserBuilder_ != null)) {
+        return newUserBuilder_.getMessageOrBuilder();
+      } else {
+        if (detailsCase_ == 2) {
+          return (lol.calico.uctutors.generated.api.v1.LoginResponseNewUser) details_;
+        }
+        return lol.calico.uctutors.generated.api.v1.LoginResponseNewUser.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.api.v1.LoginResponseNewUser new_user = 2 [json_name = "newUser"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        lol.calico.uctutors.generated.api.v1.LoginResponseNewUser, lol.calico.uctutors.generated.api.v1.LoginResponseNewUser.Builder, lol.calico.uctutors.generated.api.v1.LoginResponseNewUserOrBuilder> 
+        getNewUserFieldBuilder() {
+      if (newUserBuilder_ == null) {
+        if (!(detailsCase_ == 2)) {
+          details_ = lol.calico.uctutors.generated.api.v1.LoginResponseNewUser.getDefaultInstance();
+        }
+        newUserBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            lol.calico.uctutors.generated.api.v1.LoginResponseNewUser, lol.calico.uctutors.generated.api.v1.LoginResponseNewUser.Builder, lol.calico.uctutors.generated.api.v1.LoginResponseNewUserOrBuilder>(
+                (lol.calico.uctutors.generated.api.v1.LoginResponseNewUser) details_,
+                getParentForChildren(),
+                isClean());
+        details_ = null;
+      }
+      detailsCase_ = 2;
+      onChanged();
+      return newUserBuilder_;
+    }
+
+    private com.google.protobuf.SingleFieldBuilderV3<
+        lol.calico.uctutors.generated.api.v1.LoginResponseExistingUser, lol.calico.uctutors.generated.api.v1.LoginResponseExistingUser.Builder, lol.calico.uctutors.generated.api.v1.LoginResponseExistingUserOrBuilder> existingUserBuilder_;
+    /**
+     * <code>.api.v1.LoginResponseExistingUser existing_user = 3 [json_name = "existingUser"];</code>
+     * @return Whether the existingUser field is set.
+     */
+    @java.lang.Override
+    public boolean hasExistingUser() {
+      return detailsCase_ == 3;
+    }
+    /**
+     * <code>.api.v1.LoginResponseExistingUser existing_user = 3 [json_name = "existingUser"];</code>
+     * @return The existingUser.
+     */
+    @java.lang.Override
+    public lol.calico.uctutors.generated.api.v1.LoginResponseExistingUser getExistingUser() {
+      if (existingUserBuilder_ == null) {
+        if (detailsCase_ == 3) {
+          return (lol.calico.uctutors.generated.api.v1.LoginResponseExistingUser) details_;
+        }
+        return lol.calico.uctutors.generated.api.v1.LoginResponseExistingUser.getDefaultInstance();
+      } else {
+        if (detailsCase_ == 3) {
+          return existingUserBuilder_.getMessage();
+        }
+        return lol.calico.uctutors.generated.api.v1.LoginResponseExistingUser.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.api.v1.LoginResponseExistingUser existing_user = 3 [json_name = "existingUser"];</code>
+     */
+    public Builder setExistingUser(lol.calico.uctutors.generated.api.v1.LoginResponseExistingUser value) {
+      if (existingUserBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        details_ = value;
+        onChanged();
+      } else {
+        existingUserBuilder_.setMessage(value);
+      }
+      detailsCase_ = 3;
+      return this;
+    }
+    /**
+     * <code>.api.v1.LoginResponseExistingUser existing_user = 3 [json_name = "existingUser"];</code>
+     */
+    public Builder setExistingUser(
+        lol.calico.uctutors.generated.api.v1.LoginResponseExistingUser.Builder builderForValue) {
+      if (existingUserBuilder_ == null) {
+        details_ = builderForValue.build();
+        onChanged();
+      } else {
+        existingUserBuilder_.setMessage(builderForValue.build());
+      }
+      detailsCase_ = 3;
+      return this;
+    }
+    /**
+     * <code>.api.v1.LoginResponseExistingUser existing_user = 3 [json_name = "existingUser"];</code>
+     */
+    public Builder mergeExistingUser(lol.calico.uctutors.generated.api.v1.LoginResponseExistingUser value) {
+      if (existingUserBuilder_ == null) {
+        if (detailsCase_ == 3 &&
+            details_ != lol.calico.uctutors.generated.api.v1.LoginResponseExistingUser.getDefaultInstance()) {
+          details_ = lol.calico.uctutors.generated.api.v1.LoginResponseExistingUser.newBuilder((lol.calico.uctutors.generated.api.v1.LoginResponseExistingUser) details_)
+              .mergeFrom(value).buildPartial();
+        } else {
+          details_ = value;
+        }
+        onChanged();
+      } else {
+        if (detailsCase_ == 3) {
+          existingUserBuilder_.mergeFrom(value);
+        } else {
+          existingUserBuilder_.setMessage(value);
+        }
+      }
+      detailsCase_ = 3;
+      return this;
+    }
+    /**
+     * <code>.api.v1.LoginResponseExistingUser existing_user = 3 [json_name = "existingUser"];</code>
+     */
+    public Builder clearExistingUser() {
+      if (existingUserBuilder_ == null) {
+        if (detailsCase_ == 3) {
+          detailsCase_ = 0;
+          details_ = null;
+          onChanged();
+        }
+      } else {
+        if (detailsCase_ == 3) {
+          detailsCase_ = 0;
+          details_ = null;
+        }
+        existingUserBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>.api.v1.LoginResponseExistingUser existing_user = 3 [json_name = "existingUser"];</code>
+     */
+    public lol.calico.uctutors.generated.api.v1.LoginResponseExistingUser.Builder getExistingUserBuilder() {
+      return getExistingUserFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.api.v1.LoginResponseExistingUser existing_user = 3 [json_name = "existingUser"];</code>
+     */
+    @java.lang.Override
+    public lol.calico.uctutors.generated.api.v1.LoginResponseExistingUserOrBuilder getExistingUserOrBuilder() {
+      if ((detailsCase_ == 3) && (existingUserBuilder_ != null)) {
+        return existingUserBuilder_.getMessageOrBuilder();
+      } else {
+        if (detailsCase_ == 3) {
+          return (lol.calico.uctutors.generated.api.v1.LoginResponseExistingUser) details_;
+        }
+        return lol.calico.uctutors.generated.api.v1.LoginResponseExistingUser.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.api.v1.LoginResponseExistingUser existing_user = 3 [json_name = "existingUser"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        lol.calico.uctutors.generated.api.v1.LoginResponseExistingUser, lol.calico.uctutors.generated.api.v1.LoginResponseExistingUser.Builder, lol.calico.uctutors.generated.api.v1.LoginResponseExistingUserOrBuilder> 
+        getExistingUserFieldBuilder() {
+      if (existingUserBuilder_ == null) {
+        if (!(detailsCase_ == 3)) {
+          details_ = lol.calico.uctutors.generated.api.v1.LoginResponseExistingUser.getDefaultInstance();
+        }
+        existingUserBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            lol.calico.uctutors.generated.api.v1.LoginResponseExistingUser, lol.calico.uctutors.generated.api.v1.LoginResponseExistingUser.Builder, lol.calico.uctutors.generated.api.v1.LoginResponseExistingUserOrBuilder>(
+                (lol.calico.uctutors.generated.api.v1.LoginResponseExistingUser) details_,
+                getParentForChildren(),
+                isClean());
+        details_ = null;
+      }
+      detailsCase_ = 3;
+      onChanged();
+      return existingUserBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

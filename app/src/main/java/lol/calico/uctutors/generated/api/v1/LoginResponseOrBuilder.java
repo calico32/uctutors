@@ -7,4 +7,47 @@ package lol.calico.uctutors.generated.api.v1;
 public interface LoginResponseOrBuilder extends
     // @@protoc_insertion_point(interface_extends:api.v1.LoginResponse)
     com.google.protobuf.MessageOrBuilder {
+
+  /**
+   * <code>.api.v1.LoginStatus status = 1 [json_name = "status"];</code>
+   * @return The enum numeric value on the wire for status.
+   */
+  int getStatusValue();
+  /**
+   * <code>.api.v1.LoginStatus status = 1 [json_name = "status"];</code>
+   * @return The status.
+   */
+  lol.calico.uctutors.generated.api.v1.LoginStatus getStatus();
+
+  /**
+   * <code>.api.v1.LoginResponseNewUser new_user = 2 [json_name = "newUser"];</code>
+   * @return Whether the newUser field is set.
+   */
+  boolean hasNewUser();
+  /**
+   * <code>.api.v1.LoginResponseNewUser new_user = 2 [json_name = "newUser"];</code>
+   * @return The newUser.
+   */
+  lol.calico.uctutors.generated.api.v1.LoginResponseNewUser getNewUser();
+  /**
+   * <code>.api.v1.LoginResponseNewUser new_user = 2 [json_name = "newUser"];</code>
+   */
+  lol.calico.uctutors.generated.api.v1.LoginResponseNewUserOrBuilder getNewUserOrBuilder();
+
+  /**
+   * <code>.api.v1.LoginResponseExistingUser existing_user = 3 [json_name = "existingUser"];</code>
+   * @return Whether the existingUser field is set.
+   */
+  boolean hasExistingUser();
+  /**
+   * <code>.api.v1.LoginResponseExistingUser existing_user = 3 [json_name = "existingUser"];</code>
+   * @return The existingUser.
+   */
+  lol.calico.uctutors.generated.api.v1.LoginResponseExistingUser getExistingUser();
+  /**
+   * <code>.api.v1.LoginResponseExistingUser existing_user = 3 [json_name = "existingUser"];</code>
+   */
+  lol.calico.uctutors.generated.api.v1.LoginResponseExistingUserOrBuilder getExistingUserOrBuilder();
+
+  lol.calico.uctutors.generated.api.v1.LoginResponse.DetailsCase getDetailsCase();
 }

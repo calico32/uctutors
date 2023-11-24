@@ -1,6 +1,7 @@
 /* eslint-disable */
 import type { CallContext, CallOptions } from "nice-grpc-common";
 import _m0 from "protobufjs/minimal";
+import { Empty } from "../google/protobuf/empty";
 import { Timestamp } from "../google/protobuf/timestamp";
 
 export const protobufPackage = "api";
@@ -232,7 +233,7 @@ export const ApiInfoServiceDefinition = {
   methods: {
     getApiInfo: {
       name: "GetApiInfo",
-      requestType: GetApiInfoRequest,
+      requestType: Empty,
       requestStream: false,
       responseType: GetApiInfoResponse,
       responseStream: false,
@@ -242,17 +243,11 @@ export const ApiInfoServiceDefinition = {
 } as const;
 
 export interface ApiInfoServiceImplementation<CallContextExt = {}> {
-  getApiInfo(
-    request: GetApiInfoRequest,
-    context: CallContext & CallContextExt,
-  ): Promise<DeepPartial<GetApiInfoResponse>>;
+  getApiInfo(request: Empty, context: CallContext & CallContextExt): Promise<DeepPartial<GetApiInfoResponse>>;
 }
 
 export interface ApiInfoServiceClient<CallOptionsExt = {}> {
-  getApiInfo(
-    request: DeepPartial<GetApiInfoRequest>,
-    options?: CallOptions & CallOptionsExt,
-  ): Promise<GetApiInfoResponse>;
+  getApiInfo(request: DeepPartial<Empty>, options?: CallOptions & CallOptionsExt): Promise<GetApiInfoResponse>;
 }
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;

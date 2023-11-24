@@ -2,7 +2,9 @@ package lol.calico.uctutors.data.common
 
 import android.net.Uri
 import android.util.Log
+import io.grpc.Context
 import io.grpc.ManagedChannelBuilder
+import io.grpc.Metadata
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.asExecutor
 import lol.calico.uctutors.BuildConfig
@@ -20,12 +22,19 @@ class GrpcConnection @Inject constructor() : Closeable {
 
   companion object {
     private const val TAG = "GrpcConnection"
+    val sessionHeader: Metadata.Key<String> =
+      Metadata.Key.of("session", Metadata.ASCII_STRING_MARSHALLER)
+    val sessionKey: Context.Key<String> = Context.key("session")
   }
+
+  val sessionHeader = Companion.sessionHeader
+  val sessionKey = Companion.sessionKey
 
   private val channel = let {
     Log.d(TAG, "Connecting to ${uri.host}:${uri.port}")
 
-    val builder = ManagedChannelBuilder.forAddress(uri.host, uri.port)
+    val builder =
+      ManagedChannelBuilder.forAddress(uri.host, uri.port).intercept(HeaderInterceptor())
     if (uri.scheme == "https") {
       builder.useTransportSecurity()
     } else {

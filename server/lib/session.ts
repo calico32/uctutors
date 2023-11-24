@@ -24,6 +24,10 @@ type Intersect<U> = (U extends any ? (k: U) => void : never) extends (k: infer I
  */
 export type SessionData = { [key: string]: any }
 
+export type AuthSession = {
+  userId: string
+}
+
 /**
  * A session. The `id` property is always present, and is a unique identifier
  * for the session.
@@ -83,12 +87,7 @@ export const Session = {
     if (!cookie) return Result.error(AuthSessionError.AUTH_SESSION_ERROR_NO_SESSION)
 
     try {
-      const session = (await Iron.unseal(
-        this.crypto,
-        cookie,
-        sessionSecret,
-        Iron.defaults
-      )) as Session<T>
+      const session = await this.decrypt<T>(cookie)
       if (!Session.validate(session)) {
         return Result.error(AuthSessionError.AUTH_SESSION_ERROR_VALIDATION_FAILED)
       }
@@ -107,8 +106,32 @@ export const Session = {
   async save<T extends SessionData>(session: Session<T>, cookieStore: SetMetadataStore) {
     if (!sessionSecret) throw new Error('Session: session secret is not set')
 
-    const sealed = await Iron.seal(this.crypto, session, sessionSecret, Iron.defaults)
+    const sealed = await this.encrypt(session)
     cookieStore.set(sessionName, sealed)
+  },
+
+  /**
+   * Encrypts a session into a string.
+   *
+   * `$SESSION_SECRET` must be set, or `setSessionSecret` must be called
+   * before calling this function.
+   */
+  async encrypt<T extends SessionData>(session: Session<T>): Promise<string> {
+    if (!sessionSecret) throw new Error('Session: session secret is not set')
+
+    return await Iron.seal(this.crypto, session, sessionSecret, Iron.defaults)
+  },
+
+  /**
+   * Decrypts a session from a string.
+   *
+   * `$SESSION_SECRET` must be set, or `setSessionSecret` must be called
+   * before calling this function.
+   */
+  async decrypt<T extends SessionData>(sealed: string): Promise<Session<T>> {
+    if (!sessionSecret) throw new Error('Session: session secret is not set')
+
+    return (await Iron.unseal(this.crypto, sealed, sessionSecret, Iron.defaults)) as Session<T>
   },
 
   /**
@@ -123,7 +146,7 @@ export const Session = {
    */
   create<
     T extends SessionData,
-    E extends SessionPlugin,
+    E extends SessionPlugin = never,
     C = T & Intersect<E extends SessionPlugin<infer U> ? U : never>
   >(sessionData: T, extensions: E[] = []): Session<{ [K in keyof C]: C[K] }> {
     let session: Session<any> = {

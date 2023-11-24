@@ -1,5 +1,6 @@
 package lol.calico.uctutors.generated.api
 
+import com.google.protobuf.Empty
 import io.grpc.CallOptions
 import io.grpc.CallOptions.DEFAULT
 import io.grpc.Channel
@@ -32,7 +33,7 @@ public object ApiInfoServiceGrpcKt {
   public val serviceDescriptor: ServiceDescriptor
     get() = getServiceDescriptor()
 
-  public val getApiInfoMethod: MethodDescriptor<GetApiInfoRequest, GetApiInfoResponse>
+  public val getApiInfoMethod: MethodDescriptor<Empty, GetApiInfoResponse>
     @JvmStatic
     get() = ApiInfoServiceGrpc.getGetApiInfoMethod()
 
@@ -60,7 +61,7 @@ public object ApiInfoServiceGrpcKt {
      *
      * @return The single response from the server.
      */
-    public suspend fun getApiInfo(request: GetApiInfoRequest, headers: Metadata = Metadata()):
+    public suspend fun getApiInfo(request: Empty, headers: Metadata = Metadata()):
         GetApiInfoResponse = unaryRpc(
       channel,
       ApiInfoServiceGrpc.getGetApiInfoMethod(),
@@ -87,7 +88,7 @@ public object ApiInfoServiceGrpcKt {
      *
      * @param request The request from the client.
      */
-    public open suspend fun getApiInfo(request: GetApiInfoRequest): GetApiInfoResponse = throw
+    public open suspend fun getApiInfo(request: Empty): GetApiInfoResponse = throw
         StatusException(UNIMPLEMENTED.withDescription("Method api.ApiInfoService.GetApiInfo is unimplemented"))
 
     final override fun bindService(): ServerServiceDefinition = builder(getServiceDescriptor())

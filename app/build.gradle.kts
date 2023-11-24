@@ -3,7 +3,7 @@ plugins {
   alias(libs.plugins.androidApplication)
   alias(libs.plugins.kotlinAndroid)
   alias(libs.plugins.hilt)
-  kotlin("kapt")
+  alias(libs.plugins.ksp)
 }
 
 android {
@@ -64,6 +64,10 @@ android {
   }
 }
 
+hilt {
+  enableAggregatingTask = true
+}
+
 dependencies {
   implementation(libs.core.ktx)
   implementation(libs.lifecycle.runtime.ktx)
@@ -86,19 +90,22 @@ dependencies {
   implementation(libs.google.protobuf.kotlin)
   implementation(libs.google.protobuf.java)
   implementation(libs.google.commonprotos)
-  implementation(libs.google.googleplay.auth)
+  implementation(libs.google.playservices.auth)
   implementation(libs.grpc.core)
   implementation(libs.grpc.protobuf)
   implementation(libs.grpc.stub)
   implementation(libs.grpc.kotlin)
   implementation(libs.grpc.okhttp)
   implementation(libs.kotlinx.coroutines)
+  implementation(libs.kotlinx.coroutines.android)
+  implementation(libs.kotlinx.coroutines.playservices)
+  implementation(libs.result)
+  implementation(libs.result.coroutines)
   implementation(libs.hilt)
   implementation(libs.hilt.navigation)
   implementation(libs.datastore)
-  kapt(libs.hilt.compiler)
-}
-
-kapt {
-  correctErrorTypes = true
+  implementation(libs.credentials)
+  implementation(libs.credentials.playservices)
+  implementation(libs.googleid)
+  ksp(libs.hilt.compiler)
 }

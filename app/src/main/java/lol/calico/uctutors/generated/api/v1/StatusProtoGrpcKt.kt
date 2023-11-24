@@ -1,5 +1,6 @@
 package lol.calico.uctutors.generated.api.v1
 
+import com.google.protobuf.Empty
 import io.grpc.CallOptions
 import io.grpc.CallOptions.DEFAULT
 import io.grpc.Channel
@@ -32,7 +33,7 @@ public object StatusServiceGrpcKt {
   public val serviceDescriptor: ServiceDescriptor
     get() = getServiceDescriptor()
 
-  public val getStatusMethod: MethodDescriptor<GetStatusRequest, GetStatusResponse>
+  public val getStatusMethod: MethodDescriptor<Empty, GetStatusResponse>
     @JvmStatic
     get() = StatusServiceGrpc.getGetStatusMethod()
 
@@ -60,8 +61,8 @@ public object StatusServiceGrpcKt {
      *
      * @return The single response from the server.
      */
-    public suspend fun getStatus(request: GetStatusRequest, headers: Metadata = Metadata()):
-        GetStatusResponse = unaryRpc(
+    public suspend fun getStatus(request: Empty, headers: Metadata = Metadata()): GetStatusResponse
+        = unaryRpc(
       channel,
       StatusServiceGrpc.getGetStatusMethod(),
       request,
@@ -87,7 +88,7 @@ public object StatusServiceGrpcKt {
      *
      * @param request The request from the client.
      */
-    public open suspend fun getStatus(request: GetStatusRequest): GetStatusResponse = throw
+    public open suspend fun getStatus(request: Empty): GetStatusResponse = throw
         StatusException(UNIMPLEMENTED.withDescription("Method api.v1.StatusService.GetStatus is unimplemented"))
 
     final override fun bindService(): ServerServiceDefinition = builder(getServiceDescriptor())

@@ -1,15 +1,15 @@
 syntax = "proto3";
 package api.v1;
 
+import "google/protobuf/empty.proto";
+
+service StatusService {
+  rpc GetStatus(google.protobuf.Empty) returns (GetStatusResponse);
+}
+
 message GetStatusResponse {
   string status = 1;
   AuthInfo auth_info = 2;
-}
-
-message GetStatusRequest {}
-
-service StatusService {
-  rpc GetStatus(GetStatusRequest) returns (GetStatusResponse);
 }
 
 message AuthInfo {

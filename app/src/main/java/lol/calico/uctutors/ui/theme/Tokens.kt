@@ -275,7 +275,7 @@ val md_sys_typescale_display_medium_letter_spacing = 0.sp
 
 /* display - small */
 val md_sys_typescale_display_small_font_family = workSans
-val md_sys_typescale_display_small_font_weight = FontWeight.W400
+val md_sys_typescale_display_small_font_weight = FontWeight.W500
 val md_sys_typescale_display_small_font_size = 36.sp
 val md_sys_typescale_display_small_line_height = 44.sp
 val md_sys_typescale_display_small_letter_spacing = 0.sp

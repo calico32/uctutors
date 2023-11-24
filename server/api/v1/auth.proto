@@ -1,12 +1,64 @@
 syntax = "proto3";
 package api.v1;
 
+import "google/protobuf/empty.proto";
+import "api/v1/error.proto";
+
 service AuthService {
   rpc Login(LoginRequest) returns (LoginResponse) {}
+  rpc Logout(google.protobuf.Empty) returns (google.protobuf.Empty) {}
+  rpc Register(RegisterRequest) returns (RegisterResponse) {}
+  // rpc DeleteAccount(google.protobuf.Empty) returns (google.protobuf.Empty) {}
 }
 
 message LoginRequest {
   string id_token = 1;
 }
 
-message LoginResponse {}
+message LoginResponse {
+  LoginStatus status = 1;
+  oneof details {
+    LoginResponseNewUser new_user = 2;
+    LoginResponseExistingUser existing_user = 3;
+  }
+}
+
+
+enum LoginStatus {
+  LOGIN_STATUS_UNSPECIFIED = 0;
+  LOGIN_STATUS_NEW_USER = 1;
+  LOGIN_STATUS_EXISTING_USER = 2;
+}
+
+message LoginResponseNewUser {
+  string user_id = 1;
+  string token = 2;
+}
+
+message LoginResponseExistingUser {
+  string user_id = 1;
+  string token = 2;
+}
+
+
+message RegisterRequest {
+
+}
+
+message RegisterResponse {
+  RegisterStatus status = 1;
+  oneof details {
+    RegisterResponseSuccess success = 2;
+    Error error = 3;
+  }
+}
+
+enum RegisterStatus {
+  REGISTER_STATUS_UNSPECIFIED = 0;
+  REGISTER_STATUS_SUCCESS = 1;
+  REGISTER_STATUS_ERROR = 2;
+}
+
+message RegisterResponseSuccess {
+  string user_id = 1;
+}

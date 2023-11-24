@@ -15,27 +15,27 @@ public final class StatusServiceGrpc {
   public static final java.lang.String SERVICE_NAME = "api.v1.StatusService";
 
   // Static method descriptors that strictly reflect the proto.
-  private static volatile io.grpc.MethodDescriptor<lol.calico.uctutors.generated.api.v1.GetStatusRequest,
+  private static volatile io.grpc.MethodDescriptor<com.google.protobuf.Empty,
       lol.calico.uctutors.generated.api.v1.GetStatusResponse> getGetStatusMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "GetStatus",
-      requestType = lol.calico.uctutors.generated.api.v1.GetStatusRequest.class,
+      requestType = com.google.protobuf.Empty.class,
       responseType = lol.calico.uctutors.generated.api.v1.GetStatusResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<lol.calico.uctutors.generated.api.v1.GetStatusRequest,
+  public static io.grpc.MethodDescriptor<com.google.protobuf.Empty,
       lol.calico.uctutors.generated.api.v1.GetStatusResponse> getGetStatusMethod() {
-    io.grpc.MethodDescriptor<lol.calico.uctutors.generated.api.v1.GetStatusRequest, lol.calico.uctutors.generated.api.v1.GetStatusResponse> getGetStatusMethod;
+    io.grpc.MethodDescriptor<com.google.protobuf.Empty, lol.calico.uctutors.generated.api.v1.GetStatusResponse> getGetStatusMethod;
     if ((getGetStatusMethod = StatusServiceGrpc.getGetStatusMethod) == null) {
       synchronized (StatusServiceGrpc.class) {
         if ((getGetStatusMethod = StatusServiceGrpc.getGetStatusMethod) == null) {
           StatusServiceGrpc.getGetStatusMethod = getGetStatusMethod =
-              io.grpc.MethodDescriptor.<lol.calico.uctutors.generated.api.v1.GetStatusRequest, lol.calico.uctutors.generated.api.v1.GetStatusResponse>newBuilder()
+              io.grpc.MethodDescriptor.<com.google.protobuf.Empty, lol.calico.uctutors.generated.api.v1.GetStatusResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetStatus"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  lol.calico.uctutors.generated.api.v1.GetStatusRequest.getDefaultInstance()))
+                  com.google.protobuf.Empty.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   lol.calico.uctutors.generated.api.v1.GetStatusResponse.getDefaultInstance()))
               .setSchemaDescriptor(new StatusServiceMethodDescriptorSupplier("GetStatus"))
@@ -96,7 +96,7 @@ public final class StatusServiceGrpc {
 
     /**
      */
-    default void getStatus(lol.calico.uctutors.generated.api.v1.GetStatusRequest request,
+    default void getStatus(com.google.protobuf.Empty request,
         io.grpc.stub.StreamObserver<lol.calico.uctutors.generated.api.v1.GetStatusResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetStatusMethod(), responseObserver);
     }
@@ -131,7 +131,7 @@ public final class StatusServiceGrpc {
 
     /**
      */
-    public void getStatus(lol.calico.uctutors.generated.api.v1.GetStatusRequest request,
+    public void getStatus(com.google.protobuf.Empty request,
         io.grpc.stub.StreamObserver<lol.calico.uctutors.generated.api.v1.GetStatusResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getGetStatusMethod(), getCallOptions()), request, responseObserver);
@@ -156,7 +156,7 @@ public final class StatusServiceGrpc {
 
     /**
      */
-    public lol.calico.uctutors.generated.api.v1.GetStatusResponse getStatus(lol.calico.uctutors.generated.api.v1.GetStatusRequest request) {
+    public lol.calico.uctutors.generated.api.v1.GetStatusResponse getStatus(com.google.protobuf.Empty request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getGetStatusMethod(), getCallOptions(), request);
     }
@@ -181,7 +181,7 @@ public final class StatusServiceGrpc {
     /**
      */
     public com.google.common.util.concurrent.ListenableFuture<lol.calico.uctutors.generated.api.v1.GetStatusResponse> getStatus(
-        lol.calico.uctutors.generated.api.v1.GetStatusRequest request) {
+        com.google.protobuf.Empty request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getGetStatusMethod(), getCallOptions()), request);
     }
@@ -207,7 +207,7 @@ public final class StatusServiceGrpc {
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
         case METHODID_GET_STATUS:
-          serviceImpl.getStatus((lol.calico.uctutors.generated.api.v1.GetStatusRequest) request,
+          serviceImpl.getStatus((com.google.protobuf.Empty) request,
               (io.grpc.stub.StreamObserver<lol.calico.uctutors.generated.api.v1.GetStatusResponse>) responseObserver);
           break;
         default:
@@ -232,7 +232,7 @@ public final class StatusServiceGrpc {
           getGetStatusMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
-              lol.calico.uctutors.generated.api.v1.GetStatusRequest,
+              com.google.protobuf.Empty,
               lol.calico.uctutors.generated.api.v1.GetStatusResponse>(
                 service, METHODID_GET_STATUS)))
         .build();

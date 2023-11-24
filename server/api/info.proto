@@ -1,10 +1,11 @@
 syntax = "proto3";
 package api;
 
+import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
 
 service ApiInfoService {
-  rpc GetApiInfo(GetApiInfoRequest) returns (GetApiInfoResponse) {}
+  rpc GetApiInfo(google.protobuf.Empty) returns (GetApiInfoResponse) {}
 }
 
 message GetApiInfoRequest {}

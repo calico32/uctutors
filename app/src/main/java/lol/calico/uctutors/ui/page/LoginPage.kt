@@ -1,11 +1,5 @@
 package lol.calico.uctutors.ui.page
 
-import android.app.Activity
-import android.content.Context
-import android.content.Intent
-import android.util.Log
-import androidx.activity.ComponentActivity
-import androidx.activity.result.contract.ActivityResultContract
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -39,30 +33,24 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.auth.api.signin.GoogleSignInStatusCodes
-import com.google.android.gms.common.api.ApiException
+import com.github.michaelbull.result.Ok
+import com.github.michaelbull.result.Result
+import com.github.michaelbull.result.getErrorOr
 import kotlinx.coroutines.launch
-import lol.calico.uctutors.BuildConfig
-import lol.calico.uctutors.MainActivity
 import lol.calico.uctutors.R
-import lol.calico.uctutors.generated.api.v1.loginRequest
-import lol.calico.uctutors.ui.compose.LocalGrpcConnection
 import lol.calico.uctutors.ui.theme.Colors
 import lol.calico.uctutors.ui.theme.UCTutorsTheme
 
 @Composable
-fun LoginPage(onSignIn: (account: GoogleSignInAccount) -> Unit) {
+fun LoginPage(onSignIn: suspend () -> Result<Unit, String>) {
   val view = LocalView.current
   var loading by remember { mutableStateOf(false) }
   var error by remember { mutableStateOf("") }
   val scope = rememberCoroutineScope()
-  val grpc = LocalGrpcConnection.current
 
   Surface(
-    color = Colors.Primary40, modifier = Modifier.fillMaxSize()
+    color = Colors.Primary40,
+    modifier = Modifier.fillMaxSize()
   ) {
     Column(
       modifier = Modifier
@@ -130,35 +118,12 @@ fun LoginPage(onSignIn: (account: GoogleSignInAccount) -> Unit) {
           OutlinedButton(
             onClick = {
               if (view.isInEditMode) return@OutlinedButton
-              loading = true
-
-              val activity = view.context as ComponentActivity
-              val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .setHostedDomain("ucvts.org")
-                .requestProfile()
-                .requestEmail()
-                .requestIdToken(BuildConfig.WEB_CLIENT_ID)
-                .build()
-              val googleSignInClient = GoogleSignIn.getClient(view.context, gso)
-              val signInIntent = googleSignInClient.signInIntent
-              val signIn = activity.registerForActivityResult(SignInContract()) {
-                if (it.error != null) {
-                  error = it.error
-                  return@registerForActivityResult
-                }
-
-                if (it.account == null || it.account.idToken == null) {
-                  error = "Sign in failed: no account or id token"
-                  return@registerForActivityResult
-                }
-
-                scope.launch {
-                  val result = grpc.auth.login(loginRequest {
-                    idToken = it.account.idToken!!
-                  })
-                }
+              scope.launch {
+                error = ""
+                loading = true
+                error = onSignIn().getErrorOr("")
+                loading = false
               }
-              signIn.launch(signInIntent)
             }, modifier = Modifier
               .padding(10.dp),
             shape = RoundedCornerShape(12.dp)
@@ -195,42 +160,11 @@ fun LoginPage(onSignIn: (account: GoogleSignInAccount) -> Unit) {
   }
 }
 
-data class SignInResult(
-  val account: GoogleSignInAccount?,
-  val error: String?,
-)
-
-class SignInContract : ActivityResultContract<Intent, SignInResult>() {
-  override fun createIntent(context: Context, input: Intent): Intent {
-    return input
-  }
-
-  override fun parseResult(resultCode: Int, intent: Intent?): SignInResult {
-    if (resultCode != Activity.RESULT_OK) {
-      return SignInResult(account = null, error = "Error: code $resultCode")
-    }
-
-    val task = GoogleSignIn.getSignedInAccountFromIntent(intent)
-
-    return try {
-      val account: GoogleSignInAccount = task.getResult(ApiException::class.java)
-      Log.d(MainActivity.TAG, "sign in success (${account.email ?: "<no email>"})")
-
-      SignInResult(account, error = null)
-    } catch (e: ApiException) {
-      val errorMessage =
-        "Sign in failed: " + GoogleSignInStatusCodes.getStatusCodeString(e.statusCode)
-      Log.w(MainActivity.TAG, errorMessage)
-
-      SignInResult(account = null, error = errorMessage)
-    }
-  }
-}
 
 @Preview(showSystemUi = true)
 @Composable
 fun LoginPagePreview() {
   UCTutorsTheme {
-    LoginPage(onSignIn = {})
+    LoginPage(onSignIn = { Ok(Unit) })
   }
 }

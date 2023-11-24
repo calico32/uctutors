@@ -46,6 +46,68 @@ public final class AuthServiceGrpc {
     return getLoginMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.google.protobuf.Empty,
+      com.google.protobuf.Empty> getLogoutMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "Logout",
+      requestType = com.google.protobuf.Empty.class,
+      responseType = com.google.protobuf.Empty.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.google.protobuf.Empty,
+      com.google.protobuf.Empty> getLogoutMethod() {
+    io.grpc.MethodDescriptor<com.google.protobuf.Empty, com.google.protobuf.Empty> getLogoutMethod;
+    if ((getLogoutMethod = AuthServiceGrpc.getLogoutMethod) == null) {
+      synchronized (AuthServiceGrpc.class) {
+        if ((getLogoutMethod = AuthServiceGrpc.getLogoutMethod) == null) {
+          AuthServiceGrpc.getLogoutMethod = getLogoutMethod =
+              io.grpc.MethodDescriptor.<com.google.protobuf.Empty, com.google.protobuf.Empty>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "Logout"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.google.protobuf.Empty.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.google.protobuf.Empty.getDefaultInstance()))
+              .setSchemaDescriptor(new AuthServiceMethodDescriptorSupplier("Logout"))
+              .build();
+        }
+      }
+    }
+    return getLogoutMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<lol.calico.uctutors.generated.api.v1.RegisterRequest,
+      lol.calico.uctutors.generated.api.v1.RegisterResponse> getRegisterMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "Register",
+      requestType = lol.calico.uctutors.generated.api.v1.RegisterRequest.class,
+      responseType = lol.calico.uctutors.generated.api.v1.RegisterResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<lol.calico.uctutors.generated.api.v1.RegisterRequest,
+      lol.calico.uctutors.generated.api.v1.RegisterResponse> getRegisterMethod() {
+    io.grpc.MethodDescriptor<lol.calico.uctutors.generated.api.v1.RegisterRequest, lol.calico.uctutors.generated.api.v1.RegisterResponse> getRegisterMethod;
+    if ((getRegisterMethod = AuthServiceGrpc.getRegisterMethod) == null) {
+      synchronized (AuthServiceGrpc.class) {
+        if ((getRegisterMethod = AuthServiceGrpc.getRegisterMethod) == null) {
+          AuthServiceGrpc.getRegisterMethod = getRegisterMethod =
+              io.grpc.MethodDescriptor.<lol.calico.uctutors.generated.api.v1.RegisterRequest, lol.calico.uctutors.generated.api.v1.RegisterResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "Register"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  lol.calico.uctutors.generated.api.v1.RegisterRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  lol.calico.uctutors.generated.api.v1.RegisterResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new AuthServiceMethodDescriptorSupplier("Register"))
+              .build();
+        }
+      }
+    }
+    return getRegisterMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -100,6 +162,20 @@ public final class AuthServiceGrpc {
         io.grpc.stub.StreamObserver<lol.calico.uctutors.generated.api.v1.LoginResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getLoginMethod(), responseObserver);
     }
+
+    /**
+     */
+    default void logout(com.google.protobuf.Empty request,
+        io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getLogoutMethod(), responseObserver);
+    }
+
+    /**
+     */
+    default void register(lol.calico.uctutors.generated.api.v1.RegisterRequest request,
+        io.grpc.stub.StreamObserver<lol.calico.uctutors.generated.api.v1.RegisterResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getRegisterMethod(), responseObserver);
+    }
   }
 
   /**
@@ -136,6 +212,22 @@ public final class AuthServiceGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getLoginMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void logout(com.google.protobuf.Empty request,
+        io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getLogoutMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void register(lol.calico.uctutors.generated.api.v1.RegisterRequest request,
+        io.grpc.stub.StreamObserver<lol.calico.uctutors.generated.api.v1.RegisterResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getRegisterMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -159,6 +251,20 @@ public final class AuthServiceGrpc {
     public lol.calico.uctutors.generated.api.v1.LoginResponse login(lol.calico.uctutors.generated.api.v1.LoginRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getLoginMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.google.protobuf.Empty logout(com.google.protobuf.Empty request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getLogoutMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public lol.calico.uctutors.generated.api.v1.RegisterResponse register(lol.calico.uctutors.generated.api.v1.RegisterRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getRegisterMethod(), getCallOptions(), request);
     }
   }
 
@@ -185,9 +291,27 @@ public final class AuthServiceGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getLoginMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.google.protobuf.Empty> logout(
+        com.google.protobuf.Empty request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getLogoutMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<lol.calico.uctutors.generated.api.v1.RegisterResponse> register(
+        lol.calico.uctutors.generated.api.v1.RegisterRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getRegisterMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_LOGIN = 0;
+  private static final int METHODID_LOGOUT = 1;
+  private static final int METHODID_REGISTER = 2;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -209,6 +333,14 @@ public final class AuthServiceGrpc {
         case METHODID_LOGIN:
           serviceImpl.login((lol.calico.uctutors.generated.api.v1.LoginRequest) request,
               (io.grpc.stub.StreamObserver<lol.calico.uctutors.generated.api.v1.LoginResponse>) responseObserver);
+          break;
+        case METHODID_LOGOUT:
+          serviceImpl.logout((com.google.protobuf.Empty) request,
+              (io.grpc.stub.StreamObserver<com.google.protobuf.Empty>) responseObserver);
+          break;
+        case METHODID_REGISTER:
+          serviceImpl.register((lol.calico.uctutors.generated.api.v1.RegisterRequest) request,
+              (io.grpc.stub.StreamObserver<lol.calico.uctutors.generated.api.v1.RegisterResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -235,6 +367,20 @@ public final class AuthServiceGrpc {
               lol.calico.uctutors.generated.api.v1.LoginRequest,
               lol.calico.uctutors.generated.api.v1.LoginResponse>(
                 service, METHODID_LOGIN)))
+        .addMethod(
+          getLogoutMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.google.protobuf.Empty,
+              com.google.protobuf.Empty>(
+                service, METHODID_LOGOUT)))
+        .addMethod(
+          getRegisterMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              lol.calico.uctutors.generated.api.v1.RegisterRequest,
+              lol.calico.uctutors.generated.api.v1.RegisterResponse>(
+                service, METHODID_REGISTER)))
         .build();
   }
 
@@ -284,6 +430,8 @@ public final class AuthServiceGrpc {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new AuthServiceFileDescriptorSupplier())
               .addMethod(getLoginMethod())
+              .addMethod(getLogoutMethod())
+              .addMethod(getRegisterMethod())
               .build();
         }
       }

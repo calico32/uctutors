@@ -1,15 +1,13 @@
 /* eslint-disable */
 import type { CallContext, CallOptions } from "nice-grpc-common";
 import _m0 from "protobufjs/minimal";
+import { Empty } from "../../google/protobuf/empty";
 
 export const protobufPackage = "api.v1";
 
 export interface GetStatusResponse {
   status: string;
   authInfo: AuthInfo | undefined;
-}
-
-export interface GetStatusRequest {
 }
 
 export interface AuthInfo {
@@ -92,49 +90,6 @@ export const GetStatusResponse = {
   },
 };
 
-function createBaseGetStatusRequest(): GetStatusRequest {
-  return {};
-}
-
-export const GetStatusRequest = {
-  encode(_: GetStatusRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetStatusRequest {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseGetStatusRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(_: any): GetStatusRequest {
-    return {};
-  },
-
-  toJSON(_: GetStatusRequest): unknown {
-    const obj: any = {};
-    return obj;
-  },
-
-  create(base?: DeepPartial<GetStatusRequest>): GetStatusRequest {
-    return GetStatusRequest.fromPartial(base ?? {});
-  },
-  fromPartial(_: DeepPartial<GetStatusRequest>): GetStatusRequest {
-    const message = createBaseGetStatusRequest();
-    return message;
-  },
-};
-
 function createBaseAuthInfo(): AuthInfo {
   return { authenticated: false };
 }
@@ -199,7 +154,7 @@ export const StatusServiceDefinition = {
   methods: {
     getStatus: {
       name: "GetStatus",
-      requestType: GetStatusRequest,
+      requestType: Empty,
       requestStream: false,
       responseType: GetStatusResponse,
       responseStream: false,
@@ -209,11 +164,11 @@ export const StatusServiceDefinition = {
 } as const;
 
 export interface StatusServiceImplementation<CallContextExt = {}> {
-  getStatus(request: GetStatusRequest, context: CallContext & CallContextExt): Promise<DeepPartial<GetStatusResponse>>;
+  getStatus(request: Empty, context: CallContext & CallContextExt): Promise<DeepPartial<GetStatusResponse>>;
 }
 
 export interface StatusServiceClient<CallOptionsExt = {}> {
-  getStatus(request: DeepPartial<GetStatusRequest>, options?: CallOptions & CallOptionsExt): Promise<GetStatusResponse>;
+  getStatus(request: DeepPartial<Empty>, options?: CallOptions & CallOptionsExt): Promise<GetStatusResponse>;
 }
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;

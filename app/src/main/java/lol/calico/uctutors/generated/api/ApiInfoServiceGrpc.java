@@ -15,27 +15,27 @@ public final class ApiInfoServiceGrpc {
   public static final java.lang.String SERVICE_NAME = "api.ApiInfoService";
 
   // Static method descriptors that strictly reflect the proto.
-  private static volatile io.grpc.MethodDescriptor<lol.calico.uctutors.generated.api.GetApiInfoRequest,
+  private static volatile io.grpc.MethodDescriptor<com.google.protobuf.Empty,
       lol.calico.uctutors.generated.api.GetApiInfoResponse> getGetApiInfoMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "GetApiInfo",
-      requestType = lol.calico.uctutors.generated.api.GetApiInfoRequest.class,
+      requestType = com.google.protobuf.Empty.class,
       responseType = lol.calico.uctutors.generated.api.GetApiInfoResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<lol.calico.uctutors.generated.api.GetApiInfoRequest,
+  public static io.grpc.MethodDescriptor<com.google.protobuf.Empty,
       lol.calico.uctutors.generated.api.GetApiInfoResponse> getGetApiInfoMethod() {
-    io.grpc.MethodDescriptor<lol.calico.uctutors.generated.api.GetApiInfoRequest, lol.calico.uctutors.generated.api.GetApiInfoResponse> getGetApiInfoMethod;
+    io.grpc.MethodDescriptor<com.google.protobuf.Empty, lol.calico.uctutors.generated.api.GetApiInfoResponse> getGetApiInfoMethod;
     if ((getGetApiInfoMethod = ApiInfoServiceGrpc.getGetApiInfoMethod) == null) {
       synchronized (ApiInfoServiceGrpc.class) {
         if ((getGetApiInfoMethod = ApiInfoServiceGrpc.getGetApiInfoMethod) == null) {
           ApiInfoServiceGrpc.getGetApiInfoMethod = getGetApiInfoMethod =
-              io.grpc.MethodDescriptor.<lol.calico.uctutors.generated.api.GetApiInfoRequest, lol.calico.uctutors.generated.api.GetApiInfoResponse>newBuilder()
+              io.grpc.MethodDescriptor.<com.google.protobuf.Empty, lol.calico.uctutors.generated.api.GetApiInfoResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetApiInfo"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  lol.calico.uctutors.generated.api.GetApiInfoRequest.getDefaultInstance()))
+                  com.google.protobuf.Empty.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   lol.calico.uctutors.generated.api.GetApiInfoResponse.getDefaultInstance()))
               .setSchemaDescriptor(new ApiInfoServiceMethodDescriptorSupplier("GetApiInfo"))
@@ -96,7 +96,7 @@ public final class ApiInfoServiceGrpc {
 
     /**
      */
-    default void getApiInfo(lol.calico.uctutors.generated.api.GetApiInfoRequest request,
+    default void getApiInfo(com.google.protobuf.Empty request,
         io.grpc.stub.StreamObserver<lol.calico.uctutors.generated.api.GetApiInfoResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetApiInfoMethod(), responseObserver);
     }
@@ -131,7 +131,7 @@ public final class ApiInfoServiceGrpc {
 
     /**
      */
-    public void getApiInfo(lol.calico.uctutors.generated.api.GetApiInfoRequest request,
+    public void getApiInfo(com.google.protobuf.Empty request,
         io.grpc.stub.StreamObserver<lol.calico.uctutors.generated.api.GetApiInfoResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getGetApiInfoMethod(), getCallOptions()), request, responseObserver);
@@ -156,7 +156,7 @@ public final class ApiInfoServiceGrpc {
 
     /**
      */
-    public lol.calico.uctutors.generated.api.GetApiInfoResponse getApiInfo(lol.calico.uctutors.generated.api.GetApiInfoRequest request) {
+    public lol.calico.uctutors.generated.api.GetApiInfoResponse getApiInfo(com.google.protobuf.Empty request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getGetApiInfoMethod(), getCallOptions(), request);
     }
@@ -181,7 +181,7 @@ public final class ApiInfoServiceGrpc {
     /**
      */
     public com.google.common.util.concurrent.ListenableFuture<lol.calico.uctutors.generated.api.GetApiInfoResponse> getApiInfo(
-        lol.calico.uctutors.generated.api.GetApiInfoRequest request) {
+        com.google.protobuf.Empty request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getGetApiInfoMethod(), getCallOptions()), request);
     }
@@ -207,7 +207,7 @@ public final class ApiInfoServiceGrpc {
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
         case METHODID_GET_API_INFO:
-          serviceImpl.getApiInfo((lol.calico.uctutors.generated.api.GetApiInfoRequest) request,
+          serviceImpl.getApiInfo((com.google.protobuf.Empty) request,
               (io.grpc.stub.StreamObserver<lol.calico.uctutors.generated.api.GetApiInfoResponse>) responseObserver);
           break;
         default:
@@ -232,7 +232,7 @@ public final class ApiInfoServiceGrpc {
           getGetApiInfoMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
-              lol.calico.uctutors.generated.api.GetApiInfoRequest,
+              com.google.protobuf.Empty,
               lol.calico.uctutors.generated.api.GetApiInfoResponse>(
                 service, METHODID_GET_API_INFO)))
         .build();

@@ -4,4 +4,6 @@ import pino from 'pino'
 
 export const prisma = new PrismaClient().$extends(withAccelerate())
 
-export const logger = pino()
+export const logger = pino({
+  level: process.env.LOG_LEVEL || 'debug',
+})

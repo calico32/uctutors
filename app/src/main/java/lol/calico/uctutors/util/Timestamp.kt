@@ -1,4 +1,4 @@
-package lol.calico.uctutors.impl
+package lol.calico.uctutors.util
 
 import com.google.protobuf.Timestamp
 

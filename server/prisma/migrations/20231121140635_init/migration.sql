@@ -38,8 +38,7 @@ CREATE TABLE "Credential" (
     "created" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated" TIMESTAMP(3) NOT NULL,
     "userId" TEXT NOT NULL,
-    "accessToken" TEXT NOT NULL,
-    "refreshToken" TEXT,
+    "refreshToken" TEXT NOT NULL,
 
     CONSTRAINT "Credential_pkey" PRIMARY KEY ("id")
 );
