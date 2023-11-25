@@ -4,11 +4,15 @@
   "type": "module",
   "scripts": {
     "--generate": "prisma generate --no-engine",
-    "dev": "vite-node --watch lib/index.ts | pino-pretty",
+    "dev": "vite-node --watch lib/index.ts",
     "generate": "rm -rf ../app/src/main/java/lol/calico/uctutors/generated && buf generate && grep -rl 'Dayofweek' ../app/src/main/java/lol/calico/uctutors/generated | xargs sed -i 's/Dayofweek/DayOfWeek/g' && buf build -o ./api/descriptor.bin"
   },
   "devDependencies": {
+    "@types/estree": "^1.0.5",
+    "@typescript-eslint/typescript-estree": "^6.12.0",
     "bun-types": "latest",
+    "estree-walker": "^3.0.3",
+    "magic-string": "^0.30.5",
     "pino-pretty": "^10.2.3",
     "vite": "^4.5.0",
     "vite-node": "^0.34.6"
@@ -21,7 +25,6 @@
     "@prisma/extension-accelerate": "^0.6.2",
     "cheerio": "^1.0.0-rc.12",
     "elysia": "^0.7.21",
-    "google-auth-library": "^9.2.0",
     "googleapis": "^128.0.0",
     "iron-webcrypto": "^1.0.0",
     "long": "^5.2.3",
