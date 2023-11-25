@@ -1,5 +1,6 @@
 import { AuthSessionError } from '@/generated/api/v1/auth_session'
 import { Result } from '@/result'
+import { TokenInfo } from '@/types/google'
 import { webcrypto } from 'crypto'
 import * as Iron from 'iron-webcrypto'
 import { nanoid } from 'nanoid'
@@ -26,6 +27,7 @@ export type SessionData = { [key: string]: any }
 
 export type AuthSession = {
   userId: string
+  tokenInfo: TokenInfo
 }
 
 /**

@@ -5,9 +5,9 @@ import {
   LoginStatus,
 } from '@/generated/api/v1/auth'
 import { DeepPartial } from '@/generated/api/v1/status'
+import { validateIdToken } from '@/google'
 import { logger, prisma } from '@/providers'
 import { AuthSession, Session, expires } from '@/session'
-import { TokenInfo } from '@/types/google'
 import { CallContext, ServerError, Status } from 'nice-grpc'
 
 const imageExtensions: Record<string, string> = {
@@ -26,30 +26,16 @@ export const AuthService: AuthServiceImplementation = {
       throw new ServerError(Status.INVALID_ARGUMENT, 'no id token provided')
     }
 
-    let tokenInfo: TokenInfo
-    try {
-      const response = await fetch(
-        'https://oauth2.googleapis.com/tokeninfo?id_token=' + request.idToken
-      )
-      tokenInfo = await response.json()
-    } catch (err) {
-      throw new ServerError(Status.INVALID_ARGUMENT, 'invalid id token')
-    }
+    let tokenInfo = await validateIdToken(request.idToken)
 
-    console.log(tokenInfo)
-
-    if (tokenInfo.hd !== 'ucvts.org') {
-      throw new ServerError(Status.INVALID_ARGUMENT, 'you must use a UCVTS account to log in.')
-    }
+    logger.$inspect(tokenInfo)
 
     const userId = tokenInfo.sub
-    if (!userId) {
-      throw new ServerError(Status.INVALID_ARGUMENT, 'invalid id token')
-    }
 
     const session = Session.create(
       {
         userId: userId,
+        tokenInfo,
       } satisfies AuthSession,
       [expires(60 * 60 * 24 * 7)]
     )
