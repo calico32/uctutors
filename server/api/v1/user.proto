@@ -32,10 +32,10 @@ message User {
 
 enum School {
   SCHOOL_UNSPECIFIED = 0;
-  SCHOOL_MHS = 1;
-  SCHOOL_AAHS = 2;
-  SCHOOL_AIT = 3;
-  SCHOOL_APA = 4;
+  SCHOOL_AAHS = 1;
+  SCHOOL_AIT = 2;
+  SCHOOL_APA = 3;
+  SCHOOL_MHS = 4;
   SCHOOL_UCTECH = 5;
 }
 

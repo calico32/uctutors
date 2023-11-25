@@ -39,6 +39,33 @@ private static final long serialVersionUID = 0L;
             lol.calico.uctutors.generated.api.v1.RegisterRequest.class, lol.calico.uctutors.generated.api.v1.RegisterRequest.Builder.class);
   }
 
+  private int bitField0_;
+  public static final int DATA_FIELD_NUMBER = 1;
+  private lol.calico.uctutors.generated.api.v1.RegisterData data_;
+  /**
+   * <code>.api.v1.RegisterData data = 1 [json_name = "data"];</code>
+   * @return Whether the data field is set.
+   */
+  @java.lang.Override
+  public boolean hasData() {
+    return ((bitField0_ & 0x00000001) != 0);
+  }
+  /**
+   * <code>.api.v1.RegisterData data = 1 [json_name = "data"];</code>
+   * @return The data.
+   */
+  @java.lang.Override
+  public lol.calico.uctutors.generated.api.v1.RegisterData getData() {
+    return data_ == null ? lol.calico.uctutors.generated.api.v1.RegisterData.getDefaultInstance() : data_;
+  }
+  /**
+   * <code>.api.v1.RegisterData data = 1 [json_name = "data"];</code>
+   */
+  @java.lang.Override
+  public lol.calico.uctutors.generated.api.v1.RegisterDataOrBuilder getDataOrBuilder() {
+    return data_ == null ? lol.calico.uctutors.generated.api.v1.RegisterData.getDefaultInstance() : data_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -53,6 +80,9 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
+    if (((bitField0_ & 0x00000001) != 0)) {
+      output.writeMessage(1, getData());
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -62,6 +92,10 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
+    if (((bitField0_ & 0x00000001) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(1, getData());
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -77,6 +111,11 @@ private static final long serialVersionUID = 0L;
     }
     lol.calico.uctutors.generated.api.v1.RegisterRequest other = (lol.calico.uctutors.generated.api.v1.RegisterRequest) obj;
 
+    if (hasData() != other.hasData()) return false;
+    if (hasData()) {
+      if (!getData()
+          .equals(other.getData())) return false;
+    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -88,6 +127,10 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
+    if (hasData()) {
+      hash = (37 * hash) + DATA_FIELD_NUMBER;
+      hash = (53 * hash) + getData().hashCode();
+    }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -207,17 +250,29 @@ private static final long serialVersionUID = 0L;
 
     // Construct using lol.calico.uctutors.generated.api.v1.RegisterRequest.newBuilder()
     private Builder() {
-
+      maybeForceBuilderInitialization();
     }
 
     private Builder(
         com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       super(parent);
-
+      maybeForceBuilderInitialization();
+    }
+    private void maybeForceBuilderInitialization() {
+      if (com.google.protobuf.GeneratedMessageV3
+              .alwaysUseFieldBuilders) {
+        getDataFieldBuilder();
+      }
     }
     @java.lang.Override
     public Builder clear() {
       super.clear();
+      bitField0_ = 0;
+      data_ = null;
+      if (dataBuilder_ != null) {
+        dataBuilder_.dispose();
+        dataBuilder_ = null;
+      }
       return this;
     }
 
@@ -244,8 +299,21 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public lol.calico.uctutors.generated.api.v1.RegisterRequest buildPartial() {
       lol.calico.uctutors.generated.api.v1.RegisterRequest result = new lol.calico.uctutors.generated.api.v1.RegisterRequest(this);
+      if (bitField0_ != 0) { buildPartial0(result); }
       onBuilt();
       return result;
+    }
+
+    private void buildPartial0(lol.calico.uctutors.generated.api.v1.RegisterRequest result) {
+      int from_bitField0_ = bitField0_;
+      int to_bitField0_ = 0;
+      if (((from_bitField0_ & 0x00000001) != 0)) {
+        result.data_ = dataBuilder_ == null
+            ? data_
+            : dataBuilder_.build();
+        to_bitField0_ |= 0x00000001;
+      }
+      result.bitField0_ |= to_bitField0_;
     }
 
     @java.lang.Override
@@ -292,6 +360,9 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(lol.calico.uctutors.generated.api.v1.RegisterRequest other) {
       if (other == lol.calico.uctutors.generated.api.v1.RegisterRequest.getDefaultInstance()) return this;
+      if (other.hasData()) {
+        mergeData(other.getData());
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -318,6 +389,13 @@ private static final long serialVersionUID = 0L;
             case 0:
               done = true;
               break;
+            case 10: {
+              input.readMessage(
+                  getDataFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField0_ |= 0x00000001;
+              break;
+            } // case 10
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -332,6 +410,128 @@ private static final long serialVersionUID = 0L;
         onChanged();
       } // finally
       return this;
+    }
+    private int bitField0_;
+
+    private lol.calico.uctutors.generated.api.v1.RegisterData data_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        lol.calico.uctutors.generated.api.v1.RegisterData, lol.calico.uctutors.generated.api.v1.RegisterData.Builder, lol.calico.uctutors.generated.api.v1.RegisterDataOrBuilder> dataBuilder_;
+    /**
+     * <code>.api.v1.RegisterData data = 1 [json_name = "data"];</code>
+     * @return Whether the data field is set.
+     */
+    public boolean hasData() {
+      return ((bitField0_ & 0x00000001) != 0);
+    }
+    /**
+     * <code>.api.v1.RegisterData data = 1 [json_name = "data"];</code>
+     * @return The data.
+     */
+    public lol.calico.uctutors.generated.api.v1.RegisterData getData() {
+      if (dataBuilder_ == null) {
+        return data_ == null ? lol.calico.uctutors.generated.api.v1.RegisterData.getDefaultInstance() : data_;
+      } else {
+        return dataBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>.api.v1.RegisterData data = 1 [json_name = "data"];</code>
+     */
+    public Builder setData(lol.calico.uctutors.generated.api.v1.RegisterData value) {
+      if (dataBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        data_ = value;
+      } else {
+        dataBuilder_.setMessage(value);
+      }
+      bitField0_ |= 0x00000001;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.api.v1.RegisterData data = 1 [json_name = "data"];</code>
+     */
+    public Builder setData(
+        lol.calico.uctutors.generated.api.v1.RegisterData.Builder builderForValue) {
+      if (dataBuilder_ == null) {
+        data_ = builderForValue.build();
+      } else {
+        dataBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00000001;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.api.v1.RegisterData data = 1 [json_name = "data"];</code>
+     */
+    public Builder mergeData(lol.calico.uctutors.generated.api.v1.RegisterData value) {
+      if (dataBuilder_ == null) {
+        if (((bitField0_ & 0x00000001) != 0) &&
+          data_ != null &&
+          data_ != lol.calico.uctutors.generated.api.v1.RegisterData.getDefaultInstance()) {
+          getDataBuilder().mergeFrom(value);
+        } else {
+          data_ = value;
+        }
+      } else {
+        dataBuilder_.mergeFrom(value);
+      }
+      if (data_ != null) {
+        bitField0_ |= 0x00000001;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>.api.v1.RegisterData data = 1 [json_name = "data"];</code>
+     */
+    public Builder clearData() {
+      bitField0_ = (bitField0_ & ~0x00000001);
+      data_ = null;
+      if (dataBuilder_ != null) {
+        dataBuilder_.dispose();
+        dataBuilder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.api.v1.RegisterData data = 1 [json_name = "data"];</code>
+     */
+    public lol.calico.uctutors.generated.api.v1.RegisterData.Builder getDataBuilder() {
+      bitField0_ |= 0x00000001;
+      onChanged();
+      return getDataFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.api.v1.RegisterData data = 1 [json_name = "data"];</code>
+     */
+    public lol.calico.uctutors.generated.api.v1.RegisterDataOrBuilder getDataOrBuilder() {
+      if (dataBuilder_ != null) {
+        return dataBuilder_.getMessageOrBuilder();
+      } else {
+        return data_ == null ?
+            lol.calico.uctutors.generated.api.v1.RegisterData.getDefaultInstance() : data_;
+      }
+    }
+    /**
+     * <code>.api.v1.RegisterData data = 1 [json_name = "data"];</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        lol.calico.uctutors.generated.api.v1.RegisterData, lol.calico.uctutors.generated.api.v1.RegisterData.Builder, lol.calico.uctutors.generated.api.v1.RegisterDataOrBuilder> 
+        getDataFieldBuilder() {
+      if (dataBuilder_ == null) {
+        dataBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            lol.calico.uctutors.generated.api.v1.RegisterData, lol.calico.uctutors.generated.api.v1.RegisterData.Builder, lol.calico.uctutors.generated.api.v1.RegisterDataOrBuilder>(
+                getData(),
+                getParentForChildren(),
+                isClean());
+        data_ = null;
+      }
+      return dataBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

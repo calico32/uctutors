@@ -7,4 +7,19 @@ package lol.calico.uctutors.generated.api.v1;
 public interface RegisterRequestOrBuilder extends
     // @@protoc_insertion_point(interface_extends:api.v1.RegisterRequest)
     com.google.protobuf.MessageOrBuilder {
+
+  /**
+   * <code>.api.v1.RegisterData data = 1 [json_name = "data"];</code>
+   * @return Whether the data field is set.
+   */
+  boolean hasData();
+  /**
+   * <code>.api.v1.RegisterData data = 1 [json_name = "data"];</code>
+   * @return The data.
+   */
+  lol.calico.uctutors.generated.api.v1.RegisterData getData();
+  /**
+   * <code>.api.v1.RegisterData data = 1 [json_name = "data"];</code>
+   */
+  lol.calico.uctutors.generated.api.v1.RegisterDataOrBuilder getDataOrBuilder();
 }

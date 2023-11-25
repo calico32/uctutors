@@ -3,6 +3,7 @@ import type { CallContext, CallOptions } from "nice-grpc-common";
 import _m0 from "protobufjs/minimal";
 import { Empty } from "../../google/protobuf/empty";
 import { Error } from "./error";
+import { CampusAvailability, School, schoolFromJSON, schoolToJSON, VirtualAvailability } from "./user";
 
 export const protobufPackage = "api.v1";
 
@@ -105,6 +106,17 @@ export interface LoginResponseExistingUser {
 }
 
 export interface RegisterRequest {
+  data: RegisterData | undefined;
+}
+
+export interface RegisterData {
+  idToken: string;
+  school: School;
+  classOf: number;
+  bio: string;
+  campusAvailability: CampusAvailability[];
+  virtualAvailability: VirtualAvailability[];
+  topics: string[];
 }
 
 export interface RegisterResponse {
@@ -416,11 +428,14 @@ export const LoginResponseExistingUser = {
 };
 
 function createBaseRegisterRequest(): RegisterRequest {
-  return {};
+  return { data: undefined };
 }
 
 export const RegisterRequest = {
-  encode(_: RegisterRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: RegisterRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.data !== undefined) {
+      RegisterData.encode(message.data, writer.uint32(10).fork()).ldelim();
+    }
     return writer;
   },
 
@@ -431,6 +446,13 @@ export const RegisterRequest = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.data = RegisterData.decode(reader, reader.uint32());
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -440,20 +462,179 @@ export const RegisterRequest = {
     return message;
   },
 
-  fromJSON(_: any): RegisterRequest {
-    return {};
+  fromJSON(object: any): RegisterRequest {
+    return { data: isSet(object.data) ? RegisterData.fromJSON(object.data) : undefined };
   },
 
-  toJSON(_: RegisterRequest): unknown {
+  toJSON(message: RegisterRequest): unknown {
     const obj: any = {};
+    if (message.data !== undefined) {
+      obj.data = RegisterData.toJSON(message.data);
+    }
     return obj;
   },
 
   create(base?: DeepPartial<RegisterRequest>): RegisterRequest {
     return RegisterRequest.fromPartial(base ?? {});
   },
-  fromPartial(_: DeepPartial<RegisterRequest>): RegisterRequest {
+  fromPartial(object: DeepPartial<RegisterRequest>): RegisterRequest {
     const message = createBaseRegisterRequest();
+    message.data = (object.data !== undefined && object.data !== null)
+      ? RegisterData.fromPartial(object.data)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseRegisterData(): RegisterData {
+  return { idToken: "", school: 0, classOf: 0, bio: "", campusAvailability: [], virtualAvailability: [], topics: [] };
+}
+
+export const RegisterData = {
+  encode(message: RegisterData, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.idToken !== "") {
+      writer.uint32(10).string(message.idToken);
+    }
+    if (message.school !== 0) {
+      writer.uint32(16).int32(message.school);
+    }
+    if (message.classOf !== 0) {
+      writer.uint32(24).uint32(message.classOf);
+    }
+    if (message.bio !== "") {
+      writer.uint32(34).string(message.bio);
+    }
+    for (const v of message.campusAvailability) {
+      CampusAvailability.encode(v!, writer.uint32(42).fork()).ldelim();
+    }
+    for (const v of message.virtualAvailability) {
+      VirtualAvailability.encode(v!, writer.uint32(50).fork()).ldelim();
+    }
+    for (const v of message.topics) {
+      writer.uint32(58).string(v!);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): RegisterData {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseRegisterData();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.idToken = reader.string();
+          continue;
+        case 2:
+          if (tag !== 16) {
+            break;
+          }
+
+          message.school = reader.int32() as any;
+          continue;
+        case 3:
+          if (tag !== 24) {
+            break;
+          }
+
+          message.classOf = reader.uint32();
+          continue;
+        case 4:
+          if (tag !== 34) {
+            break;
+          }
+
+          message.bio = reader.string();
+          continue;
+        case 5:
+          if (tag !== 42) {
+            break;
+          }
+
+          message.campusAvailability.push(CampusAvailability.decode(reader, reader.uint32()));
+          continue;
+        case 6:
+          if (tag !== 50) {
+            break;
+          }
+
+          message.virtualAvailability.push(VirtualAvailability.decode(reader, reader.uint32()));
+          continue;
+        case 7:
+          if (tag !== 58) {
+            break;
+          }
+
+          message.topics.push(reader.string());
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): RegisterData {
+    return {
+      idToken: isSet(object.idToken) ? globalThis.String(object.idToken) : "",
+      school: isSet(object.school) ? schoolFromJSON(object.school) : 0,
+      classOf: isSet(object.classOf) ? globalThis.Number(object.classOf) : 0,
+      bio: isSet(object.bio) ? globalThis.String(object.bio) : "",
+      campusAvailability: globalThis.Array.isArray(object?.campusAvailability)
+        ? object.campusAvailability.map((e: any) => CampusAvailability.fromJSON(e))
+        : [],
+      virtualAvailability: globalThis.Array.isArray(object?.virtualAvailability)
+        ? object.virtualAvailability.map((e: any) => VirtualAvailability.fromJSON(e))
+        : [],
+      topics: globalThis.Array.isArray(object?.topics) ? object.topics.map((e: any) => globalThis.String(e)) : [],
+    };
+  },
+
+  toJSON(message: RegisterData): unknown {
+    const obj: any = {};
+    if (message.idToken !== "") {
+      obj.idToken = message.idToken;
+    }
+    if (message.school !== 0) {
+      obj.school = schoolToJSON(message.school);
+    }
+    if (message.classOf !== 0) {
+      obj.classOf = Math.round(message.classOf);
+    }
+    if (message.bio !== "") {
+      obj.bio = message.bio;
+    }
+    if (message.campusAvailability?.length) {
+      obj.campusAvailability = message.campusAvailability.map((e) => CampusAvailability.toJSON(e));
+    }
+    if (message.virtualAvailability?.length) {
+      obj.virtualAvailability = message.virtualAvailability.map((e) => VirtualAvailability.toJSON(e));
+    }
+    if (message.topics?.length) {
+      obj.topics = message.topics;
+    }
+    return obj;
+  },
+
+  create(base?: DeepPartial<RegisterData>): RegisterData {
+    return RegisterData.fromPartial(base ?? {});
+  },
+  fromPartial(object: DeepPartial<RegisterData>): RegisterData {
+    const message = createBaseRegisterData();
+    message.idToken = object.idToken ?? "";
+    message.school = object.school ?? 0;
+    message.classOf = object.classOf ?? 0;
+    message.bio = object.bio ?? "";
+    message.campusAvailability = object.campusAvailability?.map((e) => CampusAvailability.fromPartial(e)) || [];
+    message.virtualAvailability = object.virtualAvailability?.map((e) => VirtualAvailability.fromPartial(e)) || [];
+    message.topics = object.topics?.map((e) => e) || [];
     return message;
   },
 };

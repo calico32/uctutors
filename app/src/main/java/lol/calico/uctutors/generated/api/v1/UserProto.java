@@ -74,9 +74,9 @@ public final class UserProto {
       "ted\022\024\n\005title\030\004 \001(\tR\005title\022 \n\013description" +
       "\030\005 \001(\tR\013description\022\026\n\006skills\030\006 \003(\tR\006ski" +
       "lls\022\031\n\010image_id\030\007 \001(\tR\007imageId*t\n\006School" +
-      "\022\026\n\022SCHOOL_UNSPECIFIED\020\000\022\016\n\nSCHOOL_MHS\020\001" +
-      "\022\017\n\013SCHOOL_AAHS\020\002\022\016\n\nSCHOOL_AIT\020\003\022\016\n\nSCH" +
-      "OOL_APA\020\004\022\021\n\rSCHOOL_UCTECH\020\0052\r\n\013UserServ" +
+      "\022\026\n\022SCHOOL_UNSPECIFIED\020\000\022\017\n\013SCHOOL_AAHS\020" +
+      "\001\022\016\n\nSCHOOL_AIT\020\002\022\016\n\nSCHOOL_APA\020\003\022\016\n\nSCH" +
+      "OOL_MHS\020\004\022\021\n\rSCHOOL_UCTECH\020\0052\r\n\013UserServ" +
       "iceBj\n$lol.calico.uctutors.generated.api" +
       ".v1B\tUserProtoP\001\242\002\003AXX\252\002\006Api.V1\312\002\006Api\\V1" +
       "\342\002\022Api\\V1\\GPBMetadata\352\002\007Api::V1b\006proto3"

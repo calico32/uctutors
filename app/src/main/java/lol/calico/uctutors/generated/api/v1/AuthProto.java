@@ -41,6 +41,11 @@ public final class AuthProto {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_api_v1_RegisterRequest_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_api_v1_RegisterData_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_api_v1_RegisterData_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_api_v1_RegisterResponse_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -60,43 +65,53 @@ public final class AuthProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\021api/v1/auth.proto\022\006api.v1\032\033google/prot" +
-      "obuf/empty.proto\032\022api/v1/error.proto\")\n\014" +
-      "LoginRequest\022\031\n\010id_token\030\001 \001(\tR\007idToken\"" +
-      "\314\001\n\rLoginResponse\022+\n\006status\030\001 \001(\0162\023.api." +
-      "v1.LoginStatusR\006status\0229\n\010new_user\030\002 \001(\013" +
-      "2\034.api.v1.LoginResponseNewUserH\000R\007newUse" +
-      "r\022H\n\rexisting_user\030\003 \001(\0132!.api.v1.LoginR" +
-      "esponseExistingUserH\000R\014existingUserB\t\n\007d" +
-      "etails\"E\n\024LoginResponseNewUser\022\027\n\007user_i" +
-      "d\030\001 \001(\tR\006userId\022\024\n\005token\030\002 \001(\tR\005token\"J\n" +
-      "\031LoginResponseExistingUser\022\027\n\007user_id\030\001 " +
-      "\001(\tR\006userId\022\024\n\005token\030\002 \001(\tR\005token\"\021\n\017Reg" +
-      "isterRequest\"\261\001\n\020RegisterResponse\022.\n\006sta" +
-      "tus\030\001 \001(\0162\026.api.v1.RegisterStatusR\006statu" +
-      "s\022;\n\007success\030\002 \001(\0132\037.api.v1.RegisterResp" +
-      "onseSuccessH\000R\007success\022%\n\005error\030\003 \001(\0132\r." +
-      "api.v1.ErrorH\000R\005errorB\t\n\007details\"2\n\027Regi" +
-      "sterResponseSuccess\022\027\n\007user_id\030\001 \001(\tR\006us" +
-      "erId*f\n\013LoginStatus\022\034\n\030LOGIN_STATUS_UNSP" +
-      "ECIFIED\020\000\022\031\n\025LOGIN_STATUS_NEW_USER\020\001\022\036\n\032" +
-      "LOGIN_STATUS_EXISTING_USER\020\002*i\n\016Register" +
-      "Status\022\037\n\033REGISTER_STATUS_UNSPECIFIED\020\000\022" +
-      "\033\n\027REGISTER_STATUS_SUCCESS\020\001\022\031\n\025REGISTER" +
-      "_STATUS_ERROR\020\0022\302\001\n\013AuthService\0226\n\005Login" +
-      "\022\024.api.v1.LoginRequest\032\025.api.v1.LoginRes" +
-      "ponse\"\000\022:\n\006Logout\022\026.google.protobuf.Empt" +
-      "y\032\026.google.protobuf.Empty\"\000\022?\n\010Register\022" +
-      "\027.api.v1.RegisterRequest\032\030.api.v1.Regist" +
-      "erResponse\"\000Bj\n$lol.calico.uctutors.gene" +
-      "rated.api.v1B\tAuthProtoP\001\242\002\003AXX\252\002\006Api.V1" +
-      "\312\002\006Api\\V1\342\002\022Api\\V1\\GPBMetadata\352\002\007Api::V1" +
-      "b\006proto3"
+      "obuf/empty.proto\032\022api/v1/error.proto\032\021ap" +
+      "i/v1/user.proto\")\n\014LoginRequest\022\031\n\010id_to" +
+      "ken\030\001 \001(\tR\007idToken\"\314\001\n\rLoginResponse\022+\n\006" +
+      "status\030\001 \001(\0162\023.api.v1.LoginStatusR\006statu" +
+      "s\0229\n\010new_user\030\002 \001(\0132\034.api.v1.LoginRespon" +
+      "seNewUserH\000R\007newUser\022H\n\rexisting_user\030\003 " +
+      "\001(\0132!.api.v1.LoginResponseExistingUserH\000" +
+      "R\014existingUserB\t\n\007details\"E\n\024LoginRespon" +
+      "seNewUser\022\027\n\007user_id\030\001 \001(\tR\006userId\022\024\n\005to" +
+      "ken\030\002 \001(\tR\005token\"J\n\031LoginResponseExistin" +
+      "gUser\022\027\n\007user_id\030\001 \001(\tR\006userId\022\024\n\005token\030" +
+      "\002 \001(\tR\005token\";\n\017RegisterRequest\022(\n\004data\030" +
+      "\001 \001(\0132\024.api.v1.RegisterDataR\004data\"\263\002\n\014Re" +
+      "gisterData\022\031\n\010id_token\030\001 \001(\tR\007idToken\022&\n" +
+      "\006school\030\002 \001(\0162\016.api.v1.SchoolR\006school\022\031\n" +
+      "\010class_of\030\003 \001(\rR\007classOf\022\020\n\003bio\030\004 \001(\tR\003b" +
+      "io\022K\n\023campus_availability\030\005 \003(\0132\032.api.v1" +
+      ".CampusAvailabilityR\022campusAvailability\022" +
+      "N\n\024virtual_availability\030\006 \003(\0132\033.api.v1.V" +
+      "irtualAvailabilityR\023virtualAvailability\022" +
+      "\026\n\006topics\030\007 \003(\tR\006topics\"\261\001\n\020RegisterResp" +
+      "onse\022.\n\006status\030\001 \001(\0162\026.api.v1.RegisterSt" +
+      "atusR\006status\022;\n\007success\030\002 \001(\0132\037.api.v1.R" +
+      "egisterResponseSuccessH\000R\007success\022%\n\005err" +
+      "or\030\003 \001(\0132\r.api.v1.ErrorH\000R\005errorB\t\n\007deta" +
+      "ils\"2\n\027RegisterResponseSuccess\022\027\n\007user_i" +
+      "d\030\001 \001(\tR\006userId*f\n\013LoginStatus\022\034\n\030LOGIN_" +
+      "STATUS_UNSPECIFIED\020\000\022\031\n\025LOGIN_STATUS_NEW" +
+      "_USER\020\001\022\036\n\032LOGIN_STATUS_EXISTING_USER\020\002*" +
+      "i\n\016RegisterStatus\022\037\n\033REGISTER_STATUS_UNS" +
+      "PECIFIED\020\000\022\033\n\027REGISTER_STATUS_SUCCESS\020\001\022" +
+      "\031\n\025REGISTER_STATUS_ERROR\020\0022\302\001\n\013AuthServi" +
+      "ce\0226\n\005Login\022\024.api.v1.LoginRequest\032\025.api." +
+      "v1.LoginResponse\"\000\022:\n\006Logout\022\026.google.pr" +
+      "otobuf.Empty\032\026.google.protobuf.Empty\"\000\022?" +
+      "\n\010Register\022\027.api.v1.RegisterRequest\032\030.ap" +
+      "i.v1.RegisterResponse\"\000Bj\n$lol.calico.uc" +
+      "tutors.generated.api.v1B\tAuthProtoP\001\242\002\003A" +
+      "XX\252\002\006Api.V1\312\002\006Api\\V1\342\002\022Api\\V1\\GPBMetadat" +
+      "a\352\002\007Api::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.google.protobuf.EmptyProto.getDescriptor(),
           lol.calico.uctutors.generated.api.v1.ErrorProto.getDescriptor(),
+          lol.calico.uctutors.generated.api.v1.UserProto.getDescriptor(),
         });
     internal_static_api_v1_LoginRequest_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -127,21 +142,28 @@ public final class AuthProto {
     internal_static_api_v1_RegisterRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_api_v1_RegisterRequest_descriptor,
-        new java.lang.String[] { });
-    internal_static_api_v1_RegisterResponse_descriptor =
+        new java.lang.String[] { "Data", });
+    internal_static_api_v1_RegisterData_descriptor =
       getDescriptor().getMessageTypes().get(5);
+    internal_static_api_v1_RegisterData_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_api_v1_RegisterData_descriptor,
+        new java.lang.String[] { "IdToken", "School", "ClassOf", "Bio", "CampusAvailability", "VirtualAvailability", "Topics", });
+    internal_static_api_v1_RegisterResponse_descriptor =
+      getDescriptor().getMessageTypes().get(6);
     internal_static_api_v1_RegisterResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_api_v1_RegisterResponse_descriptor,
         new java.lang.String[] { "Status", "Success", "Error", "Details", });
     internal_static_api_v1_RegisterResponseSuccess_descriptor =
-      getDescriptor().getMessageTypes().get(6);
+      getDescriptor().getMessageTypes().get(7);
     internal_static_api_v1_RegisterResponseSuccess_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_api_v1_RegisterResponseSuccess_descriptor,
         new java.lang.String[] { "UserId", });
     com.google.protobuf.EmptyProto.getDescriptor();
     lol.calico.uctutors.generated.api.v1.ErrorProto.getDescriptor();
+    lol.calico.uctutors.generated.api.v1.UserProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

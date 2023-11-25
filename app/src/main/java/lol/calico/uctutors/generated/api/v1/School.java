@@ -14,21 +14,21 @@ public enum School
    */
   SCHOOL_UNSPECIFIED(0),
   /**
-   * <code>SCHOOL_MHS = 1;</code>
+   * <code>SCHOOL_AAHS = 1;</code>
    */
-  SCHOOL_MHS(1),
+  SCHOOL_AAHS(1),
   /**
-   * <code>SCHOOL_AAHS = 2;</code>
+   * <code>SCHOOL_AIT = 2;</code>
    */
-  SCHOOL_AAHS(2),
+  SCHOOL_AIT(2),
   /**
-   * <code>SCHOOL_AIT = 3;</code>
+   * <code>SCHOOL_APA = 3;</code>
    */
-  SCHOOL_AIT(3),
+  SCHOOL_APA(3),
   /**
-   * <code>SCHOOL_APA = 4;</code>
+   * <code>SCHOOL_MHS = 4;</code>
    */
-  SCHOOL_APA(4),
+  SCHOOL_MHS(4),
   /**
    * <code>SCHOOL_UCTECH = 5;</code>
    */
@@ -41,21 +41,21 @@ public enum School
    */
   public static final int SCHOOL_UNSPECIFIED_VALUE = 0;
   /**
-   * <code>SCHOOL_MHS = 1;</code>
+   * <code>SCHOOL_AAHS = 1;</code>
    */
-  public static final int SCHOOL_MHS_VALUE = 1;
+  public static final int SCHOOL_AAHS_VALUE = 1;
   /**
-   * <code>SCHOOL_AAHS = 2;</code>
+   * <code>SCHOOL_AIT = 2;</code>
    */
-  public static final int SCHOOL_AAHS_VALUE = 2;
+  public static final int SCHOOL_AIT_VALUE = 2;
   /**
-   * <code>SCHOOL_AIT = 3;</code>
+   * <code>SCHOOL_APA = 3;</code>
    */
-  public static final int SCHOOL_AIT_VALUE = 3;
+  public static final int SCHOOL_APA_VALUE = 3;
   /**
-   * <code>SCHOOL_APA = 4;</code>
+   * <code>SCHOOL_MHS = 4;</code>
    */
-  public static final int SCHOOL_APA_VALUE = 4;
+  public static final int SCHOOL_MHS_VALUE = 4;
   /**
    * <code>SCHOOL_UCTECH = 5;</code>
    */
@@ -87,10 +87,10 @@ public enum School
   public static School forNumber(int value) {
     switch (value) {
       case 0: return SCHOOL_UNSPECIFIED;
-      case 1: return SCHOOL_MHS;
-      case 2: return SCHOOL_AAHS;
-      case 3: return SCHOOL_AIT;
-      case 4: return SCHOOL_APA;
+      case 1: return SCHOOL_AAHS;
+      case 2: return SCHOOL_AIT;
+      case 3: return SCHOOL_APA;
+      case 4: return SCHOOL_MHS;
       case 5: return SCHOOL_UCTECH;
       default: return null;
     }

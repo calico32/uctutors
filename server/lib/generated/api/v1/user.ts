@@ -8,10 +8,10 @@ export const protobufPackage = "api.v1";
 
 export enum School {
   SCHOOL_UNSPECIFIED = 0,
-  SCHOOL_MHS = 1,
-  SCHOOL_AAHS = 2,
-  SCHOOL_AIT = 3,
-  SCHOOL_APA = 4,
+  SCHOOL_AAHS = 1,
+  SCHOOL_AIT = 2,
+  SCHOOL_APA = 3,
+  SCHOOL_MHS = 4,
   SCHOOL_UCTECH = 5,
   UNRECOGNIZED = -1,
 }
@@ -22,17 +22,17 @@ export function schoolFromJSON(object: any): School {
     case "SCHOOL_UNSPECIFIED":
       return School.SCHOOL_UNSPECIFIED;
     case 1:
-    case "SCHOOL_MHS":
-      return School.SCHOOL_MHS;
-    case 2:
     case "SCHOOL_AAHS":
       return School.SCHOOL_AAHS;
-    case 3:
+    case 2:
     case "SCHOOL_AIT":
       return School.SCHOOL_AIT;
-    case 4:
+    case 3:
     case "SCHOOL_APA":
       return School.SCHOOL_APA;
+    case 4:
+    case "SCHOOL_MHS":
+      return School.SCHOOL_MHS;
     case 5:
     case "SCHOOL_UCTECH":
       return School.SCHOOL_UCTECH;
@@ -47,14 +47,14 @@ export function schoolToJSON(object: School): string {
   switch (object) {
     case School.SCHOOL_UNSPECIFIED:
       return "SCHOOL_UNSPECIFIED";
-    case School.SCHOOL_MHS:
-      return "SCHOOL_MHS";
     case School.SCHOOL_AAHS:
       return "SCHOOL_AAHS";
     case School.SCHOOL_AIT:
       return "SCHOOL_AIT";
     case School.SCHOOL_APA:
       return "SCHOOL_APA";
+    case School.SCHOOL_MHS:
+      return "SCHOOL_MHS";
     case School.SCHOOL_UCTECH:
       return "SCHOOL_UCTECH";
     case School.UNRECOGNIZED:

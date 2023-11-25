@@ -3,6 +3,7 @@ package api.v1;
 
 import "google/protobuf/empty.proto";
 import "api/v1/error.proto";
+import "api/v1/user.proto";
 
 service AuthService {
   rpc Login(LoginRequest) returns (LoginResponse) {}
@@ -42,7 +43,17 @@ message LoginResponseExistingUser {
 
 
 message RegisterRequest {
+  RegisterData data = 1;
+}
 
+message RegisterData {
+  string id_token = 1;
+  School school = 2;
+  uint32 class_of = 3;
+  string bio = 4;
+  repeated CampusAvailability campus_availability = 5;
+  repeated VirtualAvailability virtual_availability = 6;
+  repeated string topics = 7;
 }
 
 message RegisterResponse {
