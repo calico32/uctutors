@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -63,30 +64,24 @@ fun LoginPage(onSignIn: suspend () -> Result<Unit, String>) {
         Box(
           modifier = Modifier
             .padding(bottom = 12.dp)
+            .clip(MaterialTheme.shapes.medium)
+            .shadow(12.dp)
+            .background(MaterialTheme.colorScheme.errorContainer)
+            .fillMaxWidth()
+            .padding(20.dp)
         ) {
-          Box(
-            modifier = Modifier
-              .clip(MaterialTheme.shapes.medium)
-              .shadow(12.dp)
-              .background(MaterialTheme.colorScheme.errorContainer)
-              .fillMaxWidth()
-              .padding(20.dp)
-          ) {
-            Row(
-              verticalAlignment = Alignment.CenterVertically,
-            ) {
-              Icon(
-                Icons.Outlined.ErrorOutline,
-                tint = MaterialTheme.colorScheme.onErrorContainer,
-                contentDescription = null,
-                modifier = Modifier.padding(end = 8.dp)
-              )
-              Text(
-                error,
-                color = MaterialTheme.colorScheme.onErrorContainer,
-                style = MaterialTheme.typography.bodyMedium,
-              )
-            }
+          Row {
+            Icon(
+              Icons.Outlined.ErrorOutline,
+              tint = MaterialTheme.colorScheme.onErrorContainer,
+              contentDescription = null,
+              modifier = Modifier.padding(end = 12.dp)
+            )
+            Text(
+              error,
+              color = MaterialTheme.colorScheme.onErrorContainer,
+              style = MaterialTheme.typography.bodyMedium,
+            )
           }
         }
       }
@@ -124,29 +119,35 @@ fun LoginPage(onSignIn: suspend () -> Result<Unit, String>) {
                 error = onSignIn().getErrorOr("")
                 loading = false
               }
-            }, modifier = Modifier
+            },
+            modifier = Modifier
               .padding(10.dp),
-            shape = RoundedCornerShape(12.dp)
+            shape = RoundedCornerShape(12.dp),
           ) {
             if (loading) {
               CircularProgressIndicator(
                 modifier = Modifier
-                  .width(30.dp)
                   .padding(end = 10.dp)
+                  .width(25.dp)
+                  .height(25.dp)
+                  .align(Alignment.CenterVertically),
               )
             } else {
               Image(
                 painterResource(id = R.drawable.google),
                 contentDescription = null,
-                Modifier
-                  .width(30.dp)
+                modifier = Modifier
                   .padding(end = 10.dp)
-
+                  .width(25.dp)
+                  .height(25.dp)
+                  .align(Alignment.CenterVertically)
               )
             }
             Text(
               "Sign in with Google",
               style = MaterialTheme.typography.bodyLarge,
+              modifier = Modifier
+                .align(Alignment.CenterVertically)
             )
           }
           Text(

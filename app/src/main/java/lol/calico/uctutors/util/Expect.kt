@@ -13,7 +13,7 @@ suspend fun <V, E> SuspendableResultBinding<E>.expect(
   return runCatching {
     block()
   }.getOrElse {
-    Log.d("UCTutors/expect", "Error: ${it.message}")
+    Log.d("expect", "Error: ${it.message}")
     Err(error(it)).bind<V>()
   }
 }
@@ -24,7 +24,7 @@ suspend fun <V> SuspendableResultBinding<Unit>.expect(
   return runCatching {
     block()
   }.getOrElse {
-    Log.d("UCTutors/expect", "Error: ${it.message}")
+    Log.d("expect", "Error: ${it.message}")
     Err(Unit).bind<V>()
   }
 }

@@ -1,5 +1,5 @@
 -- CreateEnum
-CREATE TYPE "School" AS ENUM ('MHS', 'AAHS', 'AIT', 'APA', 'UCTech');
+CREATE TYPE "School" AS ENUM ('AAHS', 'AIT', 'APA', 'MHS', 'UCTECH');
 
 -- CreateEnum
 CREATE TYPE "SessionType" AS ENUM ('Campus', 'Virtual');
@@ -67,6 +67,15 @@ CREATE TABLE "Storage" (
     "data" BYTEA NOT NULL,
 
     CONSTRAINT "Storage_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Nonce" (
+    "nonce" TEXT NOT NULL,
+    "created" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "expires" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Nonce_pkey" PRIMARY KEY ("nonce")
 );
 
 -- CreateTable

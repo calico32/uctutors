@@ -28,23 +28,6 @@ public object RegisterDataKt {
     internal fun _build(): lol.calico.uctutors.generated.api.v1.RegisterData = _builder.build()
 
     /**
-     * `string id_token = 1 [json_name = "idToken"];`
-     */
-    public var idToken: kotlin.String
-      @JvmName("getIdToken")
-      get() = _builder.getIdToken()
-      @JvmName("setIdToken")
-      set(value) {
-        _builder.setIdToken(value)
-      }
-    /**
-     * `string id_token = 1 [json_name = "idToken"];`
-     */
-    public fun clearIdToken() {
-      _builder.clearIdToken()
-    }
-
-    /**
      * `.api.v1.School school = 2 [json_name = "school"];`
      */
     public var school: lol.calico.uctutors.generated.api.v1.School

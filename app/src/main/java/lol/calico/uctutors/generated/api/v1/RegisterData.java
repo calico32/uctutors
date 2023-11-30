@@ -17,7 +17,6 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private RegisterData() {
-    idToken_ = "";
     school_ = 0;
     bio_ = "";
     campusAvailability_ = java.util.Collections.emptyList();
@@ -44,45 +43,6 @@ private static final long serialVersionUID = 0L;
     return lol.calico.uctutors.generated.api.v1.AuthProto.internal_static_api_v1_RegisterData_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
             lol.calico.uctutors.generated.api.v1.RegisterData.class, lol.calico.uctutors.generated.api.v1.RegisterData.Builder.class);
-  }
-
-  public static final int ID_TOKEN_FIELD_NUMBER = 1;
-  @SuppressWarnings("serial")
-  private volatile java.lang.Object idToken_ = "";
-  /**
-   * <code>string id_token = 1 [json_name = "idToken"];</code>
-   * @return The idToken.
-   */
-  @java.lang.Override
-  public java.lang.String getIdToken() {
-    java.lang.Object ref = idToken_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      idToken_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string id_token = 1 [json_name = "idToken"];</code>
-   * @return The bytes for idToken.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString
-      getIdTokenBytes() {
-    java.lang.Object ref = idToken_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      idToken_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
   }
 
   public static final int SCHOOL_FIELD_NUMBER = 2;
@@ -286,9 +246,6 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(idToken_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, idToken_);
-    }
     if (school_ != lol.calico.uctutors.generated.api.v1.School.SCHOOL_UNSPECIFIED.getNumber()) {
       output.writeEnum(2, school_);
     }
@@ -316,9 +273,6 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(idToken_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, idToken_);
-    }
     if (school_ != lol.calico.uctutors.generated.api.v1.School.SCHOOL_UNSPECIFIED.getNumber()) {
       size += com.google.protobuf.CodedOutputStream
         .computeEnumSize(2, school_);
@@ -361,8 +315,6 @@ private static final long serialVersionUID = 0L;
     }
     lol.calico.uctutors.generated.api.v1.RegisterData other = (lol.calico.uctutors.generated.api.v1.RegisterData) obj;
 
-    if (!getIdToken()
-        .equals(other.getIdToken())) return false;
     if (school_ != other.school_) return false;
     if (getClassOf()
         != other.getClassOf()) return false;
@@ -385,8 +337,6 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + ID_TOKEN_FIELD_NUMBER;
-    hash = (53 * hash) + getIdToken().hashCode();
     hash = (37 * hash) + SCHOOL_FIELD_NUMBER;
     hash = (53 * hash) + school_;
     hash = (37 * hash) + CLASS_OF_FIELD_NUMBER;
@@ -536,7 +486,6 @@ private static final long serialVersionUID = 0L;
     public Builder clear() {
       super.clear();
       bitField0_ = 0;
-      idToken_ = "";
       school_ = 0;
       classOf_ = 0;
       bio_ = "";
@@ -546,14 +495,14 @@ private static final long serialVersionUID = 0L;
         campusAvailability_ = null;
         campusAvailabilityBuilder_.clear();
       }
-      bitField0_ = (bitField0_ & ~0x00000010);
+      bitField0_ = (bitField0_ & ~0x00000008);
       if (virtualAvailabilityBuilder_ == null) {
         virtualAvailability_ = java.util.Collections.emptyList();
       } else {
         virtualAvailability_ = null;
         virtualAvailabilityBuilder_.clear();
       }
-      bitField0_ = (bitField0_ & ~0x00000020);
+      bitField0_ = (bitField0_ & ~0x00000010);
       topics_ =
           com.google.protobuf.LazyStringArrayList.emptyList();
       return this;
@@ -590,18 +539,18 @@ private static final long serialVersionUID = 0L;
 
     private void buildPartialRepeatedFields(lol.calico.uctutors.generated.api.v1.RegisterData result) {
       if (campusAvailabilityBuilder_ == null) {
-        if (((bitField0_ & 0x00000010) != 0)) {
+        if (((bitField0_ & 0x00000008) != 0)) {
           campusAvailability_ = java.util.Collections.unmodifiableList(campusAvailability_);
-          bitField0_ = (bitField0_ & ~0x00000010);
+          bitField0_ = (bitField0_ & ~0x00000008);
         }
         result.campusAvailability_ = campusAvailability_;
       } else {
         result.campusAvailability_ = campusAvailabilityBuilder_.build();
       }
       if (virtualAvailabilityBuilder_ == null) {
-        if (((bitField0_ & 0x00000020) != 0)) {
+        if (((bitField0_ & 0x00000010) != 0)) {
           virtualAvailability_ = java.util.Collections.unmodifiableList(virtualAvailability_);
-          bitField0_ = (bitField0_ & ~0x00000020);
+          bitField0_ = (bitField0_ & ~0x00000010);
         }
         result.virtualAvailability_ = virtualAvailability_;
       } else {
@@ -612,18 +561,15 @@ private static final long serialVersionUID = 0L;
     private void buildPartial0(lol.calico.uctutors.generated.api.v1.RegisterData result) {
       int from_bitField0_ = bitField0_;
       if (((from_bitField0_ & 0x00000001) != 0)) {
-        result.idToken_ = idToken_;
-      }
-      if (((from_bitField0_ & 0x00000002) != 0)) {
         result.school_ = school_;
       }
-      if (((from_bitField0_ & 0x00000004) != 0)) {
+      if (((from_bitField0_ & 0x00000002) != 0)) {
         result.classOf_ = classOf_;
       }
-      if (((from_bitField0_ & 0x00000008) != 0)) {
+      if (((from_bitField0_ & 0x00000004) != 0)) {
         result.bio_ = bio_;
       }
-      if (((from_bitField0_ & 0x00000040) != 0)) {
+      if (((from_bitField0_ & 0x00000020) != 0)) {
         topics_.makeImmutable();
         result.topics_ = topics_;
       }
@@ -673,11 +619,6 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(lol.calico.uctutors.generated.api.v1.RegisterData other) {
       if (other == lol.calico.uctutors.generated.api.v1.RegisterData.getDefaultInstance()) return this;
-      if (!other.getIdToken().isEmpty()) {
-        idToken_ = other.idToken_;
-        bitField0_ |= 0x00000001;
-        onChanged();
-      }
       if (other.school_ != 0) {
         setSchoolValue(other.getSchoolValue());
       }
@@ -686,14 +627,14 @@ private static final long serialVersionUID = 0L;
       }
       if (!other.getBio().isEmpty()) {
         bio_ = other.bio_;
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000004;
         onChanged();
       }
       if (campusAvailabilityBuilder_ == null) {
         if (!other.campusAvailability_.isEmpty()) {
           if (campusAvailability_.isEmpty()) {
             campusAvailability_ = other.campusAvailability_;
-            bitField0_ = (bitField0_ & ~0x00000010);
+            bitField0_ = (bitField0_ & ~0x00000008);
           } else {
             ensureCampusAvailabilityIsMutable();
             campusAvailability_.addAll(other.campusAvailability_);
@@ -706,7 +647,7 @@ private static final long serialVersionUID = 0L;
             campusAvailabilityBuilder_.dispose();
             campusAvailabilityBuilder_ = null;
             campusAvailability_ = other.campusAvailability_;
-            bitField0_ = (bitField0_ & ~0x00000010);
+            bitField0_ = (bitField0_ & ~0x00000008);
             campusAvailabilityBuilder_ = 
               com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                  getCampusAvailabilityFieldBuilder() : null;
@@ -719,7 +660,7 @@ private static final long serialVersionUID = 0L;
         if (!other.virtualAvailability_.isEmpty()) {
           if (virtualAvailability_.isEmpty()) {
             virtualAvailability_ = other.virtualAvailability_;
-            bitField0_ = (bitField0_ & ~0x00000020);
+            bitField0_ = (bitField0_ & ~0x00000010);
           } else {
             ensureVirtualAvailabilityIsMutable();
             virtualAvailability_.addAll(other.virtualAvailability_);
@@ -732,7 +673,7 @@ private static final long serialVersionUID = 0L;
             virtualAvailabilityBuilder_.dispose();
             virtualAvailabilityBuilder_ = null;
             virtualAvailability_ = other.virtualAvailability_;
-            bitField0_ = (bitField0_ & ~0x00000020);
+            bitField0_ = (bitField0_ & ~0x00000010);
             virtualAvailabilityBuilder_ = 
               com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                  getVirtualAvailabilityFieldBuilder() : null;
@@ -744,7 +685,7 @@ private static final long serialVersionUID = 0L;
       if (!other.topics_.isEmpty()) {
         if (topics_.isEmpty()) {
           topics_ = other.topics_;
-          bitField0_ |= 0x00000040;
+          bitField0_ |= 0x00000020;
         } else {
           ensureTopicsIsMutable();
           topics_.addAll(other.topics_);
@@ -777,24 +718,19 @@ private static final long serialVersionUID = 0L;
             case 0:
               done = true;
               break;
-            case 10: {
-              idToken_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00000001;
-              break;
-            } // case 10
             case 16: {
               school_ = input.readEnum();
-              bitField0_ |= 0x00000002;
+              bitField0_ |= 0x00000001;
               break;
             } // case 16
             case 24: {
               classOf_ = input.readUInt32();
-              bitField0_ |= 0x00000004;
+              bitField0_ |= 0x00000002;
               break;
             } // case 24
             case 34: {
               bio_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00000008;
+              bitField0_ |= 0x00000004;
               break;
             } // case 34
             case 42: {
@@ -846,78 +782,6 @@ private static final long serialVersionUID = 0L;
     }
     private int bitField0_;
 
-    private java.lang.Object idToken_ = "";
-    /**
-     * <code>string id_token = 1 [json_name = "idToken"];</code>
-     * @return The idToken.
-     */
-    public java.lang.String getIdToken() {
-      java.lang.Object ref = idToken_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        idToken_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string id_token = 1 [json_name = "idToken"];</code>
-     * @return The bytes for idToken.
-     */
-    public com.google.protobuf.ByteString
-        getIdTokenBytes() {
-      java.lang.Object ref = idToken_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        idToken_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string id_token = 1 [json_name = "idToken"];</code>
-     * @param value The idToken to set.
-     * @return This builder for chaining.
-     */
-    public Builder setIdToken(
-        java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
-      idToken_ = value;
-      bitField0_ |= 0x00000001;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string id_token = 1 [json_name = "idToken"];</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearIdToken() {
-      idToken_ = getDefaultInstance().getIdToken();
-      bitField0_ = (bitField0_ & ~0x00000001);
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string id_token = 1 [json_name = "idToken"];</code>
-     * @param value The bytes for idToken to set.
-     * @return This builder for chaining.
-     */
-    public Builder setIdTokenBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) { throw new NullPointerException(); }
-      checkByteStringIsUtf8(value);
-      idToken_ = value;
-      bitField0_ |= 0x00000001;
-      onChanged();
-      return this;
-    }
-
     private int school_ = 0;
     /**
      * <code>.api.v1.School school = 2 [json_name = "school"];</code>
@@ -933,7 +797,7 @@ private static final long serialVersionUID = 0L;
      */
     public Builder setSchoolValue(int value) {
       school_ = value;
-      bitField0_ |= 0x00000002;
+      bitField0_ |= 0x00000001;
       onChanged();
       return this;
     }
@@ -955,7 +819,7 @@ private static final long serialVersionUID = 0L;
       if (value == null) {
         throw new NullPointerException();
       }
-      bitField0_ |= 0x00000002;
+      bitField0_ |= 0x00000001;
       school_ = value.getNumber();
       onChanged();
       return this;
@@ -965,7 +829,7 @@ private static final long serialVersionUID = 0L;
      * @return This builder for chaining.
      */
     public Builder clearSchool() {
-      bitField0_ = (bitField0_ & ~0x00000002);
+      bitField0_ = (bitField0_ & ~0x00000001);
       school_ = 0;
       onChanged();
       return this;
@@ -988,7 +852,7 @@ private static final long serialVersionUID = 0L;
     public Builder setClassOf(int value) {
 
       classOf_ = value;
-      bitField0_ |= 0x00000004;
+      bitField0_ |= 0x00000002;
       onChanged();
       return this;
     }
@@ -997,7 +861,7 @@ private static final long serialVersionUID = 0L;
      * @return This builder for chaining.
      */
     public Builder clearClassOf() {
-      bitField0_ = (bitField0_ & ~0x00000004);
+      bitField0_ = (bitField0_ & ~0x00000002);
       classOf_ = 0;
       onChanged();
       return this;
@@ -1046,7 +910,7 @@ private static final long serialVersionUID = 0L;
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       bio_ = value;
-      bitField0_ |= 0x00000008;
+      bitField0_ |= 0x00000004;
       onChanged();
       return this;
     }
@@ -1056,7 +920,7 @@ private static final long serialVersionUID = 0L;
      */
     public Builder clearBio() {
       bio_ = getDefaultInstance().getBio();
-      bitField0_ = (bitField0_ & ~0x00000008);
+      bitField0_ = (bitField0_ & ~0x00000004);
       onChanged();
       return this;
     }
@@ -1070,7 +934,7 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       bio_ = value;
-      bitField0_ |= 0x00000008;
+      bitField0_ |= 0x00000004;
       onChanged();
       return this;
     }
@@ -1078,9 +942,9 @@ private static final long serialVersionUID = 0L;
     private java.util.List<lol.calico.uctutors.generated.api.v1.CampusAvailability> campusAvailability_ =
       java.util.Collections.emptyList();
     private void ensureCampusAvailabilityIsMutable() {
-      if (!((bitField0_ & 0x00000010) != 0)) {
+      if (!((bitField0_ & 0x00000008) != 0)) {
         campusAvailability_ = new java.util.ArrayList<lol.calico.uctutors.generated.api.v1.CampusAvailability>(campusAvailability_);
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000008;
        }
     }
 
@@ -1230,7 +1094,7 @@ private static final long serialVersionUID = 0L;
     public Builder clearCampusAvailability() {
       if (campusAvailabilityBuilder_ == null) {
         campusAvailability_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000008);
         onChanged();
       } else {
         campusAvailabilityBuilder_.clear();
@@ -1307,7 +1171,7 @@ private static final long serialVersionUID = 0L;
         campusAvailabilityBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
             lol.calico.uctutors.generated.api.v1.CampusAvailability, lol.calico.uctutors.generated.api.v1.CampusAvailability.Builder, lol.calico.uctutors.generated.api.v1.CampusAvailabilityOrBuilder>(
                 campusAvailability_,
-                ((bitField0_ & 0x00000010) != 0),
+                ((bitField0_ & 0x00000008) != 0),
                 getParentForChildren(),
                 isClean());
         campusAvailability_ = null;
@@ -1318,9 +1182,9 @@ private static final long serialVersionUID = 0L;
     private java.util.List<lol.calico.uctutors.generated.api.v1.VirtualAvailability> virtualAvailability_ =
       java.util.Collections.emptyList();
     private void ensureVirtualAvailabilityIsMutable() {
-      if (!((bitField0_ & 0x00000020) != 0)) {
+      if (!((bitField0_ & 0x00000010) != 0)) {
         virtualAvailability_ = new java.util.ArrayList<lol.calico.uctutors.generated.api.v1.VirtualAvailability>(virtualAvailability_);
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000010;
        }
     }
 
@@ -1470,7 +1334,7 @@ private static final long serialVersionUID = 0L;
     public Builder clearVirtualAvailability() {
       if (virtualAvailabilityBuilder_ == null) {
         virtualAvailability_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000010);
         onChanged();
       } else {
         virtualAvailabilityBuilder_.clear();
@@ -1547,7 +1411,7 @@ private static final long serialVersionUID = 0L;
         virtualAvailabilityBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
             lol.calico.uctutors.generated.api.v1.VirtualAvailability, lol.calico.uctutors.generated.api.v1.VirtualAvailability.Builder, lol.calico.uctutors.generated.api.v1.VirtualAvailabilityOrBuilder>(
                 virtualAvailability_,
-                ((bitField0_ & 0x00000020) != 0),
+                ((bitField0_ & 0x00000010) != 0),
                 getParentForChildren(),
                 isClean());
         virtualAvailability_ = null;
@@ -1561,7 +1425,7 @@ private static final long serialVersionUID = 0L;
       if (!topics_.isModifiable()) {
         topics_ = new com.google.protobuf.LazyStringArrayList(topics_);
       }
-      bitField0_ |= 0x00000040;
+      bitField0_ |= 0x00000020;
     }
     /**
      * <code>repeated string topics = 7 [json_name = "topics"];</code>
@@ -1607,7 +1471,7 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       ensureTopicsIsMutable();
       topics_.set(index, value);
-      bitField0_ |= 0x00000040;
+      bitField0_ |= 0x00000020;
       onChanged();
       return this;
     }
@@ -1621,7 +1485,7 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       ensureTopicsIsMutable();
       topics_.add(value);
-      bitField0_ |= 0x00000040;
+      bitField0_ |= 0x00000020;
       onChanged();
       return this;
     }
@@ -1635,7 +1499,7 @@ private static final long serialVersionUID = 0L;
       ensureTopicsIsMutable();
       com.google.protobuf.AbstractMessageLite.Builder.addAll(
           values, topics_);
-      bitField0_ |= 0x00000040;
+      bitField0_ |= 0x00000020;
       onChanged();
       return this;
     }
@@ -1646,7 +1510,7 @@ private static final long serialVersionUID = 0L;
     public Builder clearTopics() {
       topics_ =
         com.google.protobuf.LazyStringArrayList.emptyList();
-      bitField0_ = (bitField0_ & ~0x00000040);;
+      bitField0_ = (bitField0_ & ~0x00000020);;
       onChanged();
       return this;
     }
@@ -1661,7 +1525,7 @@ private static final long serialVersionUID = 0L;
       checkByteStringIsUtf8(value);
       ensureTopicsIsMutable();
       topics_.add(value);
-      bitField0_ |= 0x00000040;
+      bitField0_ |= 0x00000020;
       onChanged();
       return this;
     }

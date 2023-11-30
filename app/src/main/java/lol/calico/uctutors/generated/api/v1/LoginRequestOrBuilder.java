@@ -19,4 +19,16 @@ public interface LoginRequestOrBuilder extends
    */
   com.google.protobuf.ByteString
       getIdTokenBytes();
+
+  /**
+   * <code>string nonce = 2 [json_name = "nonce"];</code>
+   * @return The nonce.
+   */
+  java.lang.String getNonce();
+  /**
+   * <code>string nonce = 2 [json_name = "nonce"];</code>
+   * @return The bytes for nonce.
+   */
+  com.google.protobuf.ByteString
+      getNonceBytes();
 }

@@ -6,14 +6,20 @@ import "api/v1/error.proto";
 import "api/v1/user.proto";
 
 service AuthService {
+  rpc GetNonce(google.protobuf.Empty) returns (GetNonceResponse) {}
   rpc Login(LoginRequest) returns (LoginResponse) {}
   rpc Logout(google.protobuf.Empty) returns (google.protobuf.Empty) {}
   rpc Register(RegisterRequest) returns (RegisterResponse) {}
   // rpc DeleteAccount(google.protobuf.Empty) returns (google.protobuf.Empty) {}
 }
 
+message GetNonceResponse {
+  string nonce = 1;
+}
+
 message LoginRequest {
   string id_token = 1;
+  string nonce = 2;
 }
 
 message LoginResponse {
@@ -47,7 +53,6 @@ message RegisterRequest {
 }
 
 message RegisterData {
-  string id_token = 1;
   School school = 2;
   uint32 class_of = 3;
   string bio = 4;

@@ -85,8 +85,13 @@ export function registerStatusToJSON(object: RegisterStatus): string {
   }
 }
 
+export interface GetNonceResponse {
+  nonce: string;
+}
+
 export interface LoginRequest {
   idToken: string;
+  nonce: string;
 }
 
 export interface LoginResponse {
@@ -110,7 +115,6 @@ export interface RegisterRequest {
 }
 
 export interface RegisterData {
-  idToken: string;
   school: School;
   classOf: number;
   bio: string;
@@ -129,14 +133,74 @@ export interface RegisterResponseSuccess {
   userId: string;
 }
 
+function createBaseGetNonceResponse(): GetNonceResponse {
+  return { nonce: "" };
+}
+
+export const GetNonceResponse = {
+  encode(message: GetNonceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.nonce !== "") {
+      writer.uint32(10).string(message.nonce);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetNonceResponse {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGetNonceResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.nonce = reader.string();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): GetNonceResponse {
+    return { nonce: isSet(object.nonce) ? globalThis.String(object.nonce) : "" };
+  },
+
+  toJSON(message: GetNonceResponse): unknown {
+    const obj: any = {};
+    if (message.nonce !== "") {
+      obj.nonce = message.nonce;
+    }
+    return obj;
+  },
+
+  create(base?: DeepPartial<GetNonceResponse>): GetNonceResponse {
+    return GetNonceResponse.fromPartial(base ?? {});
+  },
+  fromPartial(object: DeepPartial<GetNonceResponse>): GetNonceResponse {
+    const message = createBaseGetNonceResponse();
+    message.nonce = object.nonce ?? "";
+    return message;
+  },
+};
+
 function createBaseLoginRequest(): LoginRequest {
-  return { idToken: "" };
+  return { idToken: "", nonce: "" };
 }
 
 export const LoginRequest = {
   encode(message: LoginRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.idToken !== "") {
       writer.uint32(10).string(message.idToken);
+    }
+    if (message.nonce !== "") {
+      writer.uint32(18).string(message.nonce);
     }
     return writer;
   },
@@ -155,6 +219,13 @@ export const LoginRequest = {
 
           message.idToken = reader.string();
           continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.nonce = reader.string();
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -165,13 +236,19 @@ export const LoginRequest = {
   },
 
   fromJSON(object: any): LoginRequest {
-    return { idToken: isSet(object.idToken) ? globalThis.String(object.idToken) : "" };
+    return {
+      idToken: isSet(object.idToken) ? globalThis.String(object.idToken) : "",
+      nonce: isSet(object.nonce) ? globalThis.String(object.nonce) : "",
+    };
   },
 
   toJSON(message: LoginRequest): unknown {
     const obj: any = {};
     if (message.idToken !== "") {
       obj.idToken = message.idToken;
+    }
+    if (message.nonce !== "") {
+      obj.nonce = message.nonce;
     }
     return obj;
   },
@@ -182,6 +259,7 @@ export const LoginRequest = {
   fromPartial(object: DeepPartial<LoginRequest>): LoginRequest {
     const message = createBaseLoginRequest();
     message.idToken = object.idToken ?? "";
+    message.nonce = object.nonce ?? "";
     return message;
   },
 };
@@ -487,14 +565,11 @@ export const RegisterRequest = {
 };
 
 function createBaseRegisterData(): RegisterData {
-  return { idToken: "", school: 0, classOf: 0, bio: "", campusAvailability: [], virtualAvailability: [], topics: [] };
+  return { school: 0, classOf: 0, bio: "", campusAvailability: [], virtualAvailability: [], topics: [] };
 }
 
 export const RegisterData = {
   encode(message: RegisterData, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.idToken !== "") {
-      writer.uint32(10).string(message.idToken);
-    }
     if (message.school !== 0) {
       writer.uint32(16).int32(message.school);
     }
@@ -523,13 +598,6 @@ export const RegisterData = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.idToken = reader.string();
-          continue;
         case 2:
           if (tag !== 16) {
             break;
@@ -583,7 +651,6 @@ export const RegisterData = {
 
   fromJSON(object: any): RegisterData {
     return {
-      idToken: isSet(object.idToken) ? globalThis.String(object.idToken) : "",
       school: isSet(object.school) ? schoolFromJSON(object.school) : 0,
       classOf: isSet(object.classOf) ? globalThis.Number(object.classOf) : 0,
       bio: isSet(object.bio) ? globalThis.String(object.bio) : "",
@@ -599,9 +666,6 @@ export const RegisterData = {
 
   toJSON(message: RegisterData): unknown {
     const obj: any = {};
-    if (message.idToken !== "") {
-      obj.idToken = message.idToken;
-    }
     if (message.school !== 0) {
       obj.school = schoolToJSON(message.school);
     }
@@ -628,7 +692,6 @@ export const RegisterData = {
   },
   fromPartial(object: DeepPartial<RegisterData>): RegisterData {
     const message = createBaseRegisterData();
-    message.idToken = object.idToken ?? "";
     message.school = object.school ?? 0;
     message.classOf = object.classOf ?? 0;
     message.bio = object.bio ?? "";
@@ -792,6 +855,14 @@ export const AuthServiceDefinition = {
   name: "AuthService",
   fullName: "api.v1.AuthService",
   methods: {
+    getNonce: {
+      name: "GetNonce",
+      requestType: Empty,
+      requestStream: false,
+      responseType: GetNonceResponse,
+      responseStream: false,
+      options: {},
+    },
     login: {
       name: "Login",
       requestType: LoginRequest,
@@ -820,12 +891,14 @@ export const AuthServiceDefinition = {
 } as const;
 
 export interface AuthServiceImplementation<CallContextExt = {}> {
+  getNonce(request: Empty, context: CallContext & CallContextExt): Promise<DeepPartial<GetNonceResponse>>;
   login(request: LoginRequest, context: CallContext & CallContextExt): Promise<DeepPartial<LoginResponse>>;
   logout(request: Empty, context: CallContext & CallContextExt): Promise<DeepPartial<Empty>>;
   register(request: RegisterRequest, context: CallContext & CallContextExt): Promise<DeepPartial<RegisterResponse>>;
 }
 
 export interface AuthServiceClient<CallOptionsExt = {}> {
+  getNonce(request: DeepPartial<Empty>, options?: CallOptions & CallOptionsExt): Promise<GetNonceResponse>;
   login(request: DeepPartial<LoginRequest>, options?: CallOptions & CallOptionsExt): Promise<LoginResponse>;
   logout(request: DeepPartial<Empty>, options?: CallOptions & CallOptionsExt): Promise<Empty>;
   register(request: DeepPartial<RegisterRequest>, options?: CallOptions & CallOptionsExt): Promise<RegisterResponse>;

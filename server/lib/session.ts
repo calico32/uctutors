@@ -1,6 +1,6 @@
 import { AuthSessionError } from '@/generated/api/v1/auth_session'
 import { Result } from '@/result'
-import { TokenInfo } from '@/types/google'
+import { TokenInfo } from '@/util/google'
 import { webcrypto } from 'crypto'
 import * as Iron from 'iron-webcrypto'
 import { nanoid } from 'nanoid'

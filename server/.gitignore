@@ -176,3 +176,5 @@ dist
 .DS_Store
 
 *.pem
+
+lib/buildinfo.ts

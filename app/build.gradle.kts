@@ -31,7 +31,15 @@ android {
   buildFeatures {
     compose = true
     buildConfig = true
+  }
 
+  signingConfigs {
+    create("release") {
+      storeFile = file(env.KEYSTORE_FILE.value)
+      storePassword = env.KEYSTORE_PASSWORD.value
+      keyAlias = env.KEY_ALIAS.value
+      keyPassword = env.KEY_PASSWORD.value
+    }
   }
 
   buildTypes {
@@ -45,6 +53,8 @@ android {
         getDefaultProguardFile("proguard-android-optimize.txt"),
         "proguard-rules.pro"
       )
+
+      signingConfig = signingConfigs.getByName("release")
     }
   }
   compileOptions {
@@ -70,6 +80,7 @@ hilt {
 
 dependencies {
   implementation(libs.core.ktx)
+  implementation(kotlin("reflect"))
   implementation(libs.lifecycle.runtime.ktx)
   implementation(libs.activity.compose)
   implementation(platform(libs.compose.bom))

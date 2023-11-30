@@ -1,5 +1,5 @@
-import { logger } from '@/providers'
-import { TokenInfo } from '@/types/google'
+import { logger, prisma } from '@/providers'
+import { TokenInfo } from '@/util/google'
 import { webcrypto } from 'crypto'
 import { ServerError, Status } from 'nice-grpc'
 const DISCOVERY_URL = 'https://accounts.google.com/.well-known/openid-configuration'
@@ -151,6 +151,24 @@ export async function validateIdToken(idToken: string): Promise<TokenInfo> {
   if (!payload.sub) {
     throw new ServerError(Status.INVALID_ARGUMENT, 'invalid id token')
   }
+
+  if (!payload.nonce) {
+    throw new ServerError(Status.INVALID_ARGUMENT, 'invalid id token')
+  }
+
+  const foundNonce = await prisma.nonce.findUnique({
+    where: { nonce: payload.nonce },
+  })
+
+  if (!foundNonce) {
+    throw new ServerError(Status.INVALID_ARGUMENT, 'invalid nonce')
+  }
+
+  if (foundNonce.expires < new Date()) {
+    throw new ServerError(Status.INVALID_ARGUMENT, 'nonce expired')
+  }
+
+  await prisma.nonce.delete({ where: { nonce: payload.nonce } })
 
   return payload
 }

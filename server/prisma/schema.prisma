@@ -24,10 +24,11 @@ model User {
   bannerId  String?
   banner    Storage? @relation("banner", fields: [bannerId], references: [id])
 
-  /// [monday, tuesday, wednesday, thursday, friday]
+  /// [monday, tuesday, wednesday, thursday, friday, a days, b days]
   /// where each day is an object `{ p5: boolean, p6: boolean }`
-  campusAvailability  Json
-  /// [monday, tuesday, wednesday, thursday, friday, saturday, sunday]
+  campusAvailability Json
+
+  /// [sunday, monday, tuesday, wednesday, thursday, friday, saturday]
   /// where each day is an object `{ times: { start: datestring, end: datestring }[] }`
   virtualAvailability Json
 
@@ -73,11 +74,16 @@ model Experience {
 }
 
 enum School {
-  MHS
   AAHS
   AIT
   APA
-  UCTech
+  MHS
+  UCTECH
+}
+
+enum AvailabilityMergeType {
+  AND
+  OR
 }
 
 model Storage {
@@ -92,6 +98,12 @@ model Storage {
   avatar     User[]       @relation("avatar")
   banner     User[]       @relation("banner")
   experience Experience[] @relation("experience")
+}
+
+model Nonce {
+  nonce   String   @id
+  created DateTime @default(now())
+  expires DateTime
 }
 
 model Session {

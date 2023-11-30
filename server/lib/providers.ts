@@ -13,7 +13,7 @@ export const logger: Logger = pino({
       ignore: 'hostname,pid',
     },
   },
-}) as any
+}) as any // we're adding the $inspect method below
 
 logger.$inspect = (loc: any, obj?: any) => {
   if (obj) {
@@ -24,6 +24,15 @@ logger.$inspect = (loc: any, obj?: any) => {
 }
 
 export type Logger = pino.Logger & {
-  $inspect(loc: any, obj: any): void
+  /**
+   * Log an object with a source location. The location is usually automatically
+   * inserted by a build plugin; you won't need to pass the location yourself.
+   * Call this function with a single argument instead.
+   */
+  $inspect(loc: string, obj: any): void
+  /**
+   * Log an object with a source location. The source location is automatically
+   * inserted by a build plugin.
+   */
   $inspect(obj: any): void
 }

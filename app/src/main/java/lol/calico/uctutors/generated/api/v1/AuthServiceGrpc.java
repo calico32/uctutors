@@ -5,7 +5,7 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
 /**
  */
 @javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.59.0)",
+    value = "by gRPC proto compiler (version 1.59.1)",
     comments = "Source: api/v1/auth.proto")
 @io.grpc.stub.annotations.GrpcGenerated
 public final class AuthServiceGrpc {
@@ -15,6 +15,37 @@ public final class AuthServiceGrpc {
   public static final java.lang.String SERVICE_NAME = "api.v1.AuthService";
 
   // Static method descriptors that strictly reflect the proto.
+  private static volatile io.grpc.MethodDescriptor<com.google.protobuf.Empty,
+      lol.calico.uctutors.generated.api.v1.GetNonceResponse> getGetNonceMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GetNonce",
+      requestType = com.google.protobuf.Empty.class,
+      responseType = lol.calico.uctutors.generated.api.v1.GetNonceResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.google.protobuf.Empty,
+      lol.calico.uctutors.generated.api.v1.GetNonceResponse> getGetNonceMethod() {
+    io.grpc.MethodDescriptor<com.google.protobuf.Empty, lol.calico.uctutors.generated.api.v1.GetNonceResponse> getGetNonceMethod;
+    if ((getGetNonceMethod = AuthServiceGrpc.getGetNonceMethod) == null) {
+      synchronized (AuthServiceGrpc.class) {
+        if ((getGetNonceMethod = AuthServiceGrpc.getGetNonceMethod) == null) {
+          AuthServiceGrpc.getGetNonceMethod = getGetNonceMethod =
+              io.grpc.MethodDescriptor.<com.google.protobuf.Empty, lol.calico.uctutors.generated.api.v1.GetNonceResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetNonce"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.google.protobuf.Empty.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  lol.calico.uctutors.generated.api.v1.GetNonceResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new AuthServiceMethodDescriptorSupplier("GetNonce"))
+              .build();
+        }
+      }
+    }
+    return getGetNonceMethod;
+  }
+
   private static volatile io.grpc.MethodDescriptor<lol.calico.uctutors.generated.api.v1.LoginRequest,
       lol.calico.uctutors.generated.api.v1.LoginResponse> getLoginMethod;
 
@@ -158,6 +189,13 @@ public final class AuthServiceGrpc {
 
     /**
      */
+    default void getNonce(com.google.protobuf.Empty request,
+        io.grpc.stub.StreamObserver<lol.calico.uctutors.generated.api.v1.GetNonceResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetNonceMethod(), responseObserver);
+    }
+
+    /**
+     */
     default void login(lol.calico.uctutors.generated.api.v1.LoginRequest request,
         io.grpc.stub.StreamObserver<lol.calico.uctutors.generated.api.v1.LoginResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getLoginMethod(), responseObserver);
@@ -207,6 +245,14 @@ public final class AuthServiceGrpc {
 
     /**
      */
+    public void getNonce(com.google.protobuf.Empty request,
+        io.grpc.stub.StreamObserver<lol.calico.uctutors.generated.api.v1.GetNonceResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getGetNonceMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
     public void login(lol.calico.uctutors.generated.api.v1.LoginRequest request,
         io.grpc.stub.StreamObserver<lol.calico.uctutors.generated.api.v1.LoginResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
@@ -244,6 +290,13 @@ public final class AuthServiceGrpc {
     protected AuthServiceBlockingStub build(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new AuthServiceBlockingStub(channel, callOptions);
+    }
+
+    /**
+     */
+    public lol.calico.uctutors.generated.api.v1.GetNonceResponse getNonce(com.google.protobuf.Empty request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getGetNonceMethod(), getCallOptions(), request);
     }
 
     /**
@@ -286,6 +339,14 @@ public final class AuthServiceGrpc {
 
     /**
      */
+    public com.google.common.util.concurrent.ListenableFuture<lol.calico.uctutors.generated.api.v1.GetNonceResponse> getNonce(
+        com.google.protobuf.Empty request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getGetNonceMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
     public com.google.common.util.concurrent.ListenableFuture<lol.calico.uctutors.generated.api.v1.LoginResponse> login(
         lol.calico.uctutors.generated.api.v1.LoginRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
@@ -309,9 +370,10 @@ public final class AuthServiceGrpc {
     }
   }
 
-  private static final int METHODID_LOGIN = 0;
-  private static final int METHODID_LOGOUT = 1;
-  private static final int METHODID_REGISTER = 2;
+  private static final int METHODID_GET_NONCE = 0;
+  private static final int METHODID_LOGIN = 1;
+  private static final int METHODID_LOGOUT = 2;
+  private static final int METHODID_REGISTER = 3;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -330,6 +392,10 @@ public final class AuthServiceGrpc {
     @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
+        case METHODID_GET_NONCE:
+          serviceImpl.getNonce((com.google.protobuf.Empty) request,
+              (io.grpc.stub.StreamObserver<lol.calico.uctutors.generated.api.v1.GetNonceResponse>) responseObserver);
+          break;
         case METHODID_LOGIN:
           serviceImpl.login((lol.calico.uctutors.generated.api.v1.LoginRequest) request,
               (io.grpc.stub.StreamObserver<lol.calico.uctutors.generated.api.v1.LoginResponse>) responseObserver);
@@ -360,6 +426,13 @@ public final class AuthServiceGrpc {
 
   public static final io.grpc.ServerServiceDefinition bindService(AsyncService service) {
     return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
+        .addMethod(
+          getGetNonceMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.google.protobuf.Empty,
+              lol.calico.uctutors.generated.api.v1.GetNonceResponse>(
+                service, METHODID_GET_NONCE)))
         .addMethod(
           getLoginMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
@@ -429,6 +502,7 @@ public final class AuthServiceGrpc {
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new AuthServiceFileDescriptorSupplier())
+              .addMethod(getGetNonceMethod())
               .addMethod(getLoginMethod())
               .addMethod(getLogoutMethod())
               .addMethod(getRegisterMethod())

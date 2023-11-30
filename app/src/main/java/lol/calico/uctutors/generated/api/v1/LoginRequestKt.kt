@@ -43,6 +43,23 @@ public object LoginRequestKt {
     public fun clearIdToken() {
       _builder.clearIdToken()
     }
+
+    /**
+     * `string nonce = 2 [json_name = "nonce"];`
+     */
+    public var nonce: kotlin.String
+      @JvmName("getNonce")
+      get() = _builder.getNonce()
+      @JvmName("setNonce")
+      set(value) {
+        _builder.setNonce(value)
+      }
+    /**
+     * `string nonce = 2 [json_name = "nonce"];`
+     */
+    public fun clearNonce() {
+      _builder.clearNonce()
+    }
   }
 }
 @kotlin.jvm.JvmSynthetic

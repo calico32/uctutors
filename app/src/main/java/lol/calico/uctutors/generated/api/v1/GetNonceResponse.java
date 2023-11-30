@@ -5,19 +5,18 @@
 package lol.calico.uctutors.generated.api.v1;
 
 /**
- * Protobuf type {@code api.v1.LoginRequest}
+ * Protobuf type {@code api.v1.GetNonceResponse}
  */
-public final class LoginRequest extends
+public final class GetNonceResponse extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:api.v1.LoginRequest)
-    LoginRequestOrBuilder {
+    // @@protoc_insertion_point(message_implements:api.v1.GetNonceResponse)
+    GetNonceResponseOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use LoginRequest.newBuilder() to construct.
-  private LoginRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use GetNonceResponse.newBuilder() to construct.
+  private GetNonceResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private LoginRequest() {
-    idToken_ = "";
+  private GetNonceResponse() {
     nonce_ = "";
   }
 
@@ -25,66 +24,27 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings({"unused"})
   protected java.lang.Object newInstance(
       UnusedPrivateParameter unused) {
-    return new LoginRequest();
+    return new GetNonceResponse();
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return lol.calico.uctutors.generated.api.v1.AuthProto.internal_static_api_v1_LoginRequest_descriptor;
+    return lol.calico.uctutors.generated.api.v1.AuthProto.internal_static_api_v1_GetNonceResponse_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return lol.calico.uctutors.generated.api.v1.AuthProto.internal_static_api_v1_LoginRequest_fieldAccessorTable
+    return lol.calico.uctutors.generated.api.v1.AuthProto.internal_static_api_v1_GetNonceResponse_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            lol.calico.uctutors.generated.api.v1.LoginRequest.class, lol.calico.uctutors.generated.api.v1.LoginRequest.Builder.class);
+            lol.calico.uctutors.generated.api.v1.GetNonceResponse.class, lol.calico.uctutors.generated.api.v1.GetNonceResponse.Builder.class);
   }
 
-  public static final int ID_TOKEN_FIELD_NUMBER = 1;
-  @SuppressWarnings("serial")
-  private volatile java.lang.Object idToken_ = "";
-  /**
-   * <code>string id_token = 1 [json_name = "idToken"];</code>
-   * @return The idToken.
-   */
-  @java.lang.Override
-  public java.lang.String getIdToken() {
-    java.lang.Object ref = idToken_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      idToken_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string id_token = 1 [json_name = "idToken"];</code>
-   * @return The bytes for idToken.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString
-      getIdTokenBytes() {
-    java.lang.Object ref = idToken_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      idToken_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int NONCE_FIELD_NUMBER = 2;
+  public static final int NONCE_FIELD_NUMBER = 1;
   @SuppressWarnings("serial")
   private volatile java.lang.Object nonce_ = "";
   /**
-   * <code>string nonce = 2 [json_name = "nonce"];</code>
+   * <code>string nonce = 1 [json_name = "nonce"];</code>
    * @return The nonce.
    */
   @java.lang.Override
@@ -101,7 +61,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string nonce = 2 [json_name = "nonce"];</code>
+   * <code>string nonce = 1 [json_name = "nonce"];</code>
    * @return The bytes for nonce.
    */
   @java.lang.Override
@@ -133,11 +93,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(idToken_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, idToken_);
-    }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(nonce_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, nonce_);
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, nonce_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -148,11 +105,8 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(idToken_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, idToken_);
-    }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(nonce_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, nonce_);
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, nonce_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -164,13 +118,11 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof lol.calico.uctutors.generated.api.v1.LoginRequest)) {
+    if (!(obj instanceof lol.calico.uctutors.generated.api.v1.GetNonceResponse)) {
       return super.equals(obj);
     }
-    lol.calico.uctutors.generated.api.v1.LoginRequest other = (lol.calico.uctutors.generated.api.v1.LoginRequest) obj;
+    lol.calico.uctutors.generated.api.v1.GetNonceResponse other = (lol.calico.uctutors.generated.api.v1.GetNonceResponse) obj;
 
-    if (!getIdToken()
-        .equals(other.getIdToken())) return false;
     if (!getNonce()
         .equals(other.getNonce())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
@@ -184,8 +136,6 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + ID_TOKEN_FIELD_NUMBER;
-    hash = (53 * hash) + getIdToken().hashCode();
     hash = (37 * hash) + NONCE_FIELD_NUMBER;
     hash = (53 * hash) + getNonce().hashCode();
     hash = (29 * hash) + getUnknownFields().hashCode();
@@ -193,44 +143,44 @@ private static final long serialVersionUID = 0L;
     return hash;
   }
 
-  public static lol.calico.uctutors.generated.api.v1.LoginRequest parseFrom(
+  public static lol.calico.uctutors.generated.api.v1.GetNonceResponse parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static lol.calico.uctutors.generated.api.v1.LoginRequest parseFrom(
+  public static lol.calico.uctutors.generated.api.v1.GetNonceResponse parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static lol.calico.uctutors.generated.api.v1.LoginRequest parseFrom(
+  public static lol.calico.uctutors.generated.api.v1.GetNonceResponse parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static lol.calico.uctutors.generated.api.v1.LoginRequest parseFrom(
+  public static lol.calico.uctutors.generated.api.v1.GetNonceResponse parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static lol.calico.uctutors.generated.api.v1.LoginRequest parseFrom(byte[] data)
+  public static lol.calico.uctutors.generated.api.v1.GetNonceResponse parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static lol.calico.uctutors.generated.api.v1.LoginRequest parseFrom(
+  public static lol.calico.uctutors.generated.api.v1.GetNonceResponse parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static lol.calico.uctutors.generated.api.v1.LoginRequest parseFrom(java.io.InputStream input)
+  public static lol.calico.uctutors.generated.api.v1.GetNonceResponse parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static lol.calico.uctutors.generated.api.v1.LoginRequest parseFrom(
+  public static lol.calico.uctutors.generated.api.v1.GetNonceResponse parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -238,26 +188,26 @@ private static final long serialVersionUID = 0L;
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
 
-  public static lol.calico.uctutors.generated.api.v1.LoginRequest parseDelimitedFrom(java.io.InputStream input)
+  public static lol.calico.uctutors.generated.api.v1.GetNonceResponse parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
 
-  public static lol.calico.uctutors.generated.api.v1.LoginRequest parseDelimitedFrom(
+  public static lol.calico.uctutors.generated.api.v1.GetNonceResponse parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static lol.calico.uctutors.generated.api.v1.LoginRequest parseFrom(
+  public static lol.calico.uctutors.generated.api.v1.GetNonceResponse parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static lol.calico.uctutors.generated.api.v1.LoginRequest parseFrom(
+  public static lol.calico.uctutors.generated.api.v1.GetNonceResponse parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -270,7 +220,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(lol.calico.uctutors.generated.api.v1.LoginRequest prototype) {
+  public static Builder newBuilder(lol.calico.uctutors.generated.api.v1.GetNonceResponse prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -286,26 +236,26 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code api.v1.LoginRequest}
+   * Protobuf type {@code api.v1.GetNonceResponse}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:api.v1.LoginRequest)
-      lol.calico.uctutors.generated.api.v1.LoginRequestOrBuilder {
+      // @@protoc_insertion_point(builder_implements:api.v1.GetNonceResponse)
+      lol.calico.uctutors.generated.api.v1.GetNonceResponseOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return lol.calico.uctutors.generated.api.v1.AuthProto.internal_static_api_v1_LoginRequest_descriptor;
+      return lol.calico.uctutors.generated.api.v1.AuthProto.internal_static_api_v1_GetNonceResponse_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return lol.calico.uctutors.generated.api.v1.AuthProto.internal_static_api_v1_LoginRequest_fieldAccessorTable
+      return lol.calico.uctutors.generated.api.v1.AuthProto.internal_static_api_v1_GetNonceResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              lol.calico.uctutors.generated.api.v1.LoginRequest.class, lol.calico.uctutors.generated.api.v1.LoginRequest.Builder.class);
+              lol.calico.uctutors.generated.api.v1.GetNonceResponse.class, lol.calico.uctutors.generated.api.v1.GetNonceResponse.Builder.class);
     }
 
-    // Construct using lol.calico.uctutors.generated.api.v1.LoginRequest.newBuilder()
+    // Construct using lol.calico.uctutors.generated.api.v1.GetNonceResponse.newBuilder()
     private Builder() {
 
     }
@@ -319,7 +269,6 @@ private static final long serialVersionUID = 0L;
     public Builder clear() {
       super.clear();
       bitField0_ = 0;
-      idToken_ = "";
       nonce_ = "";
       return this;
     }
@@ -327,17 +276,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return lol.calico.uctutors.generated.api.v1.AuthProto.internal_static_api_v1_LoginRequest_descriptor;
+      return lol.calico.uctutors.generated.api.v1.AuthProto.internal_static_api_v1_GetNonceResponse_descriptor;
     }
 
     @java.lang.Override
-    public lol.calico.uctutors.generated.api.v1.LoginRequest getDefaultInstanceForType() {
-      return lol.calico.uctutors.generated.api.v1.LoginRequest.getDefaultInstance();
+    public lol.calico.uctutors.generated.api.v1.GetNonceResponse getDefaultInstanceForType() {
+      return lol.calico.uctutors.generated.api.v1.GetNonceResponse.getDefaultInstance();
     }
 
     @java.lang.Override
-    public lol.calico.uctutors.generated.api.v1.LoginRequest build() {
-      lol.calico.uctutors.generated.api.v1.LoginRequest result = buildPartial();
+    public lol.calico.uctutors.generated.api.v1.GetNonceResponse build() {
+      lol.calico.uctutors.generated.api.v1.GetNonceResponse result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -345,19 +294,16 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public lol.calico.uctutors.generated.api.v1.LoginRequest buildPartial() {
-      lol.calico.uctutors.generated.api.v1.LoginRequest result = new lol.calico.uctutors.generated.api.v1.LoginRequest(this);
+    public lol.calico.uctutors.generated.api.v1.GetNonceResponse buildPartial() {
+      lol.calico.uctutors.generated.api.v1.GetNonceResponse result = new lol.calico.uctutors.generated.api.v1.GetNonceResponse(this);
       if (bitField0_ != 0) { buildPartial0(result); }
       onBuilt();
       return result;
     }
 
-    private void buildPartial0(lol.calico.uctutors.generated.api.v1.LoginRequest result) {
+    private void buildPartial0(lol.calico.uctutors.generated.api.v1.GetNonceResponse result) {
       int from_bitField0_ = bitField0_;
       if (((from_bitField0_ & 0x00000001) != 0)) {
-        result.idToken_ = idToken_;
-      }
-      if (((from_bitField0_ & 0x00000002) != 0)) {
         result.nonce_ = nonce_;
       }
     }
@@ -396,24 +342,19 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof lol.calico.uctutors.generated.api.v1.LoginRequest) {
-        return mergeFrom((lol.calico.uctutors.generated.api.v1.LoginRequest)other);
+      if (other instanceof lol.calico.uctutors.generated.api.v1.GetNonceResponse) {
+        return mergeFrom((lol.calico.uctutors.generated.api.v1.GetNonceResponse)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(lol.calico.uctutors.generated.api.v1.LoginRequest other) {
-      if (other == lol.calico.uctutors.generated.api.v1.LoginRequest.getDefaultInstance()) return this;
-      if (!other.getIdToken().isEmpty()) {
-        idToken_ = other.idToken_;
-        bitField0_ |= 0x00000001;
-        onChanged();
-      }
+    public Builder mergeFrom(lol.calico.uctutors.generated.api.v1.GetNonceResponse other) {
+      if (other == lol.calico.uctutors.generated.api.v1.GetNonceResponse.getDefaultInstance()) return this;
       if (!other.getNonce().isEmpty()) {
         nonce_ = other.nonce_;
-        bitField0_ |= 0x00000002;
+        bitField0_ |= 0x00000001;
         onChanged();
       }
       this.mergeUnknownFields(other.getUnknownFields());
@@ -443,15 +384,10 @@ private static final long serialVersionUID = 0L;
               done = true;
               break;
             case 10: {
-              idToken_ = input.readStringRequireUtf8();
+              nonce_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000001;
               break;
             } // case 10
-            case 18: {
-              nonce_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00000002;
-              break;
-            } // case 18
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -469,81 +405,9 @@ private static final long serialVersionUID = 0L;
     }
     private int bitField0_;
 
-    private java.lang.Object idToken_ = "";
-    /**
-     * <code>string id_token = 1 [json_name = "idToken"];</code>
-     * @return The idToken.
-     */
-    public java.lang.String getIdToken() {
-      java.lang.Object ref = idToken_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        idToken_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string id_token = 1 [json_name = "idToken"];</code>
-     * @return The bytes for idToken.
-     */
-    public com.google.protobuf.ByteString
-        getIdTokenBytes() {
-      java.lang.Object ref = idToken_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        idToken_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string id_token = 1 [json_name = "idToken"];</code>
-     * @param value The idToken to set.
-     * @return This builder for chaining.
-     */
-    public Builder setIdToken(
-        java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
-      idToken_ = value;
-      bitField0_ |= 0x00000001;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string id_token = 1 [json_name = "idToken"];</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearIdToken() {
-      idToken_ = getDefaultInstance().getIdToken();
-      bitField0_ = (bitField0_ & ~0x00000001);
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string id_token = 1 [json_name = "idToken"];</code>
-     * @param value The bytes for idToken to set.
-     * @return This builder for chaining.
-     */
-    public Builder setIdTokenBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) { throw new NullPointerException(); }
-      checkByteStringIsUtf8(value);
-      idToken_ = value;
-      bitField0_ |= 0x00000001;
-      onChanged();
-      return this;
-    }
-
     private java.lang.Object nonce_ = "";
     /**
-     * <code>string nonce = 2 [json_name = "nonce"];</code>
+     * <code>string nonce = 1 [json_name = "nonce"];</code>
      * @return The nonce.
      */
     public java.lang.String getNonce() {
@@ -559,7 +423,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string nonce = 2 [json_name = "nonce"];</code>
+     * <code>string nonce = 1 [json_name = "nonce"];</code>
      * @return The bytes for nonce.
      */
     public com.google.protobuf.ByteString
@@ -576,7 +440,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string nonce = 2 [json_name = "nonce"];</code>
+     * <code>string nonce = 1 [json_name = "nonce"];</code>
      * @param value The nonce to set.
      * @return This builder for chaining.
      */
@@ -584,22 +448,22 @@ private static final long serialVersionUID = 0L;
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       nonce_ = value;
-      bitField0_ |= 0x00000002;
+      bitField0_ |= 0x00000001;
       onChanged();
       return this;
     }
     /**
-     * <code>string nonce = 2 [json_name = "nonce"];</code>
+     * <code>string nonce = 1 [json_name = "nonce"];</code>
      * @return This builder for chaining.
      */
     public Builder clearNonce() {
       nonce_ = getDefaultInstance().getNonce();
-      bitField0_ = (bitField0_ & ~0x00000002);
+      bitField0_ = (bitField0_ & ~0x00000001);
       onChanged();
       return this;
     }
     /**
-     * <code>string nonce = 2 [json_name = "nonce"];</code>
+     * <code>string nonce = 1 [json_name = "nonce"];</code>
      * @param value The bytes for nonce to set.
      * @return This builder for chaining.
      */
@@ -608,7 +472,7 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       nonce_ = value;
-      bitField0_ |= 0x00000002;
+      bitField0_ |= 0x00000001;
       onChanged();
       return this;
     }
@@ -625,23 +489,23 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:api.v1.LoginRequest)
+    // @@protoc_insertion_point(builder_scope:api.v1.GetNonceResponse)
   }
 
-  // @@protoc_insertion_point(class_scope:api.v1.LoginRequest)
-  private static final lol.calico.uctutors.generated.api.v1.LoginRequest DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:api.v1.GetNonceResponse)
+  private static final lol.calico.uctutors.generated.api.v1.GetNonceResponse DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new lol.calico.uctutors.generated.api.v1.LoginRequest();
+    DEFAULT_INSTANCE = new lol.calico.uctutors.generated.api.v1.GetNonceResponse();
   }
 
-  public static lol.calico.uctutors.generated.api.v1.LoginRequest getDefaultInstance() {
+  public static lol.calico.uctutors.generated.api.v1.GetNonceResponse getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<LoginRequest>
-      PARSER = new com.google.protobuf.AbstractParser<LoginRequest>() {
+  private static final com.google.protobuf.Parser<GetNonceResponse>
+      PARSER = new com.google.protobuf.AbstractParser<GetNonceResponse>() {
     @java.lang.Override
-    public LoginRequest parsePartialFrom(
+    public GetNonceResponse parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -660,17 +524,17 @@ private static final long serialVersionUID = 0L;
     }
   };
 
-  public static com.google.protobuf.Parser<LoginRequest> parser() {
+  public static com.google.protobuf.Parser<GetNonceResponse> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<LoginRequest> getParserForType() {
+  public com.google.protobuf.Parser<GetNonceResponse> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public lol.calico.uctutors.generated.api.v1.LoginRequest getDefaultInstanceForType() {
+  public lol.calico.uctutors.generated.api.v1.GetNonceResponse getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

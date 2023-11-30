@@ -1,14 +1,15 @@
 import {
   AuthServiceImplementation,
-  LoginRequest,
+  GetNonceResponse,
   LoginResponse,
   LoginStatus,
 } from '@/generated/api/v1/auth'
-import { DeepPartial } from '@/generated/api/v1/status'
 import { validateIdToken } from '@/google'
 import { logger, prisma } from '@/providers'
 import { AuthSession, Session, expires } from '@/session'
-import { CallContext, ServerError, Status } from 'nice-grpc'
+import { protoSchoolToPrismaSchool } from '@/util/school'
+import { webcrypto } from 'crypto'
+import { ServerError, Status } from 'nice-grpc'
 
 const imageExtensions: Record<string, string> = {
   'image/jpeg': 'jpg',
@@ -20,8 +21,26 @@ const imageExtensions: Record<string, string> = {
   'image/tiff': 'tiff',
 }
 
+async function generateNonce() {
+  const array = new Uint8Array(32)
+  webcrypto.getRandomValues(array)
+  return Buffer.from(array).toString('base64')
+}
+
 export const AuthService: AuthServiceImplementation = {
-  async login(request: LoginRequest, ctx: CallContext): Promise<DeepPartial<LoginResponse>> {
+  async getNonce(request): Promise<GetNonceResponse> {
+    const nonce = await prisma.nonce.create({
+      data: {
+        created: new Date(),
+        expires: new Date(Date.now() + 1000 * 60 * 5),
+        nonce: await generateNonce(),
+      },
+    })
+    return {
+      nonce: nonce.nonce,
+    }
+  },
+  async login(request, ctx): Promise<LoginResponse> {
     if (!request.idToken) {
       throw new ServerError(Status.INVALID_ARGUMENT, 'no id token provided')
     }
@@ -68,6 +87,56 @@ export const AuthService: AuthServiceImplementation = {
   },
 
   async register(request, context) {
-    return {}
+    const session = await Session.get<AuthSession>(context.metadata)
+    if (!session.ok) {
+      throw new ServerError(Status.UNAUTHENTICATED, '')
+    }
+
+    if (!request.data?.school) {
+      throw new ServerError(Status.INVALID_ARGUMENT, 'no school provided')
+    }
+
+    if (!request.data?.classOf) {
+      throw new ServerError(Status.INVALID_ARGUMENT, 'no class year provided')
+    }
+
+    const tokenInfo = session.value.tokenInfo
+
+    const user = await prisma.user.findUnique({ where: { id: tokenInfo.sub } })
+
+    if (user) {
+      throw new ServerError(Status.ALREADY_EXISTS, 'user already exists')
+    }
+
+    const photoData = await fetch(tokenInfo.picture)
+    const photoBuffer = Buffer.from(await photoData.arrayBuffer())
+    const photoType = photoData.headers.get('content-type')
+    if (!photoType) {
+      throw new ServerError(Status.INTERNAL, 'no photo content type')
+    }
+    const photoExtension = imageExtensions[photoType]
+    if (!photoExtension) {
+      throw new ServerError(Status.INTERNAL, 'invalid photo content type')
+    }
+
+    const newUser = await prisma.user.create({
+      data: {
+        id: tokenInfo.sub,
+        email: tokenInfo.email,
+        firstName: tokenInfo.given_name,
+        lastName: tokenInfo.family_name,
+        school: protoSchoolToPrismaSchool(request.data.school),
+        classOf: request.data.classOf,
+        campusAvailability: request.data.campusAvailability,
+        virtualAvailability: request.data.virtualAvailability,
+        avatar: {
+          create: {
+            name: 'avatar.' + photoExtension,
+            type: photoType,
+            data: photoBuffer,
+          },
+        },
+      },
+    })
   },
 }

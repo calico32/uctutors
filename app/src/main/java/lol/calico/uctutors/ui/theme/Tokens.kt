@@ -289,7 +289,7 @@ val md_sys_typescale_headline_large_letter_spacing = 0.sp
 
 /* headline _ medium */
 val md_sys_typescale_headline_medium_font_family = workSans
-val md_sys_typescale_headline_medium_font_weight = FontWeight.W400
+val md_sys_typescale_headline_medium_font_weight = FontWeight.W600
 val md_sys_typescale_headline_medium_font_size = 28.sp
 val md_sys_typescale_headline_medium_line_height = 36.sp
 val md_sys_typescale_headline_medium_letter_spacing = 0.sp
@@ -345,15 +345,15 @@ val md_sys_typescale_label_small_letter_spacing = 0.50.sp
 
 /* title _ large */
 val md_sys_typescale_title_large_font_family = workSans
-val md_sys_typescale_title_large_font_weight = FontWeight.W400
-val md_sys_typescale_title_large_font_size = 22.sp
-val md_sys_typescale_title_large_line_height = 28.sp
+val md_sys_typescale_title_large_font_weight = FontWeight.W500
+val md_sys_typescale_title_large_font_size = 32.sp
+val md_sys_typescale_title_large_line_height = 32.sp
 val md_sys_typescale_title_large_letter_spacing = 0.sp
 
 /* title _ medium */
 val md_sys_typescale_title_medium_font_family = workSans
-val md_sys_typescale_title_medium_font_weight = FontWeight.W500
-val md_sys_typescale_title_medium_font_size = 16.sp
+val md_sys_typescale_title_medium_font_weight = FontWeight.W600
+val md_sys_typescale_title_medium_font_size = 20.sp
 val md_sys_typescale_title_medium_line_height = 24.sp
 val md_sys_typescale_title_medium_letter_spacing = 0.15.sp
 

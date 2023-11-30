@@ -9,18 +9,6 @@ public interface RegisterDataOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string id_token = 1 [json_name = "idToken"];</code>
-   * @return The idToken.
-   */
-  java.lang.String getIdToken();
-  /**
-   * <code>string id_token = 1 [json_name = "idToken"];</code>
-   * @return The bytes for idToken.
-   */
-  com.google.protobuf.ByteString
-      getIdTokenBytes();
-
-  /**
    * <code>.api.v1.School school = 2 [json_name = "school"];</code>
    * @return The enum numeric value on the wire for school.
    */
