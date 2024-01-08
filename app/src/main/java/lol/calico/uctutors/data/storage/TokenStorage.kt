@@ -7,17 +7,18 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import dagger.hilt.android.qualifiers.ActivityContext
+import javax.inject.Inject
+import javax.inject.Singleton
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import lol.calico.uctutors.data.common.GrpcConnection
-import javax.inject.Inject
-import javax.inject.Singleton
 
 @Singleton
-
-class TokenStorage @Inject constructor(
+class TokenStorage
+@Inject
+constructor(
   @ActivityContext private val context: Context,
   private val grpc: GrpcConnection,
 ) {
@@ -38,19 +39,13 @@ class TokenStorage @Inject constructor(
     }
   }
 
-  val token: Flow<String?> = context.dataStore.data.map { preferences ->
-    preferences[TOKEN_KEY]
-  }
+  val token: Flow<String?> = context.dataStore.data.map { preferences -> preferences[TOKEN_KEY] }
 
   suspend fun clearToken() {
-    context.dataStore.edit { preferences ->
-      preferences.remove(TOKEN_KEY)
-    }
+    context.dataStore.edit { preferences -> preferences.remove(TOKEN_KEY) }
   }
 
   suspend fun saveToken(token: String) {
-    context.dataStore.edit { preferences ->
-      preferences[TOKEN_KEY] = token
-    }
+    context.dataStore.edit { preferences -> preferences[TOKEN_KEY] = token }
   }
 }

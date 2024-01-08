@@ -28,92 +28,24 @@ public object RegisterResponseKt {
     internal fun _build(): lol.calico.uctutors.generated.api.v1.RegisterResponse = _builder.build()
 
     /**
-     * `.api.v1.RegisterStatus status = 1 [json_name = "status"];`
+     * `string user_id = 1 [json_name = "userId"];`
      */
-    public var status: lol.calico.uctutors.generated.api.v1.RegisterStatus
-      @JvmName("getStatus")
-      get() = _builder.getStatus()
-      @JvmName("setStatus")
+    public var userId: kotlin.String
+      @JvmName("getUserId")
+      get() = _builder.getUserId()
+      @JvmName("setUserId")
       set(value) {
-        _builder.setStatus(value)
-      }
-    public var statusValue: kotlin.Int
-      @JvmName("getStatusValue")
-      get() = _builder.getStatusValue()
-      @JvmName("setStatusValue")
-      set(value) {
-        _builder.setStatusValue(value)
+        _builder.setUserId(value)
       }
     /**
-     * `.api.v1.RegisterStatus status = 1 [json_name = "status"];`
+     * `string user_id = 1 [json_name = "userId"];`
      */
-    public fun clearStatus() {
-      _builder.clearStatus()
-    }
-
-    /**
-     * `.api.v1.RegisterResponseSuccess success = 2 [json_name = "success"];`
-     */
-    public var success: lol.calico.uctutors.generated.api.v1.RegisterResponseSuccess
-      @JvmName("getSuccess")
-      get() = _builder.getSuccess()
-      @JvmName("setSuccess")
-      set(value) {
-        _builder.setSuccess(value)
-      }
-    /**
-     * `.api.v1.RegisterResponseSuccess success = 2 [json_name = "success"];`
-     */
-    public fun clearSuccess() {
-      _builder.clearSuccess()
-    }
-    /**
-     * `.api.v1.RegisterResponseSuccess success = 2 [json_name = "success"];`
-     * @return Whether the success field is set.
-     */
-    public fun hasSuccess(): kotlin.Boolean {
-      return _builder.hasSuccess()
-    }
-
-    /**
-     * `.api.v1.Error error = 3 [json_name = "error"];`
-     */
-    public var error: lol.calico.uctutors.generated.api.v1.Error
-      @JvmName("getError")
-      get() = _builder.getError()
-      @JvmName("setError")
-      set(value) {
-        _builder.setError(value)
-      }
-    /**
-     * `.api.v1.Error error = 3 [json_name = "error"];`
-     */
-    public fun clearError() {
-      _builder.clearError()
-    }
-    /**
-     * `.api.v1.Error error = 3 [json_name = "error"];`
-     * @return Whether the error field is set.
-     */
-    public fun hasError(): kotlin.Boolean {
-      return _builder.hasError()
-    }
-    public val detailsCase: lol.calico.uctutors.generated.api.v1.RegisterResponse.DetailsCase
-      @JvmName("getDetailsCase")
-      get() = _builder.getDetailsCase()
-
-    public fun clearDetails() {
-      _builder.clearDetails()
+    public fun clearUserId() {
+      _builder.clearUserId()
     }
   }
 }
 @kotlin.jvm.JvmSynthetic
 public inline fun lol.calico.uctutors.generated.api.v1.RegisterResponse.copy(block: `lol.calico.uctutors.generated.api.v1`.RegisterResponseKt.Dsl.() -> kotlin.Unit): lol.calico.uctutors.generated.api.v1.RegisterResponse =
   `lol.calico.uctutors.generated.api.v1`.RegisterResponseKt.Dsl._create(this.toBuilder()).apply { block() }._build()
-
-public val lol.calico.uctutors.generated.api.v1.RegisterResponseOrBuilder.successOrNull: lol.calico.uctutors.generated.api.v1.RegisterResponseSuccess?
-  get() = if (hasSuccess()) getSuccess() else null
-
-public val lol.calico.uctutors.generated.api.v1.RegisterResponseOrBuilder.errorOrNull: lol.calico.uctutors.generated.api.v1.Error?
-  get() = if (hasError()) getError() else null
 

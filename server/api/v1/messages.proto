@@ -1,0 +1,96 @@
+syntax = "proto3";
+package api.v1;
+
+import "google/protobuf/empty.proto";
+import "api/v1/user.proto";
+
+service MessageService {
+  rpc GetChannels(google.protobuf.Empty) returns (GetChannelsResponse);
+  rpc OpenChannel(OpenChannelRequest) returns (stream OpenChannelResponse);
+  rpc CloseChannel(CloseChannelRequest) returns (google.protobuf.Empty);
+  rpc SendMessage(SendMessageRequest) returns (SendMessageResponse);
+  rpc JoinChannel(JoinChannelRequest) returns (google.protobuf.Empty);
+  rpc LeaveChannel(LeaveChannelRequest) returns (google.protobuf.Empty);
+  rpc GetMessages(GetMessagesRequest) returns (GetMessagesResponse);
+  rpc AddChannelMember(AddChannelMemberRequest) returns (google.protobuf.Empty);
+}
+
+message GetChannelsResponse {
+  repeated MessageChannelStub channels = 1;
+}
+
+message MessageChannelStub {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  repeated string user_ids = 4;
+  string latest_message = 5;
+  string pinned_message_id = 6;
+}
+
+message Message {
+  string id = 1;
+  string channel_id = 2;
+  string user_id = 3;
+  string text = 4;
+  uint64 timestamp = 5;
+  UserStub user = 6;
+}
+
+message MessageList {
+  uint32 count = 1;
+  uint64 next_page = 2;
+  repeated Message messages = 3;
+}
+
+message ChannelMemberUpdate {
+  string channel_id = 1;
+  repeated UserStub members = 2;
+}
+
+message OpenChannelRequest {
+  string channel_id = 1;
+}
+
+message CloseChannelRequest {
+  string channel_id = 1;
+}
+
+message OpenChannelResponse {
+  oneof event {
+    MessageList message_list = 1;
+    Message message = 2;
+    ChannelMemberUpdate members = 3;
+  }
+}
+
+message SendMessageRequest {
+  string channel_id = 1;
+  string text = 2;
+}
+
+message SendMessageResponse {
+  Message message = 1;
+}
+
+message JoinChannelRequest {
+  string channel_id = 1;
+}
+
+message LeaveChannelRequest {
+  string channel_id = 1;
+}
+
+message GetMessagesRequest {
+  string channel_id = 1;
+  uint64 page = 2;
+}
+
+message GetMessagesResponse {
+  MessageList message_list = 1;
+}
+
+message AddChannelMemberRequest {
+  string channel_id = 1;
+  string user_id = 2;
+}

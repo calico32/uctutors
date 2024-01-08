@@ -55,11 +55,6 @@ public final class AuthProto {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_api_v1_RegisterResponse_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_api_v1_RegisterResponseSuccess_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_api_v1_RegisterResponseSuccess_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -91,27 +86,20 @@ public final class AuthProto {
       "mpusAvailabilityR\022campusAvailability\022N\n\024" +
       "virtual_availability\030\006 \003(\0132\033.api.v1.Virt" +
       "ualAvailabilityR\023virtualAvailability\022\026\n\006" +
-      "topics\030\007 \003(\tR\006topics\"\261\001\n\020RegisterRespons" +
-      "e\022.\n\006status\030\001 \001(\0162\026.api.v1.RegisterStatu" +
-      "sR\006status\022;\n\007success\030\002 \001(\0132\037.api.v1.Regi" +
-      "sterResponseSuccessH\000R\007success\022%\n\005error\030" +
-      "\003 \001(\0132\r.api.v1.ErrorH\000R\005errorB\t\n\007details" +
-      "\"2\n\027RegisterResponseSuccess\022\027\n\007user_id\030\001" +
-      " \001(\tR\006userId*f\n\013LoginStatus\022\034\n\030LOGIN_STA" +
-      "TUS_UNSPECIFIED\020\000\022\031\n\025LOGIN_STATUS_NEW_US" +
-      "ER\020\001\022\036\n\032LOGIN_STATUS_EXISTING_USER\020\002*i\n\016" +
-      "RegisterStatus\022\037\n\033REGISTER_STATUS_UNSPEC" +
-      "IFIED\020\000\022\033\n\027REGISTER_STATUS_SUCCESS\020\001\022\031\n\025" +
-      "REGISTER_STATUS_ERROR\020\0022\202\002\n\013AuthService\022" +
-      ">\n\010GetNonce\022\026.google.protobuf.Empty\032\030.ap" +
-      "i.v1.GetNonceResponse\"\000\0226\n\005Login\022\024.api.v" +
-      "1.LoginRequest\032\025.api.v1.LoginResponse\"\000\022" +
-      ":\n\006Logout\022\026.google.protobuf.Empty\032\026.goog" +
-      "le.protobuf.Empty\"\000\022?\n\010Register\022\027.api.v1" +
-      ".RegisterRequest\032\030.api.v1.RegisterRespon" +
-      "se\"\000Bj\n$lol.calico.uctutors.generated.ap" +
-      "i.v1B\tAuthProtoP\001\242\002\003AXX\252\002\006Api.V1\312\002\006Api\\V" +
-      "1\342\002\022Api\\V1\\GPBMetadata\352\002\007Api::V1b\006proto3"
+      "topics\030\007 \003(\tR\006topics\"+\n\020RegisterResponse" +
+      "\022\027\n\007user_id\030\001 \001(\tR\006userId*f\n\013LoginStatus" +
+      "\022\034\n\030LOGIN_STATUS_UNSPECIFIED\020\000\022\031\n\025LOGIN_" +
+      "STATUS_NEW_USER\020\001\022\036\n\032LOGIN_STATUS_EXISTI" +
+      "NG_USER\020\0022\202\002\n\013AuthService\022>\n\010GetNonce\022\026." +
+      "google.protobuf.Empty\032\030.api.v1.GetNonceR" +
+      "esponse\"\000\0226\n\005Login\022\024.api.v1.LoginRequest" +
+      "\032\025.api.v1.LoginResponse\"\000\022:\n\006Logout\022\026.go" +
+      "ogle.protobuf.Empty\032\026.google.protobuf.Em" +
+      "pty\"\000\022?\n\010Register\022\027.api.v1.RegisterReque" +
+      "st\032\030.api.v1.RegisterResponse\"\000Bj\n$lol.ca" +
+      "lico.uctutors.generated.api.v1B\tAuthProt" +
+      "oP\001\242\002\003AXX\252\002\006Api.V1\312\002\006Api\\V1\342\002\022Api\\V1\\GPB" +
+      "Metadata\352\002\007Api::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -167,12 +155,6 @@ public final class AuthProto {
     internal_static_api_v1_RegisterResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_api_v1_RegisterResponse_descriptor,
-        new java.lang.String[] { "Status", "Success", "Error", "Details", });
-    internal_static_api_v1_RegisterResponseSuccess_descriptor =
-      getDescriptor().getMessageTypes().get(8);
-    internal_static_api_v1_RegisterResponseSuccess_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_api_v1_RegisterResponseSuccess_descriptor,
         new java.lang.String[] { "UserId", });
     com.google.protobuf.EmptyProto.getDescriptor();
     lol.calico.uctutors.generated.api.v1.ErrorProto.getDescriptor();

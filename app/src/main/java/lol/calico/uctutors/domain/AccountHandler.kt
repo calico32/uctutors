@@ -18,6 +18,9 @@ import com.google.android.libraries.identity.googleid.GetSignInWithGoogleOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.protobuf.empty
 import dagger.hilt.android.qualifiers.ActivityContext
+import javax.inject.Inject
+import javax.inject.Singleton
+import kotlin.coroutines.coroutineContext
 import lol.calico.uctutors.BuildConfig
 import lol.calico.uctutors.data.common.GrpcConnection
 import lol.calico.uctutors.data.storage.TokenStorage
@@ -26,12 +29,11 @@ import lol.calico.uctutors.generated.api.v1.RegisterData
 import lol.calico.uctutors.generated.api.v1.loginRequest
 import lol.calico.uctutors.generated.api.v1.registerRequest
 import lol.calico.uctutors.util.expect
-import javax.inject.Inject
-import javax.inject.Singleton
-import kotlin.coroutines.coroutineContext
 
 @Singleton
-class AccountHandler @Inject constructor(
+class AccountHandler
+@Inject
+constructor(
   @ActivityContext private val context: Context,
   private val grpc: GrpcConnection,
   private val tokenStorage: TokenStorage,
@@ -39,6 +41,7 @@ class AccountHandler @Inject constructor(
   companion object {
     const val TAG = "AccountHandler"
     const val NO_ACCOUNTS_AVAILABLE = "no_accounts_available"
+    const val NO_MATCHING_CLIENT_ID = "no_matching_client_id"
   }
 
   private val credentialManager = CredentialManager.create(context)
@@ -46,19 +49,19 @@ class AccountHandler @Inject constructor(
   suspend fun tryImmediateSignIn(): Result<LoginResponse?, Unit> = binding {
     val nonce = generateNonce()
 
-    val googleIdOption = GetGoogleIdOption.Builder().setFilterByAuthorizedAccounts(true)
-      .setServerClientId(BuildConfig.WEB_CLIENT_ID).setAutoSelectEnabled(true).setNonce(nonce)
-      .build()
+    val googleIdOption =
+      GetGoogleIdOption.Builder()
+        .setFilterByAuthorizedAccounts(true)
+        .setServerClientId(BuildConfig.WEB_CLIENT_ID)
+        .setAutoSelectEnabled(true)
+        .setNonce(nonce)
+        .build()
 
-    val getCredentialRequest = GetCredentialRequest(
-      listOf(googleIdOption), preferImmediatelyAvailableCredentials = true
-    )
+    val getCredentialRequest =
+      GetCredentialRequest(listOf(googleIdOption), preferImmediatelyAvailableCredentials = true)
 
     val result = expect {
-      credentialManager.getCredential(
-        context = context,
-        request = getCredentialRequest
-      )
+      credentialManager.getCredential(context = context, request = getCredentialRequest)
     }
 
     val loginResult = handleSignIn(result)
@@ -71,71 +74,85 @@ class AccountHandler @Inject constructor(
 
     Log.d(TAG, "nonce: $nonce")
 
-    var googleIdOption = GetGoogleIdOption.Builder()
-      .setFilterByAuthorizedAccounts(true)
-      .setServerClientId(BuildConfig.WEB_CLIENT_ID)
-      .setAutoSelectEnabled(false)
-      .setNonce(nonce)
-      .build()
+    val googleIdOption =
+      GetGoogleIdOption.Builder()
+        .setFilterByAuthorizedAccounts(true)
+        .setServerClientId(BuildConfig.WEB_CLIENT_ID)
+        .setAutoSelectEnabled(true)
+        .setNonce(nonce)
+        .build()
 
-
-    var getCredentialRequest = GetCredentialRequest.Builder()
-      .addCredentialOption(googleIdOption)
-      .build()
+    var getCredentialRequest =
+      GetCredentialRequest.Builder().addCredentialOption(googleIdOption).build()
 
     var result = getCredential(getCredentialRequest)
 
     if (result is Err && result.error == NO_ACCOUNTS_AVAILABLE) {
       Log.d(TAG, "No accounts available, trying again with all accounts")
 
-      val googleSignInOption = GetSignInWithGoogleOption.Builder(BuildConfig.WEB_CLIENT_ID)
-        .setHostedDomainFilter("ucvts.org")
-        .setNonce(nonce)
-        .build()
+      val googleSignInOption =
+        GetSignInWithGoogleOption.Builder(BuildConfig.WEB_CLIENT_ID)
+          .setHostedDomainFilter("ucvts.org")
+          .setNonce(nonce)
+          .build()
 
-
-      getCredentialRequest = GetCredentialRequest.Builder()
-        .addCredentialOption(googleSignInOption)
-        .build()
+      getCredentialRequest =
+        GetCredentialRequest.Builder().addCredentialOption(googleSignInOption).build()
 
       result = getCredential(getCredentialRequest)
+
+      if (result is Err && result.error == NO_MATCHING_CLIENT_ID) {
+        Log.d(
+          TAG,
+          "Configuration error: app's signing key is not configured in Google Play Console!"
+        )
+
+        getCredentialRequest =
+          GetCredentialRequest.Builder().addCredentialOption(googleIdOption).build()
+
+        result = getCredential(getCredentialRequest)
+      }
     }
 
     return@binding handleSignIn(result.bind()).bind()
   }
 
-  private suspend fun getCredential(getCredentialRequest: GetCredentialRequest): Result<GetCredentialResponse, String> =
-    binding {
-      expect({
-        when (it) {
-          is GetCredentialCustomException -> {
+  private suspend fun getCredential(
+    getCredentialRequest: GetCredentialRequest
+  ): Result<GetCredentialResponse, String> = binding {
+    expect({
+      when (it) {
+        is GetCredentialCustomException -> {
+          if (
+            it.type.lowercase() == "google password manager" &&
+              it.message?.lowercase() == "account authorization failed"
+          ) {
+            NO_MATCHING_CLIENT_ID
+          } else {
             "Getting credential failed: ${it.type} ${it.message}"
           }
-
-          is NoCredentialException -> {
-            NO_ACCOUNTS_AVAILABLE
-          }
-
-          else -> {
-            "Getting credential failed: ${it.javaClass.name} ${it.message}"
-          }
         }
-      }) {
-        credentialManager.getCredential(
-          context = context, request = getCredentialRequest
-        )
+        is NoCredentialException -> {
+          NO_ACCOUNTS_AVAILABLE
+        }
+        else -> {
+          "Getting credential failed: ${it.javaClass.name} ${it.message}"
+        }
       }
+    }) {
+      credentialManager.getCredential(context = context, request = getCredentialRequest)
     }
+  }
 
   private suspend fun handleSignIn(
     result: GetCredentialResponse,
   ): Result<LoginResponse, String> = binding {
     val credential = result.credential
 
-    if (credential !is CustomCredential || (
-        credential.type != GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_SIWG_CREDENTIAL
-          && credential.type != GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL
-        )
+    if (
+      credential !is CustomCredential ||
+        (credential.type != GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_SIWG_CREDENTIAL &&
+          credential.type != GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL)
     ) {
       Log.e(TAG, "Unexpected type of credential")
       Err("Unexpected type of credential").bind<Unit>()
@@ -148,11 +165,10 @@ class AccountHandler @Inject constructor(
 
     Log.d(TAG, "googleIdTokenCredential: $googleIdTokenCredential")
 
-    val response = expect({ "Sign in failed: ${it.message}" }) {
-      grpc.auth.login(loginRequest {
-        idToken = googleIdTokenCredential.idToken
-      })
-    }
+    val response =
+      expect({ "Sign in failed: ${it.message}" }) {
+        grpc.auth.login(loginRequest { idToken = googleIdTokenCredential.idToken })
+      }
 
     Log.d(TAG, "response from server:$response")
 
@@ -190,11 +206,10 @@ class AccountHandler @Inject constructor(
   }
 
   suspend fun register(registerData: RegisterData): Result<Unit, String> = binding {
-    val response = expect({ "Registration failed: ${it.message}" }) {
-      grpc.auth.register(registerRequest {
-        data = registerData
-      })
-    }
+    val response =
+      expect({ "Registration failed: ${it.message}" }) {
+        grpc.auth.register(registerRequest { data = registerData })
+      }
 
     Log.d(TAG, "response from server:$response")
 

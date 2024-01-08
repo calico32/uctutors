@@ -1,12 +1,13 @@
+import env from '@/env'
 import { PrismaClient } from '@prisma/client'
 import { withAccelerate } from '@prisma/extension-accelerate'
 import pino from 'pino'
 import { inspect } from 'util'
 
-export const prisma = new PrismaClient().$extends(withAccelerate())
+export const prisma = new PrismaClient().$extends(withAccelerate()) as unknown as PrismaClient
 
 export const logger: Logger = pino({
-  level: process.env.LOG_LEVEL || 'debug',
+  level: env.LOG_LEVEL || 'debug',
   transport: {
     target: 'pino-pretty',
     options: {

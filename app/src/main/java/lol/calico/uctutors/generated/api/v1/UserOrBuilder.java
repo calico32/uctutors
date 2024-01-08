@@ -140,6 +140,18 @@ public interface UserOrBuilder extends
       getBannerIdBytes();
 
   /**
+   * <code>string picture_url = 18 [json_name = "pictureUrl"];</code>
+   * @return The pictureUrl.
+   */
+  java.lang.String getPictureUrl();
+  /**
+   * <code>string picture_url = 18 [json_name = "pictureUrl"];</code>
+   * @return The bytes for pictureUrl.
+   */
+  com.google.protobuf.ByteString
+      getPictureUrlBytes();
+
+  /**
    * <code>repeated .api.v1.CampusAvailability campus_availability = 12 [json_name = "campusAvailability"];</code>
    */
   java.util.List<lol.calico.uctutors.generated.api.v1.CampusAvailability> 

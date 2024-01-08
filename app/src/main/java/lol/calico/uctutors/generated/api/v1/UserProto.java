@@ -21,6 +21,11 @@ public final class UserProto {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_api_v1_User_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_api_v1_UserStub_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_api_v1_UserStub_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_api_v1_CampusAvailability_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -35,6 +40,16 @@ public final class UserProto {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_api_v1_Experience_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_api_v1_GetUserRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_api_v1_GetUserRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_api_v1_GetUserResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_api_v1_GetUserResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -46,7 +61,7 @@ public final class UserProto {
     java.lang.String[] descriptorData = {
       "\n\021api/v1/user.proto\022\006api.v1\032\037google/prot" +
       "obuf/timestamp.proto\032\033google/type/dayofw" +
-      "eek.proto\032\032google/type/interval.proto\"\216\005" +
+      "eek.proto\032\032google/type/interval.proto\"\257\005" +
       "\n\004User\022\016\n\002id\030\001 \001(\tR\002id\0222\n\006joined\030\002 \001(\0132\032" +
       ".google.protobuf.TimestampR\006joined\0224\n\007up" +
       "dated\030\003 \001(\0132\032.google.protobuf.TimestampR" +
@@ -55,31 +70,46 @@ public final class UserProto {
       "R\010lastName\022&\n\006school\030\007 \001(\0162\016.api.v1.Scho" +
       "olR\006school\022\031\n\010class_of\030\010 \001(\rR\007classOf\022\020\n" +
       "\003bio\030\t \001(\tR\003bio\022\033\n\tavatar_id\030\n \001(\tR\010avat" +
-      "arId\022\033\n\tbanner_id\030\013 \001(\tR\010bannerId\022K\n\023cam" +
-      "pus_availability\030\014 \003(\0132\032.api.v1.CampusAv" +
-      "ailabilityR\022campusAvailability\022N\n\024virtua" +
-      "l_availability\030\r \003(\0132\033.api.v1.VirtualAva" +
-      "ilabilityR\023virtualAvailability\022\026\n\006topics" +
-      "\030\016 \003(\tR\006topics\022\037\n\013tutor_score\030\017 \001(\rR\ntut" +
-      "orScore\022\037\n\013tutee_score\030\020 \001(\rR\ntuteeScore" +
-      "\0224\n\013experiences\030\021 \003(\0132\022.api.v1.Experienc" +
-      "eR\013experiences\"4\n\022CampusAvailability\022\016\n\002" +
-      "p5\030\001 \001(\010R\002p5\022\016\n\002p6\030\002 \001(\010R\002p6\"r\n\023VirtualA" +
-      "vailability\022(\n\003day\030\001 \001(\0162\026.google.type.D" +
-      "ayOfWeekR\003day\0221\n\010interval\030\002 \001(\0132\025.google" +
-      ".type.IntervalR\010interval\"\363\001\n\nExperience\022" +
-      "\016\n\002id\030\001 \001(\tR\002id\0224\n\007created\030\002 \001(\0132\032.googl" +
-      "e.protobuf.TimestampR\007created\0224\n\007updated" +
-      "\030\003 \001(\0132\032.google.protobuf.TimestampR\007upda" +
-      "ted\022\024\n\005title\030\004 \001(\tR\005title\022 \n\013description" +
-      "\030\005 \001(\tR\013description\022\026\n\006skills\030\006 \003(\tR\006ski" +
-      "lls\022\031\n\010image_id\030\007 \001(\tR\007imageId*t\n\006School" +
-      "\022\026\n\022SCHOOL_UNSPECIFIED\020\000\022\017\n\013SCHOOL_AAHS\020" +
-      "\001\022\016\n\nSCHOOL_AIT\020\002\022\016\n\nSCHOOL_APA\020\003\022\016\n\nSCH" +
-      "OOL_MHS\020\004\022\021\n\rSCHOOL_UCTECH\020\0052\r\n\013UserServ" +
-      "iceBj\n$lol.calico.uctutors.generated.api" +
-      ".v1B\tUserProtoP\001\242\002\003AXX\252\002\006Api.V1\312\002\006Api\\V1" +
-      "\342\002\022Api\\V1\\GPBMetadata\352\002\007Api::V1b\006proto3"
+      "arId\022\033\n\tbanner_id\030\013 \001(\tR\010bannerId\022\037\n\013pic" +
+      "ture_url\030\022 \001(\tR\npictureUrl\022K\n\023campus_ava" +
+      "ilability\030\014 \003(\0132\032.api.v1.CampusAvailabil" +
+      "ityR\022campusAvailability\022N\n\024virtual_avail" +
+      "ability\030\r \003(\0132\033.api.v1.VirtualAvailabili" +
+      "tyR\023virtualAvailability\022\026\n\006topics\030\016 \003(\tR" +
+      "\006topics\022\037\n\013tutor_score\030\017 \001(\rR\ntutorScore" +
+      "\022\037\n\013tutee_score\030\020 \001(\rR\ntuteeScore\0224\n\013exp" +
+      "eriences\030\021 \003(\0132\022.api.v1.ExperienceR\013expe" +
+      "riences\"\221\003\n\010UserStub\022\016\n\002id\030\001 \001(\tR\002id\0222\n\006" +
+      "joined\030\002 \001(\0132\032.google.protobuf.Timestamp" +
+      "R\006joined\0224\n\007updated\030\003 \001(\0132\032.google.proto" +
+      "buf.TimestampR\007updated\022\035\n\nfirst_name\030\004 \001" +
+      "(\tR\tfirstName\022\033\n\tlast_name\030\005 \001(\tR\010lastNa" +
+      "me\022&\n\006school\030\006 \001(\0162\016.api.v1.SchoolR\006scho" +
+      "ol\022\031\n\010class_of\030\007 \001(\rR\007classOf\022\020\n\003bio\030\010 \001" +
+      "(\tR\003bio\022\033\n\tavatar_id\030\t \001(\tR\010avatarId\022\033\n\t" +
+      "banner_id\030\n \001(\tR\010bannerId\022\037\n\013tutor_score" +
+      "\030\016 \001(\rR\ntutorScore\022\037\n\013tutee_score\030\017 \001(\rR" +
+      "\ntuteeScore\"4\n\022CampusAvailability\022\016\n\002p5\030" +
+      "\001 \001(\010R\002p5\022\016\n\002p6\030\002 \001(\010R\002p6\"r\n\023VirtualAvai" +
+      "lability\022(\n\003day\030\001 \001(\0162\026.google.type.DayO" +
+      "fWeekR\003day\0221\n\010interval\030\002 \001(\0132\025.google.ty" +
+      "pe.IntervalR\010interval\"\363\001\n\nExperience\022\016\n\002" +
+      "id\030\001 \001(\tR\002id\0224\n\007created\030\002 \001(\0132\032.google.p" +
+      "rotobuf.TimestampR\007created\0224\n\007updated\030\003 " +
+      "\001(\0132\032.google.protobuf.TimestampR\007updated" +
+      "\022\024\n\005title\030\004 \001(\tR\005title\022 \n\013description\030\005 " +
+      "\001(\tR\013description\022\026\n\006skills\030\006 \003(\tR\006skills" +
+      "\022\031\n\010image_id\030\007 \001(\tR\007imageId\" \n\016GetUserRe" +
+      "quest\022\016\n\002id\030\001 \001(\tR\002id\"3\n\017GetUserResponse" +
+      "\022 \n\004user\030\001 \001(\0132\014.api.v1.UserR\004user*t\n\006Sc" +
+      "hool\022\026\n\022SCHOOL_UNSPECIFIED\020\000\022\017\n\013SCHOOL_A" +
+      "AHS\020\001\022\016\n\nSCHOOL_AIT\020\002\022\016\n\nSCHOOL_APA\020\003\022\016\n" +
+      "\nSCHOOL_MHS\020\004\022\021\n\rSCHOOL_UCTECH\020\0052I\n\013User" +
+      "Service\022:\n\007GetUser\022\026.api.v1.GetUserReque" +
+      "st\032\027.api.v1.GetUserResponseBj\n$lol.calic" +
+      "o.uctutors.generated.api.v1B\tUserProtoP\001" +
+      "\242\002\003AXX\252\002\006Api.V1\312\002\006Api\\V1\342\002\022Api\\V1\\GPBMet" +
+      "adata\352\002\007Api::V1b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -93,25 +123,43 @@ public final class UserProto {
     internal_static_api_v1_User_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_api_v1_User_descriptor,
-        new java.lang.String[] { "Id", "Joined", "Updated", "Email", "FirstName", "LastName", "School", "ClassOf", "Bio", "AvatarId", "BannerId", "CampusAvailability", "VirtualAvailability", "Topics", "TutorScore", "TuteeScore", "Experiences", });
-    internal_static_api_v1_CampusAvailability_descriptor =
+        new java.lang.String[] { "Id", "Joined", "Updated", "Email", "FirstName", "LastName", "School", "ClassOf", "Bio", "AvatarId", "BannerId", "PictureUrl", "CampusAvailability", "VirtualAvailability", "Topics", "TutorScore", "TuteeScore", "Experiences", });
+    internal_static_api_v1_UserStub_descriptor =
       getDescriptor().getMessageTypes().get(1);
+    internal_static_api_v1_UserStub_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_api_v1_UserStub_descriptor,
+        new java.lang.String[] { "Id", "Joined", "Updated", "FirstName", "LastName", "School", "ClassOf", "Bio", "AvatarId", "BannerId", "TutorScore", "TuteeScore", });
+    internal_static_api_v1_CampusAvailability_descriptor =
+      getDescriptor().getMessageTypes().get(2);
     internal_static_api_v1_CampusAvailability_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_api_v1_CampusAvailability_descriptor,
         new java.lang.String[] { "P5", "P6", });
     internal_static_api_v1_VirtualAvailability_descriptor =
-      getDescriptor().getMessageTypes().get(2);
+      getDescriptor().getMessageTypes().get(3);
     internal_static_api_v1_VirtualAvailability_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_api_v1_VirtualAvailability_descriptor,
         new java.lang.String[] { "Day", "Interval", });
     internal_static_api_v1_Experience_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+      getDescriptor().getMessageTypes().get(4);
     internal_static_api_v1_Experience_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_api_v1_Experience_descriptor,
         new java.lang.String[] { "Id", "Created", "Updated", "Title", "Description", "Skills", "ImageId", });
+    internal_static_api_v1_GetUserRequest_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_api_v1_GetUserRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_api_v1_GetUserRequest_descriptor,
+        new java.lang.String[] { "Id", });
+    internal_static_api_v1_GetUserResponse_descriptor =
+      getDescriptor().getMessageTypes().get(6);
+    internal_static_api_v1_GetUserResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_api_v1_GetUserResponse_descriptor,
+        new java.lang.String[] { "User", });
     com.google.protobuf.TimestampProto.getDescriptor();
     com.google.type.DayOfWeekProto.getDescriptor();
     com.google.type.IntervalProto.getDescriptor();

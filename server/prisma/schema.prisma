@@ -44,7 +44,10 @@ model User {
 
   experiences Experience[]
 
-  credential Credential?
+  credential       Credential?
+  MessageChannel   MessageChannel? @relation(fields: [messageChannelId], references: [id])
+  messageChannelId String?
+  Message          Message[]
 }
 
 model Credential {
@@ -150,4 +153,36 @@ enum Attendance {
   Excused
   NoShow
   Canceled
+}
+
+model MessageChannel {
+  id      String   @id
+  created DateTime @default(now())
+  updated DateTime @updatedAt
+
+  name        String?
+  description String?
+  public      Boolean @default(true)
+
+  messages Message[]
+  users    User[]
+
+  pins Message[] @relation("pinned")
+}
+
+model Message {
+  id      String   @id @default(uuid())
+  created DateTime @default(now())
+  updated DateTime @updatedAt
+
+  channel   MessageChannel @relation(fields: [channelId], references: [id])
+  channelId String
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  content String
+
+  pinnedIn   MessageChannel? @relation("pinned", fields: [pinnedInId], references: [id])
+  pinnedInId String?
 }

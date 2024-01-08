@@ -17,7 +17,7 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private RegisterResponse() {
-    status_ = 0;
+    userId_ = "";
   }
 
   @java.lang.Override
@@ -40,126 +40,43 @@ private static final long serialVersionUID = 0L;
             lol.calico.uctutors.generated.api.v1.RegisterResponse.class, lol.calico.uctutors.generated.api.v1.RegisterResponse.Builder.class);
   }
 
-  private int detailsCase_ = 0;
+  public static final int USER_ID_FIELD_NUMBER = 1;
   @SuppressWarnings("serial")
-  private java.lang.Object details_;
-  public enum DetailsCase
-      implements com.google.protobuf.Internal.EnumLite,
-          com.google.protobuf.AbstractMessage.InternalOneOfEnum {
-    SUCCESS(2),
-    ERROR(3),
-    DETAILS_NOT_SET(0);
-    private final int value;
-    private DetailsCase(int value) {
-      this.value = value;
-    }
-    /**
-     * @param value The number of the enum to look for.
-     * @return The enum associated with the given number.
-     * @deprecated Use {@link #forNumber(int)} instead.
-     */
-    @java.lang.Deprecated
-    public static DetailsCase valueOf(int value) {
-      return forNumber(value);
-    }
-
-    public static DetailsCase forNumber(int value) {
-      switch (value) {
-        case 2: return SUCCESS;
-        case 3: return ERROR;
-        case 0: return DETAILS_NOT_SET;
-        default: return null;
-      }
-    }
-    public int getNumber() {
-      return this.value;
-    }
-  };
-
-  public DetailsCase
-  getDetailsCase() {
-    return DetailsCase.forNumber(
-        detailsCase_);
-  }
-
-  public static final int STATUS_FIELD_NUMBER = 1;
-  private int status_ = 0;
+  private volatile java.lang.Object userId_ = "";
   /**
-   * <code>.api.v1.RegisterStatus status = 1 [json_name = "status"];</code>
-   * @return The enum numeric value on the wire for status.
-   */
-  @java.lang.Override public int getStatusValue() {
-    return status_;
-  }
-  /**
-   * <code>.api.v1.RegisterStatus status = 1 [json_name = "status"];</code>
-   * @return The status.
-   */
-  @java.lang.Override public lol.calico.uctutors.generated.api.v1.RegisterStatus getStatus() {
-    lol.calico.uctutors.generated.api.v1.RegisterStatus result = lol.calico.uctutors.generated.api.v1.RegisterStatus.forNumber(status_);
-    return result == null ? lol.calico.uctutors.generated.api.v1.RegisterStatus.UNRECOGNIZED : result;
-  }
-
-  public static final int SUCCESS_FIELD_NUMBER = 2;
-  /**
-   * <code>.api.v1.RegisterResponseSuccess success = 2 [json_name = "success"];</code>
-   * @return Whether the success field is set.
+   * <code>string user_id = 1 [json_name = "userId"];</code>
+   * @return The userId.
    */
   @java.lang.Override
-  public boolean hasSuccess() {
-    return detailsCase_ == 2;
-  }
-  /**
-   * <code>.api.v1.RegisterResponseSuccess success = 2 [json_name = "success"];</code>
-   * @return The success.
-   */
-  @java.lang.Override
-  public lol.calico.uctutors.generated.api.v1.RegisterResponseSuccess getSuccess() {
-    if (detailsCase_ == 2) {
-       return (lol.calico.uctutors.generated.api.v1.RegisterResponseSuccess) details_;
+  public java.lang.String getUserId() {
+    java.lang.Object ref = userId_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      userId_ = s;
+      return s;
     }
-    return lol.calico.uctutors.generated.api.v1.RegisterResponseSuccess.getDefaultInstance();
   }
   /**
-   * <code>.api.v1.RegisterResponseSuccess success = 2 [json_name = "success"];</code>
+   * <code>string user_id = 1 [json_name = "userId"];</code>
+   * @return The bytes for userId.
    */
   @java.lang.Override
-  public lol.calico.uctutors.generated.api.v1.RegisterResponseSuccessOrBuilder getSuccessOrBuilder() {
-    if (detailsCase_ == 2) {
-       return (lol.calico.uctutors.generated.api.v1.RegisterResponseSuccess) details_;
+  public com.google.protobuf.ByteString
+      getUserIdBytes() {
+    java.lang.Object ref = userId_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      userId_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
     }
-    return lol.calico.uctutors.generated.api.v1.RegisterResponseSuccess.getDefaultInstance();
-  }
-
-  public static final int ERROR_FIELD_NUMBER = 3;
-  /**
-   * <code>.api.v1.Error error = 3 [json_name = "error"];</code>
-   * @return Whether the error field is set.
-   */
-  @java.lang.Override
-  public boolean hasError() {
-    return detailsCase_ == 3;
-  }
-  /**
-   * <code>.api.v1.Error error = 3 [json_name = "error"];</code>
-   * @return The error.
-   */
-  @java.lang.Override
-  public lol.calico.uctutors.generated.api.v1.Error getError() {
-    if (detailsCase_ == 3) {
-       return (lol.calico.uctutors.generated.api.v1.Error) details_;
-    }
-    return lol.calico.uctutors.generated.api.v1.Error.getDefaultInstance();
-  }
-  /**
-   * <code>.api.v1.Error error = 3 [json_name = "error"];</code>
-   */
-  @java.lang.Override
-  public lol.calico.uctutors.generated.api.v1.ErrorOrBuilder getErrorOrBuilder() {
-    if (detailsCase_ == 3) {
-       return (lol.calico.uctutors.generated.api.v1.Error) details_;
-    }
-    return lol.calico.uctutors.generated.api.v1.Error.getDefaultInstance();
   }
 
   private byte memoizedIsInitialized = -1;
@@ -176,14 +93,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (status_ != lol.calico.uctutors.generated.api.v1.RegisterStatus.REGISTER_STATUS_UNSPECIFIED.getNumber()) {
-      output.writeEnum(1, status_);
-    }
-    if (detailsCase_ == 2) {
-      output.writeMessage(2, (lol.calico.uctutors.generated.api.v1.RegisterResponseSuccess) details_);
-    }
-    if (detailsCase_ == 3) {
-      output.writeMessage(3, (lol.calico.uctutors.generated.api.v1.Error) details_);
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(userId_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, userId_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -194,17 +105,8 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (status_ != lol.calico.uctutors.generated.api.v1.RegisterStatus.REGISTER_STATUS_UNSPECIFIED.getNumber()) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeEnumSize(1, status_);
-    }
-    if (detailsCase_ == 2) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(2, (lol.calico.uctutors.generated.api.v1.RegisterResponseSuccess) details_);
-    }
-    if (detailsCase_ == 3) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(3, (lol.calico.uctutors.generated.api.v1.Error) details_);
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(userId_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, userId_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -221,20 +123,8 @@ private static final long serialVersionUID = 0L;
     }
     lol.calico.uctutors.generated.api.v1.RegisterResponse other = (lol.calico.uctutors.generated.api.v1.RegisterResponse) obj;
 
-    if (status_ != other.status_) return false;
-    if (!getDetailsCase().equals(other.getDetailsCase())) return false;
-    switch (detailsCase_) {
-      case 2:
-        if (!getSuccess()
-            .equals(other.getSuccess())) return false;
-        break;
-      case 3:
-        if (!getError()
-            .equals(other.getError())) return false;
-        break;
-      case 0:
-      default:
-    }
+    if (!getUserId()
+        .equals(other.getUserId())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -246,20 +136,8 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + STATUS_FIELD_NUMBER;
-    hash = (53 * hash) + status_;
-    switch (detailsCase_) {
-      case 2:
-        hash = (37 * hash) + SUCCESS_FIELD_NUMBER;
-        hash = (53 * hash) + getSuccess().hashCode();
-        break;
-      case 3:
-        hash = (37 * hash) + ERROR_FIELD_NUMBER;
-        hash = (53 * hash) + getError().hashCode();
-        break;
-      case 0:
-      default:
-    }
+    hash = (37 * hash) + USER_ID_FIELD_NUMBER;
+    hash = (53 * hash) + getUserId().hashCode();
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -391,15 +269,7 @@ private static final long serialVersionUID = 0L;
     public Builder clear() {
       super.clear();
       bitField0_ = 0;
-      status_ = 0;
-      if (successBuilder_ != null) {
-        successBuilder_.clear();
-      }
-      if (errorBuilder_ != null) {
-        errorBuilder_.clear();
-      }
-      detailsCase_ = 0;
-      details_ = null;
+      userId_ = "";
       return this;
     }
 
@@ -427,7 +297,6 @@ private static final long serialVersionUID = 0L;
     public lol.calico.uctutors.generated.api.v1.RegisterResponse buildPartial() {
       lol.calico.uctutors.generated.api.v1.RegisterResponse result = new lol.calico.uctutors.generated.api.v1.RegisterResponse(this);
       if (bitField0_ != 0) { buildPartial0(result); }
-      buildPartialOneofs(result);
       onBuilt();
       return result;
     }
@@ -435,20 +304,7 @@ private static final long serialVersionUID = 0L;
     private void buildPartial0(lol.calico.uctutors.generated.api.v1.RegisterResponse result) {
       int from_bitField0_ = bitField0_;
       if (((from_bitField0_ & 0x00000001) != 0)) {
-        result.status_ = status_;
-      }
-    }
-
-    private void buildPartialOneofs(lol.calico.uctutors.generated.api.v1.RegisterResponse result) {
-      result.detailsCase_ = detailsCase_;
-      result.details_ = this.details_;
-      if (detailsCase_ == 2 &&
-          successBuilder_ != null) {
-        result.details_ = successBuilder_.build();
-      }
-      if (detailsCase_ == 3 &&
-          errorBuilder_ != null) {
-        result.details_ = errorBuilder_.build();
+        result.userId_ = userId_;
       }
     }
 
@@ -496,21 +352,10 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(lol.calico.uctutors.generated.api.v1.RegisterResponse other) {
       if (other == lol.calico.uctutors.generated.api.v1.RegisterResponse.getDefaultInstance()) return this;
-      if (other.status_ != 0) {
-        setStatusValue(other.getStatusValue());
-      }
-      switch (other.getDetailsCase()) {
-        case SUCCESS: {
-          mergeSuccess(other.getSuccess());
-          break;
-        }
-        case ERROR: {
-          mergeError(other.getError());
-          break;
-        }
-        case DETAILS_NOT_SET: {
-          break;
-        }
+      if (!other.getUserId().isEmpty()) {
+        userId_ = other.userId_;
+        bitField0_ |= 0x00000001;
+        onChanged();
       }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
@@ -538,25 +383,11 @@ private static final long serialVersionUID = 0L;
             case 0:
               done = true;
               break;
-            case 8: {
-              status_ = input.readEnum();
+            case 10: {
+              userId_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000001;
               break;
-            } // case 8
-            case 18: {
-              input.readMessage(
-                  getSuccessFieldBuilder().getBuilder(),
-                  extensionRegistry);
-              detailsCase_ = 2;
-              break;
-            } // case 18
-            case 26: {
-              input.readMessage(
-                  getErrorFieldBuilder().getBuilder(),
-                  extensionRegistry);
-              detailsCase_ = 3;
-              break;
-            } // case 26
+            } // case 10
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -572,358 +403,78 @@ private static final long serialVersionUID = 0L;
       } // finally
       return this;
     }
-    private int detailsCase_ = 0;
-    private java.lang.Object details_;
-    public DetailsCase
-        getDetailsCase() {
-      return DetailsCase.forNumber(
-          detailsCase_);
-    }
-
-    public Builder clearDetails() {
-      detailsCase_ = 0;
-      details_ = null;
-      onChanged();
-      return this;
-    }
-
     private int bitField0_;
 
-    private int status_ = 0;
+    private java.lang.Object userId_ = "";
     /**
-     * <code>.api.v1.RegisterStatus status = 1 [json_name = "status"];</code>
-     * @return The enum numeric value on the wire for status.
+     * <code>string user_id = 1 [json_name = "userId"];</code>
+     * @return The userId.
      */
-    @java.lang.Override public int getStatusValue() {
-      return status_;
-    }
-    /**
-     * <code>.api.v1.RegisterStatus status = 1 [json_name = "status"];</code>
-     * @param value The enum numeric value on the wire for status to set.
-     * @return This builder for chaining.
-     */
-    public Builder setStatusValue(int value) {
-      status_ = value;
-      bitField0_ |= 0x00000001;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>.api.v1.RegisterStatus status = 1 [json_name = "status"];</code>
-     * @return The status.
-     */
-    @java.lang.Override
-    public lol.calico.uctutors.generated.api.v1.RegisterStatus getStatus() {
-      lol.calico.uctutors.generated.api.v1.RegisterStatus result = lol.calico.uctutors.generated.api.v1.RegisterStatus.forNumber(status_);
-      return result == null ? lol.calico.uctutors.generated.api.v1.RegisterStatus.UNRECOGNIZED : result;
-    }
-    /**
-     * <code>.api.v1.RegisterStatus status = 1 [json_name = "status"];</code>
-     * @param value The status to set.
-     * @return This builder for chaining.
-     */
-    public Builder setStatus(lol.calico.uctutors.generated.api.v1.RegisterStatus value) {
-      if (value == null) {
-        throw new NullPointerException();
+    public java.lang.String getUserId() {
+      java.lang.Object ref = userId_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        userId_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
       }
+    }
+    /**
+     * <code>string user_id = 1 [json_name = "userId"];</code>
+     * @return The bytes for userId.
+     */
+    public com.google.protobuf.ByteString
+        getUserIdBytes() {
+      java.lang.Object ref = userId_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string user_id = 1 [json_name = "userId"];</code>
+     * @param value The userId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setUserId(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      userId_ = value;
       bitField0_ |= 0x00000001;
-      status_ = value.getNumber();
       onChanged();
       return this;
     }
     /**
-     * <code>.api.v1.RegisterStatus status = 1 [json_name = "status"];</code>
+     * <code>string user_id = 1 [json_name = "userId"];</code>
      * @return This builder for chaining.
      */
-    public Builder clearStatus() {
+    public Builder clearUserId() {
+      userId_ = getDefaultInstance().getUserId();
       bitField0_ = (bitField0_ & ~0x00000001);
-      status_ = 0;
       onChanged();
       return this;
     }
-
-    private com.google.protobuf.SingleFieldBuilderV3<
-        lol.calico.uctutors.generated.api.v1.RegisterResponseSuccess, lol.calico.uctutors.generated.api.v1.RegisterResponseSuccess.Builder, lol.calico.uctutors.generated.api.v1.RegisterResponseSuccessOrBuilder> successBuilder_;
     /**
-     * <code>.api.v1.RegisterResponseSuccess success = 2 [json_name = "success"];</code>
-     * @return Whether the success field is set.
+     * <code>string user_id = 1 [json_name = "userId"];</code>
+     * @param value The bytes for userId to set.
+     * @return This builder for chaining.
      */
-    @java.lang.Override
-    public boolean hasSuccess() {
-      return detailsCase_ == 2;
-    }
-    /**
-     * <code>.api.v1.RegisterResponseSuccess success = 2 [json_name = "success"];</code>
-     * @return The success.
-     */
-    @java.lang.Override
-    public lol.calico.uctutors.generated.api.v1.RegisterResponseSuccess getSuccess() {
-      if (successBuilder_ == null) {
-        if (detailsCase_ == 2) {
-          return (lol.calico.uctutors.generated.api.v1.RegisterResponseSuccess) details_;
-        }
-        return lol.calico.uctutors.generated.api.v1.RegisterResponseSuccess.getDefaultInstance();
-      } else {
-        if (detailsCase_ == 2) {
-          return successBuilder_.getMessage();
-        }
-        return lol.calico.uctutors.generated.api.v1.RegisterResponseSuccess.getDefaultInstance();
-      }
-    }
-    /**
-     * <code>.api.v1.RegisterResponseSuccess success = 2 [json_name = "success"];</code>
-     */
-    public Builder setSuccess(lol.calico.uctutors.generated.api.v1.RegisterResponseSuccess value) {
-      if (successBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        details_ = value;
-        onChanged();
-      } else {
-        successBuilder_.setMessage(value);
-      }
-      detailsCase_ = 2;
-      return this;
-    }
-    /**
-     * <code>.api.v1.RegisterResponseSuccess success = 2 [json_name = "success"];</code>
-     */
-    public Builder setSuccess(
-        lol.calico.uctutors.generated.api.v1.RegisterResponseSuccess.Builder builderForValue) {
-      if (successBuilder_ == null) {
-        details_ = builderForValue.build();
-        onChanged();
-      } else {
-        successBuilder_.setMessage(builderForValue.build());
-      }
-      detailsCase_ = 2;
-      return this;
-    }
-    /**
-     * <code>.api.v1.RegisterResponseSuccess success = 2 [json_name = "success"];</code>
-     */
-    public Builder mergeSuccess(lol.calico.uctutors.generated.api.v1.RegisterResponseSuccess value) {
-      if (successBuilder_ == null) {
-        if (detailsCase_ == 2 &&
-            details_ != lol.calico.uctutors.generated.api.v1.RegisterResponseSuccess.getDefaultInstance()) {
-          details_ = lol.calico.uctutors.generated.api.v1.RegisterResponseSuccess.newBuilder((lol.calico.uctutors.generated.api.v1.RegisterResponseSuccess) details_)
-              .mergeFrom(value).buildPartial();
-        } else {
-          details_ = value;
-        }
-        onChanged();
-      } else {
-        if (detailsCase_ == 2) {
-          successBuilder_.mergeFrom(value);
-        } else {
-          successBuilder_.setMessage(value);
-        }
-      }
-      detailsCase_ = 2;
-      return this;
-    }
-    /**
-     * <code>.api.v1.RegisterResponseSuccess success = 2 [json_name = "success"];</code>
-     */
-    public Builder clearSuccess() {
-      if (successBuilder_ == null) {
-        if (detailsCase_ == 2) {
-          detailsCase_ = 0;
-          details_ = null;
-          onChanged();
-        }
-      } else {
-        if (detailsCase_ == 2) {
-          detailsCase_ = 0;
-          details_ = null;
-        }
-        successBuilder_.clear();
-      }
-      return this;
-    }
-    /**
-     * <code>.api.v1.RegisterResponseSuccess success = 2 [json_name = "success"];</code>
-     */
-    public lol.calico.uctutors.generated.api.v1.RegisterResponseSuccess.Builder getSuccessBuilder() {
-      return getSuccessFieldBuilder().getBuilder();
-    }
-    /**
-     * <code>.api.v1.RegisterResponseSuccess success = 2 [json_name = "success"];</code>
-     */
-    @java.lang.Override
-    public lol.calico.uctutors.generated.api.v1.RegisterResponseSuccessOrBuilder getSuccessOrBuilder() {
-      if ((detailsCase_ == 2) && (successBuilder_ != null)) {
-        return successBuilder_.getMessageOrBuilder();
-      } else {
-        if (detailsCase_ == 2) {
-          return (lol.calico.uctutors.generated.api.v1.RegisterResponseSuccess) details_;
-        }
-        return lol.calico.uctutors.generated.api.v1.RegisterResponseSuccess.getDefaultInstance();
-      }
-    }
-    /**
-     * <code>.api.v1.RegisterResponseSuccess success = 2 [json_name = "success"];</code>
-     */
-    private com.google.protobuf.SingleFieldBuilderV3<
-        lol.calico.uctutors.generated.api.v1.RegisterResponseSuccess, lol.calico.uctutors.generated.api.v1.RegisterResponseSuccess.Builder, lol.calico.uctutors.generated.api.v1.RegisterResponseSuccessOrBuilder> 
-        getSuccessFieldBuilder() {
-      if (successBuilder_ == null) {
-        if (!(detailsCase_ == 2)) {
-          details_ = lol.calico.uctutors.generated.api.v1.RegisterResponseSuccess.getDefaultInstance();
-        }
-        successBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-            lol.calico.uctutors.generated.api.v1.RegisterResponseSuccess, lol.calico.uctutors.generated.api.v1.RegisterResponseSuccess.Builder, lol.calico.uctutors.generated.api.v1.RegisterResponseSuccessOrBuilder>(
-                (lol.calico.uctutors.generated.api.v1.RegisterResponseSuccess) details_,
-                getParentForChildren(),
-                isClean());
-        details_ = null;
-      }
-      detailsCase_ = 2;
+    public Builder setUserIdBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      userId_ = value;
+      bitField0_ |= 0x00000001;
       onChanged();
-      return successBuilder_;
-    }
-
-    private com.google.protobuf.SingleFieldBuilderV3<
-        lol.calico.uctutors.generated.api.v1.Error, lol.calico.uctutors.generated.api.v1.Error.Builder, lol.calico.uctutors.generated.api.v1.ErrorOrBuilder> errorBuilder_;
-    /**
-     * <code>.api.v1.Error error = 3 [json_name = "error"];</code>
-     * @return Whether the error field is set.
-     */
-    @java.lang.Override
-    public boolean hasError() {
-      return detailsCase_ == 3;
-    }
-    /**
-     * <code>.api.v1.Error error = 3 [json_name = "error"];</code>
-     * @return The error.
-     */
-    @java.lang.Override
-    public lol.calico.uctutors.generated.api.v1.Error getError() {
-      if (errorBuilder_ == null) {
-        if (detailsCase_ == 3) {
-          return (lol.calico.uctutors.generated.api.v1.Error) details_;
-        }
-        return lol.calico.uctutors.generated.api.v1.Error.getDefaultInstance();
-      } else {
-        if (detailsCase_ == 3) {
-          return errorBuilder_.getMessage();
-        }
-        return lol.calico.uctutors.generated.api.v1.Error.getDefaultInstance();
-      }
-    }
-    /**
-     * <code>.api.v1.Error error = 3 [json_name = "error"];</code>
-     */
-    public Builder setError(lol.calico.uctutors.generated.api.v1.Error value) {
-      if (errorBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        details_ = value;
-        onChanged();
-      } else {
-        errorBuilder_.setMessage(value);
-      }
-      detailsCase_ = 3;
       return this;
-    }
-    /**
-     * <code>.api.v1.Error error = 3 [json_name = "error"];</code>
-     */
-    public Builder setError(
-        lol.calico.uctutors.generated.api.v1.Error.Builder builderForValue) {
-      if (errorBuilder_ == null) {
-        details_ = builderForValue.build();
-        onChanged();
-      } else {
-        errorBuilder_.setMessage(builderForValue.build());
-      }
-      detailsCase_ = 3;
-      return this;
-    }
-    /**
-     * <code>.api.v1.Error error = 3 [json_name = "error"];</code>
-     */
-    public Builder mergeError(lol.calico.uctutors.generated.api.v1.Error value) {
-      if (errorBuilder_ == null) {
-        if (detailsCase_ == 3 &&
-            details_ != lol.calico.uctutors.generated.api.v1.Error.getDefaultInstance()) {
-          details_ = lol.calico.uctutors.generated.api.v1.Error.newBuilder((lol.calico.uctutors.generated.api.v1.Error) details_)
-              .mergeFrom(value).buildPartial();
-        } else {
-          details_ = value;
-        }
-        onChanged();
-      } else {
-        if (detailsCase_ == 3) {
-          errorBuilder_.mergeFrom(value);
-        } else {
-          errorBuilder_.setMessage(value);
-        }
-      }
-      detailsCase_ = 3;
-      return this;
-    }
-    /**
-     * <code>.api.v1.Error error = 3 [json_name = "error"];</code>
-     */
-    public Builder clearError() {
-      if (errorBuilder_ == null) {
-        if (detailsCase_ == 3) {
-          detailsCase_ = 0;
-          details_ = null;
-          onChanged();
-        }
-      } else {
-        if (detailsCase_ == 3) {
-          detailsCase_ = 0;
-          details_ = null;
-        }
-        errorBuilder_.clear();
-      }
-      return this;
-    }
-    /**
-     * <code>.api.v1.Error error = 3 [json_name = "error"];</code>
-     */
-    public lol.calico.uctutors.generated.api.v1.Error.Builder getErrorBuilder() {
-      return getErrorFieldBuilder().getBuilder();
-    }
-    /**
-     * <code>.api.v1.Error error = 3 [json_name = "error"];</code>
-     */
-    @java.lang.Override
-    public lol.calico.uctutors.generated.api.v1.ErrorOrBuilder getErrorOrBuilder() {
-      if ((detailsCase_ == 3) && (errorBuilder_ != null)) {
-        return errorBuilder_.getMessageOrBuilder();
-      } else {
-        if (detailsCase_ == 3) {
-          return (lol.calico.uctutors.generated.api.v1.Error) details_;
-        }
-        return lol.calico.uctutors.generated.api.v1.Error.getDefaultInstance();
-      }
-    }
-    /**
-     * <code>.api.v1.Error error = 3 [json_name = "error"];</code>
-     */
-    private com.google.protobuf.SingleFieldBuilderV3<
-        lol.calico.uctutors.generated.api.v1.Error, lol.calico.uctutors.generated.api.v1.Error.Builder, lol.calico.uctutors.generated.api.v1.ErrorOrBuilder> 
-        getErrorFieldBuilder() {
-      if (errorBuilder_ == null) {
-        if (!(detailsCase_ == 3)) {
-          details_ = lol.calico.uctutors.generated.api.v1.Error.getDefaultInstance();
-        }
-        errorBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-            lol.calico.uctutors.generated.api.v1.Error, lol.calico.uctutors.generated.api.v1.Error.Builder, lol.calico.uctutors.generated.api.v1.ErrorOrBuilder>(
-                (lol.calico.uctutors.generated.api.v1.Error) details_,
-                getParentForChildren(),
-                isClean());
-        details_ = null;
-      }
-      detailsCase_ = 3;
-      onChanged();
-      return errorBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

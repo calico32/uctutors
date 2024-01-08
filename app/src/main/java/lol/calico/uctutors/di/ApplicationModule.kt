@@ -6,7 +6,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.android.qualifiers.ActivityContext
-import lol.calico.uctutors.data.common.GrpcConnection
+import lol.calico.uctutors.data.common.GrpcNetworkConnection
 import lol.calico.uctutors.data.storage.TokenStorage
 import lol.calico.uctutors.domain.AccountHandler
 
@@ -16,7 +16,7 @@ object ApplicationModule {
   @Provides
   fun provideAccountHandler(
     @ActivityContext context: Context,
-    grpc: GrpcConnection,
+    grpc: GrpcNetworkConnection,
     tokenStorage: TokenStorage,
   ): AccountHandler {
     return AccountHandler(context, grpc, tokenStorage)
@@ -25,7 +25,7 @@ object ApplicationModule {
   @Provides
   fun provideTokenStorage(
     @ActivityContext context: Context,
-    grpc: GrpcConnection,
+    grpc: GrpcNetworkConnection,
   ): TokenStorage {
     return TokenStorage(context, grpc)
   }

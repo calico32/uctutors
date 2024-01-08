@@ -2,7 +2,6 @@
 import type { CallContext, CallOptions } from "nice-grpc-common";
 import _m0 from "protobufjs/minimal";
 import { Empty } from "../../google/protobuf/empty";
-import { Error } from "./error";
 import { CampusAvailability, School, schoolFromJSON, schoolToJSON, VirtualAvailability } from "./user";
 
 export const protobufPackage = "api.v1";
@@ -41,45 +40,6 @@ export function loginStatusToJSON(object: LoginStatus): string {
     case LoginStatus.LOGIN_STATUS_EXISTING_USER:
       return "LOGIN_STATUS_EXISTING_USER";
     case LoginStatus.UNRECOGNIZED:
-    default:
-      return "UNRECOGNIZED";
-  }
-}
-
-export enum RegisterStatus {
-  REGISTER_STATUS_UNSPECIFIED = 0,
-  REGISTER_STATUS_SUCCESS = 1,
-  REGISTER_STATUS_ERROR = 2,
-  UNRECOGNIZED = -1,
-}
-
-export function registerStatusFromJSON(object: any): RegisterStatus {
-  switch (object) {
-    case 0:
-    case "REGISTER_STATUS_UNSPECIFIED":
-      return RegisterStatus.REGISTER_STATUS_UNSPECIFIED;
-    case 1:
-    case "REGISTER_STATUS_SUCCESS":
-      return RegisterStatus.REGISTER_STATUS_SUCCESS;
-    case 2:
-    case "REGISTER_STATUS_ERROR":
-      return RegisterStatus.REGISTER_STATUS_ERROR;
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return RegisterStatus.UNRECOGNIZED;
-  }
-}
-
-export function registerStatusToJSON(object: RegisterStatus): string {
-  switch (object) {
-    case RegisterStatus.REGISTER_STATUS_UNSPECIFIED:
-      return "REGISTER_STATUS_UNSPECIFIED";
-    case RegisterStatus.REGISTER_STATUS_SUCCESS:
-      return "REGISTER_STATUS_SUCCESS";
-    case RegisterStatus.REGISTER_STATUS_ERROR:
-      return "REGISTER_STATUS_ERROR";
-    case RegisterStatus.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";
   }
@@ -124,12 +84,6 @@ export interface RegisterData {
 }
 
 export interface RegisterResponse {
-  status: RegisterStatus;
-  success?: RegisterResponseSuccess | undefined;
-  error?: Error | undefined;
-}
-
-export interface RegisterResponseSuccess {
   userId: string;
 }
 
@@ -703,19 +657,13 @@ export const RegisterData = {
 };
 
 function createBaseRegisterResponse(): RegisterResponse {
-  return { status: 0, success: undefined, error: undefined };
+  return { userId: "" };
 }
 
 export const RegisterResponse = {
   encode(message: RegisterResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.status !== 0) {
-      writer.uint32(8).int32(message.status);
-    }
-    if (message.success !== undefined) {
-      RegisterResponseSuccess.encode(message.success, writer.uint32(18).fork()).ldelim();
-    }
-    if (message.error !== undefined) {
-      Error.encode(message.error, writer.uint32(26).fork()).ldelim();
+    if (message.userId !== "") {
+      writer.uint32(10).string(message.userId);
     }
     return writer;
   },
@@ -724,91 +672,6 @@ export const RegisterResponse = {
     const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRegisterResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 8) {
-            break;
-          }
-
-          message.status = reader.int32() as any;
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.success = RegisterResponseSuccess.decode(reader, reader.uint32());
-          continue;
-        case 3:
-          if (tag !== 26) {
-            break;
-          }
-
-          message.error = Error.decode(reader, reader.uint32());
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): RegisterResponse {
-    return {
-      status: isSet(object.status) ? registerStatusFromJSON(object.status) : 0,
-      success: isSet(object.success) ? RegisterResponseSuccess.fromJSON(object.success) : undefined,
-      error: isSet(object.error) ? Error.fromJSON(object.error) : undefined,
-    };
-  },
-
-  toJSON(message: RegisterResponse): unknown {
-    const obj: any = {};
-    if (message.status !== 0) {
-      obj.status = registerStatusToJSON(message.status);
-    }
-    if (message.success !== undefined) {
-      obj.success = RegisterResponseSuccess.toJSON(message.success);
-    }
-    if (message.error !== undefined) {
-      obj.error = Error.toJSON(message.error);
-    }
-    return obj;
-  },
-
-  create(base?: DeepPartial<RegisterResponse>): RegisterResponse {
-    return RegisterResponse.fromPartial(base ?? {});
-  },
-  fromPartial(object: DeepPartial<RegisterResponse>): RegisterResponse {
-    const message = createBaseRegisterResponse();
-    message.status = object.status ?? 0;
-    message.success = (object.success !== undefined && object.success !== null)
-      ? RegisterResponseSuccess.fromPartial(object.success)
-      : undefined;
-    message.error = (object.error !== undefined && object.error !== null) ? Error.fromPartial(object.error) : undefined;
-    return message;
-  },
-};
-
-function createBaseRegisterResponseSuccess(): RegisterResponseSuccess {
-  return { userId: "" };
-}
-
-export const RegisterResponseSuccess = {
-  encode(message: RegisterResponseSuccess, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.userId !== "") {
-      writer.uint32(10).string(message.userId);
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): RegisterResponseSuccess {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseRegisterResponseSuccess();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -828,11 +691,11 @@ export const RegisterResponseSuccess = {
     return message;
   },
 
-  fromJSON(object: any): RegisterResponseSuccess {
+  fromJSON(object: any): RegisterResponse {
     return { userId: isSet(object.userId) ? globalThis.String(object.userId) : "" };
   },
 
-  toJSON(message: RegisterResponseSuccess): unknown {
+  toJSON(message: RegisterResponse): unknown {
     const obj: any = {};
     if (message.userId !== "") {
       obj.userId = message.userId;
@@ -840,11 +703,11 @@ export const RegisterResponseSuccess = {
     return obj;
   },
 
-  create(base?: DeepPartial<RegisterResponseSuccess>): RegisterResponseSuccess {
-    return RegisterResponseSuccess.fromPartial(base ?? {});
+  create(base?: DeepPartial<RegisterResponse>): RegisterResponse {
+    return RegisterResponse.fromPartial(base ?? {});
   },
-  fromPartial(object: DeepPartial<RegisterResponseSuccess>): RegisterResponseSuccess {
-    const message = createBaseRegisterResponseSuccess();
+  fromPartial(object: DeepPartial<RegisterResponse>): RegisterResponse {
+    const message = createBaseRegisterResponse();
     message.userId = object.userId ?? "";
     return message;
   },

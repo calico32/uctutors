@@ -5,7 +5,7 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
 /**
  */
 @javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.59.1)",
+    value = "by gRPC proto compiler (version 1.60.1)",
     comments = "Source: api/v1/user.proto")
 @io.grpc.stub.annotations.GrpcGenerated
 public final class UserServiceGrpc {
@@ -15,6 +15,37 @@ public final class UserServiceGrpc {
   public static final java.lang.String SERVICE_NAME = "api.v1.UserService";
 
   // Static method descriptors that strictly reflect the proto.
+  private static volatile io.grpc.MethodDescriptor<lol.calico.uctutors.generated.api.v1.GetUserRequest,
+      lol.calico.uctutors.generated.api.v1.GetUserResponse> getGetUserMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GetUser",
+      requestType = lol.calico.uctutors.generated.api.v1.GetUserRequest.class,
+      responseType = lol.calico.uctutors.generated.api.v1.GetUserResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<lol.calico.uctutors.generated.api.v1.GetUserRequest,
+      lol.calico.uctutors.generated.api.v1.GetUserResponse> getGetUserMethod() {
+    io.grpc.MethodDescriptor<lol.calico.uctutors.generated.api.v1.GetUserRequest, lol.calico.uctutors.generated.api.v1.GetUserResponse> getGetUserMethod;
+    if ((getGetUserMethod = UserServiceGrpc.getGetUserMethod) == null) {
+      synchronized (UserServiceGrpc.class) {
+        if ((getGetUserMethod = UserServiceGrpc.getGetUserMethod) == null) {
+          UserServiceGrpc.getGetUserMethod = getGetUserMethod =
+              io.grpc.MethodDescriptor.<lol.calico.uctutors.generated.api.v1.GetUserRequest, lol.calico.uctutors.generated.api.v1.GetUserResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetUser"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  lol.calico.uctutors.generated.api.v1.GetUserRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  lol.calico.uctutors.generated.api.v1.GetUserResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new UserServiceMethodDescriptorSupplier("GetUser"))
+              .build();
+        }
+      }
+    }
+    return getGetUserMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -62,6 +93,13 @@ public final class UserServiceGrpc {
   /**
    */
   public interface AsyncService {
+
+    /**
+     */
+    default void getUser(lol.calico.uctutors.generated.api.v1.GetUserRequest request,
+        io.grpc.stub.StreamObserver<lol.calico.uctutors.generated.api.v1.GetUserResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetUserMethod(), responseObserver);
+    }
   }
 
   /**
@@ -90,6 +128,14 @@ public final class UserServiceGrpc {
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new UserServiceStub(channel, callOptions);
     }
+
+    /**
+     */
+    public void getUser(lol.calico.uctutors.generated.api.v1.GetUserRequest request,
+        io.grpc.stub.StreamObserver<lol.calico.uctutors.generated.api.v1.GetUserResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getGetUserMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -106,6 +152,13 @@ public final class UserServiceGrpc {
     protected UserServiceBlockingStub build(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new UserServiceBlockingStub(channel, callOptions);
+    }
+
+    /**
+     */
+    public lol.calico.uctutors.generated.api.v1.GetUserResponse getUser(lol.calico.uctutors.generated.api.v1.GetUserRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getGetUserMethod(), getCallOptions(), request);
     }
   }
 
@@ -124,8 +177,17 @@ public final class UserServiceGrpc {
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new UserServiceFutureStub(channel, callOptions);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<lol.calico.uctutors.generated.api.v1.GetUserResponse> getUser(
+        lol.calico.uctutors.generated.api.v1.GetUserRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getGetUserMethod(), getCallOptions()), request);
+    }
   }
 
+  private static final int METHODID_GET_USER = 0;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -144,6 +206,10 @@ public final class UserServiceGrpc {
     @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
+        case METHODID_GET_USER:
+          serviceImpl.getUser((lol.calico.uctutors.generated.api.v1.GetUserRequest) request,
+              (io.grpc.stub.StreamObserver<lol.calico.uctutors.generated.api.v1.GetUserResponse>) responseObserver);
+          break;
         default:
           throw new AssertionError();
       }
@@ -162,6 +228,13 @@ public final class UserServiceGrpc {
 
   public static final io.grpc.ServerServiceDefinition bindService(AsyncService service) {
     return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
+        .addMethod(
+          getGetUserMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              lol.calico.uctutors.generated.api.v1.GetUserRequest,
+              lol.calico.uctutors.generated.api.v1.GetUserResponse>(
+                service, METHODID_GET_USER)))
         .build();
   }
 
@@ -210,6 +283,7 @@ public final class UserServiceGrpc {
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new UserServiceFileDescriptorSupplier())
+              .addMethod(getGetUserMethod())
               .build();
         }
       }

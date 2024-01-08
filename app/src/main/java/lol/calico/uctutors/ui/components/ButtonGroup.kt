@@ -49,10 +49,10 @@ fun <T> ButtonGroup(
     colorPalette = colorPalette,
     onClick = onClick,
     active = active,
-    content = content,
     weight = weight,
     roundingType = RoundingType.Both,
     borderType = BorderType.Horizontal,
+    content = content,
   )
 }
 
@@ -66,16 +66,14 @@ fun <T> ButtonGroup(
   weight: (T) -> Float = { 1f },
   content: @Composable RowScope.(T) -> Unit,
 ) {
-  ButtonRow(
+  ButtonGroup(
     items = items,
     modifier = modifier,
     colorPalette = colorPalette,
     onClick = { it, _ -> onClick(it) },
     active = { it, _ -> active(it) },
-    roundingType = RoundingType.Both,
-    content = { it, _ -> content(it) },
     weight = { it, _ -> weight(it) },
-    borderType = BorderType.Horizontal,
+    content = { it, _ -> content(it) },
   )
 }
 
@@ -138,33 +136,16 @@ fun <T> ButtonGrid(
   weight: (T) -> Float = { 1f },
   content: @Composable RowScope.(T) -> Unit,
 ) {
-  Column(
-    modifier = columnModifier,
-    verticalArrangement = Arrangement.Center,
-    horizontalAlignment = Alignment.CenterHorizontally,
-  ) {
-    items.forEachIndexed { rowIndex, row ->
-      ButtonRow(
-        items = row,
-        modifier = rowModifier,
-        colorPalette = colorPalette,
-        onClick = { it, _ -> onClick(it) },
-        active = { it, _ -> active(it) },
-        roundingType = when (rowIndex) {
-          0 -> RoundingType.Top
-          items.size - 1 -> RoundingType.Bottom
-          else -> RoundingType.None
-        },
-        borderType = when (rowIndex) {
-          0 -> BorderType.Horizontal
-          else -> BorderType.Both
-        },
-        weight = { it, _ -> weight(it) },
-      ) { it, _ ->
-        content(it)
-      }
-    }
-  }
+  ButtonGrid(
+    items = items,
+    rowModifier = rowModifier,
+    columnModifier = columnModifier,
+    colorPalette = colorPalette,
+    onClick = { it, _, _ -> onClick(it) },
+    active = { it, _, _ -> active(it) },
+    weight = { it, _, _ -> weight(it) },
+    content = { it, _, _ -> content(it) },
+  )
 }
 
 

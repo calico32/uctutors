@@ -8,6 +8,7 @@ import { validateIdToken } from '@/google'
 import { logger, prisma } from '@/providers'
 import { AuthSession, Session, expires } from '@/session'
 import { protoSchoolToPrismaSchool } from '@/util/school'
+import { expandTokenInfo } from '@/util/token'
 import { webcrypto } from 'crypto'
 import { ServerError, Status } from 'nice-grpc'
 
@@ -45,16 +46,18 @@ export const AuthService: AuthServiceImplementation = {
       throw new ServerError(Status.INVALID_ARGUMENT, 'no id token provided')
     }
 
-    let tokenInfo = await validateIdToken(request.idToken)
+    const tokenInfo = await validateIdToken(request.idToken)
 
-    logger.$inspect(tokenInfo)
+    const variant = tokenInfo.variant
+    delete (tokenInfo as any).variant
 
     const userId = tokenInfo.sub
 
     const session = Session.create(
       {
         userId: userId,
-        tokenInfo,
+        tokenInfo: expandTokenInfo(tokenInfo),
+        appVariant: variant,
       } satisfies AuthSession,
       [expires(60 * 60 * 24 * 7)]
     )
@@ -102,7 +105,7 @@ export const AuthService: AuthServiceImplementation = {
 
     const tokenInfo = session.value.tokenInfo
 
-    const user = await prisma.user.findUnique({ where: { id: tokenInfo.sub } })
+    const user = await prisma.user.findUnique({ where: { id: tokenInfo.userId } })
 
     if (user) {
       throw new ServerError(Status.ALREADY_EXISTS, 'user already exists')
@@ -119,16 +122,27 @@ export const AuthService: AuthServiceImplementation = {
       throw new ServerError(Status.INTERNAL, 'invalid photo content type')
     }
 
+    if (!request.data.campusAvailability?.length) {
+      throw new ServerError(Status.INVALID_ARGUMENT, 'no campus availability provided')
+    }
+
     const newUser = await prisma.user.create({
+      select: {
+        id: true,
+      },
       data: {
-        id: tokenInfo.sub,
+        id: tokenInfo.userId,
         email: tokenInfo.email,
-        firstName: tokenInfo.given_name,
-        lastName: tokenInfo.family_name,
+        firstName: tokenInfo.givenName,
+        lastName: tokenInfo.familyName,
         school: protoSchoolToPrismaSchool(request.data.school),
         classOf: request.data.classOf,
-        campusAvailability: request.data.campusAvailability,
-        virtualAvailability: request.data.virtualAvailability,
+        campusAvailability: request.data.campusAvailability.map((c) => ({ p5: c.p5, p6: c.p6 })),
+        virtualAvailability: request.data.virtualAvailability.map((v) => ({
+          day: v.day,
+          start: v.interval?.startTime,
+          end: v.interval?.endTime,
+        })),
         avatar: {
           create: {
             name: 'avatar.' + photoExtension,
@@ -138,5 +152,9 @@ export const AuthService: AuthServiceImplementation = {
         },
       },
     })
+
+    return {
+      userId: newUser.id,
+    }
   },
 }

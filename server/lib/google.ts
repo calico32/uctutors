@@ -1,5 +1,6 @@
+import env from '@/env'
 import { logger, prisma } from '@/providers'
-import { TokenInfo } from '@/util/google'
+import { TokenInfo } from '@/util/token'
 import { webcrypto } from 'crypto'
 import { ServerError, Status } from 'nice-grpc'
 const DISCOVERY_URL = 'https://accounts.google.com/.well-known/openid-configuration'
@@ -103,7 +104,9 @@ export async function importKey(key: Key) {
   return webcrypto.subtle.importKey('jwk', key, algorithms[key.alg] ?? key.alg, true, ['verify'])
 }
 
-export async function validateIdToken(idToken: string): Promise<TokenInfo> {
+export async function validateIdToken(
+  idToken: string
+): Promise<TokenInfo & { variant: 'debug' | 'release' }> {
   const jwks = await GoogleJWKs.getKeys()
   const keys = await Promise.all(jwks.map(importKey))
 
@@ -111,7 +114,7 @@ export async function validateIdToken(idToken: string): Promise<TokenInfo> {
 
   const [header, payload] = [b64Header, b64Payload].map((b64) =>
     JSON.parse(Buffer.from(b64, 'base64').toString('utf-8'))
-  ) as [JWTHeader, TokenInfo]
+  ) as [JWTHeader, TokenInfo & { variant: 'debug' | 'release' }]
 
   const keyIndex = jwks.findIndex((key) => key.kid === header.kid)
   if (keyIndex === -1) {
@@ -128,8 +131,7 @@ export async function validateIdToken(idToken: string): Promise<TokenInfo> {
   }
 
   const expectedIssuer = await GoogleOpenIDConfiguration.get('issuer')
-  const expectedAudience = process.env.GOOGLE_CLIENT_ID
-  const expectedAuthorizedParty = process.env.APP_CLIENT_ID
+  const expectedAudience = env.SERVER_CLIENT_ID
   const expectedHostedDomain = 'ucvts.org'
 
   if (payload.iss !== expectedIssuer) {
@@ -140,8 +142,15 @@ export async function validateIdToken(idToken: string): Promise<TokenInfo> {
     throw new ServerError(Status.INVALID_ARGUMENT, 'invalid audience')
   }
 
-  if (payload.azp !== expectedAuthorizedParty) {
-    throw new ServerError(Status.INVALID_ARGUMENT, 'invalid authorized party')
+  switch (payload.azp) {
+    case env.APP_DEBUG_CLIENT_ID:
+      payload.variant = 'debug'
+      break
+    case env.APP_RELEASE_CLIENT_ID:
+      payload.variant = 'release'
+      break
+    default:
+      throw new ServerError(Status.INVALID_ARGUMENT, 'invalid authorized party')
   }
 
   if (payload.hd !== expectedHostedDomain) {

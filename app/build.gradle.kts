@@ -18,9 +18,7 @@ android {
     versionName = "1.0"
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    vectorDrawables {
-      useSupportLibrary = true
-    }
+    vectorDrawables { useSupportLibrary = true }
 
     fun quoted(str: String) = '"' + str.replace("\"", "\\\"") + '"'
 
@@ -45,14 +43,13 @@ android {
   buildTypes {
     debug {
       isMinifyEnabled = false
-
+      isDebuggable = true
     }
+
     release {
       isMinifyEnabled = false
-      proguardFiles(
-        getDefaultProguardFile("proguard-android-optimize.txt"),
-        "proguard-rules.pro"
-      )
+      isShrinkResources = false
+      proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
 
       signingConfig = signingConfigs.getByName("release")
     }
@@ -61,22 +58,12 @@ android {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
   }
-  kotlinOptions {
-    jvmTarget = "1.8"
-  }
-  composeOptions {
-    kotlinCompilerExtensionVersion = "1.5.4"
-  }
-  packaging {
-    resources {
-      excludes += "/META-INF/{AL2.0,LGPL2.1}"
-    }
-  }
+  kotlinOptions { jvmTarget = "1.8" }
+  composeOptions { kotlinCompilerExtensionVersion = "1.5.4" }
+  packaging { resources { excludes += "/META-INF/{AL2.0,LGPL2.1}" } }
 }
 
-hilt {
-  enableAggregatingTask = true
-}
+hilt { enableAggregatingTask = true }
 
 dependencies {
   implementation(libs.core.ktx)
@@ -119,4 +106,5 @@ dependencies {
   implementation(libs.credentials.playservices)
   implementation(libs.googleid)
   ksp(libs.hilt.compiler)
+  implementation(libs.coil)
 }

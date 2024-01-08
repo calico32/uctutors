@@ -9,45 +9,14 @@ public interface RegisterResponseOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>.api.v1.RegisterStatus status = 1 [json_name = "status"];</code>
-   * @return The enum numeric value on the wire for status.
+   * <code>string user_id = 1 [json_name = "userId"];</code>
+   * @return The userId.
    */
-  int getStatusValue();
+  java.lang.String getUserId();
   /**
-   * <code>.api.v1.RegisterStatus status = 1 [json_name = "status"];</code>
-   * @return The status.
+   * <code>string user_id = 1 [json_name = "userId"];</code>
+   * @return The bytes for userId.
    */
-  lol.calico.uctutors.generated.api.v1.RegisterStatus getStatus();
-
-  /**
-   * <code>.api.v1.RegisterResponseSuccess success = 2 [json_name = "success"];</code>
-   * @return Whether the success field is set.
-   */
-  boolean hasSuccess();
-  /**
-   * <code>.api.v1.RegisterResponseSuccess success = 2 [json_name = "success"];</code>
-   * @return The success.
-   */
-  lol.calico.uctutors.generated.api.v1.RegisterResponseSuccess getSuccess();
-  /**
-   * <code>.api.v1.RegisterResponseSuccess success = 2 [json_name = "success"];</code>
-   */
-  lol.calico.uctutors.generated.api.v1.RegisterResponseSuccessOrBuilder getSuccessOrBuilder();
-
-  /**
-   * <code>.api.v1.Error error = 3 [json_name = "error"];</code>
-   * @return Whether the error field is set.
-   */
-  boolean hasError();
-  /**
-   * <code>.api.v1.Error error = 3 [json_name = "error"];</code>
-   * @return The error.
-   */
-  lol.calico.uctutors.generated.api.v1.Error getError();
-  /**
-   * <code>.api.v1.Error error = 3 [json_name = "error"];</code>
-   */
-  lol.calico.uctutors.generated.api.v1.ErrorOrBuilder getErrorOrBuilder();
-
-  lol.calico.uctutors.generated.api.v1.RegisterResponse.DetailsCase getDetailsCase();
+  com.google.protobuf.ByteString
+      getUserIdBytes();
 }

@@ -5,26 +5,20 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.CompositionLocalProvider
 import dagger.hilt.android.AndroidEntryPoint
-import lol.calico.uctutors.data.common.GrpcConnection
+import javax.inject.Inject
+import lol.calico.uctutors.data.common.GrpcNetworkConnection
 import lol.calico.uctutors.data.storage.TokenStorage
 import lol.calico.uctutors.domain.AccountHandler
 import lol.calico.uctutors.ui.App
 import lol.calico.uctutors.ui.compose.LocalAccountHandler
 import lol.calico.uctutors.ui.compose.LocalGrpcConnection
 import lol.calico.uctutors.ui.compose.LocalTokenStorage
-import javax.inject.Inject
-
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-  @Inject
-  lateinit var grpc: GrpcConnection
-
-  @Inject
-  lateinit var accountHandler: AccountHandler
-
-  @Inject
-  lateinit var tokenStorage: TokenStorage
+  @Inject lateinit var grpc: GrpcNetworkConnection
+  @Inject lateinit var accountHandler: AccountHandler
+  @Inject lateinit var tokenStorage: TokenStorage
 
   companion object {
     private const val TAG = "MainActivity"

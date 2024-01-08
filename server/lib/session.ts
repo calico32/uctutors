@@ -1,13 +1,14 @@
+import env from '@/env'
 import { AuthSessionError } from '@/generated/api/v1/auth_session'
 import { Result } from '@/result'
-import { TokenInfo } from '@/util/google'
+import { DetailedTokenInfo } from '@/util/token'
 import { webcrypto } from 'crypto'
 import * as Iron from 'iron-webcrypto'
 import { nanoid } from 'nanoid'
 
 const sessionName = 'session'
 
-let sessionSecret = process.env.SESSION_SECRET
+let sessionSecret = env.SESSION_SECRET
 
 /**
  * Sets the session secret.
@@ -27,7 +28,8 @@ export type SessionData = { [key: string]: any }
 
 export type AuthSession = {
   userId: string
-  tokenInfo: TokenInfo
+  tokenInfo: DetailedTokenInfo
+  appVariant: 'debug' | 'release'
 }
 
 /**

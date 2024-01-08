@@ -18,6 +18,7 @@ message User {
   string bio = 9;
   string avatar_id = 10;
   string banner_id = 11;
+  string picture_url = 18;
 
   repeated CampusAvailability campus_availability = 12;
   repeated VirtualAvailability virtual_availability = 13;
@@ -28,6 +29,23 @@ message User {
   uint32 tutee_score = 16;
 
   repeated Experience experiences = 17;
+}
+
+message UserStub {
+  string id = 1;
+  google.protobuf.Timestamp joined = 2;
+  google.protobuf.Timestamp updated = 3;
+
+  string first_name = 4;
+  string last_name = 5;
+  School school = 6;
+  uint32 class_of = 7;
+  string bio = 8;
+  string avatar_id = 9;
+  string banner_id = 10;
+
+  uint32 tutor_score = 14;
+  uint32 tutee_score = 15;
 }
 
 enum School {
@@ -61,4 +79,13 @@ message Experience {
 }
 
 service UserService {
+  rpc GetUser(GetUserRequest) returns (GetUserResponse);
+}
+
+message GetUserRequest {
+  string id = 1;
+}
+
+message GetUserResponse {
+  User user = 1;
 }

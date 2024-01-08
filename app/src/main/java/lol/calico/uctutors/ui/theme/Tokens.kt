@@ -4,7 +4,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
-
 val md_source = Color(0xff059669)
 
 /* primary */
@@ -325,7 +324,7 @@ val md_sys_typescale_body_small_letter_spacing = 0.40.sp
 /* label _ large */
 val md_sys_typescale_label_large_font_family = workSans
 val md_sys_typescale_label_large_font_weight = FontWeight.W500
-val md_sys_typescale_label_large_font_size = 14.sp
+val md_sys_typescale_label_large_font_size = 16.sp
 val md_sys_typescale_label_large_line_height = 20.sp
 val md_sys_typescale_label_large_letter_spacing = 0.10.sp
 

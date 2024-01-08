@@ -1,10 +1,14 @@
 import { parse } from '@typescript-eslint/typescript-estree'
+import { exec as _exec } from 'child_process'
 import type ESTree from 'estree'
 import { walk } from 'estree-walker'
 import MagicString from 'magic-string'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import { promisify } from 'util'
 import { defineConfig } from 'vite'
+
+const exec = promisify(_exec)
 
 const __filename = fileURLToPath(new URL(import.meta.url))
 const __dirname = path.dirname(__filename)
@@ -20,6 +24,13 @@ export default defineConfig({
     },
   },
   plugins: [
+    {
+      name: 'generate',
+      enforce: 'pre',
+      async buildStart() {
+        await exec('bun ./scripts/generate.ts')
+      },
+    },
     {
       name: 'logger-inspect-source-location',
       enforce: 'pre',
