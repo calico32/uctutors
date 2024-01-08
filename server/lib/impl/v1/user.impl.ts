@@ -1,6 +1,7 @@
-import { UserServiceImplementation, schoolFromJSON } from '@/generated/api/v1/user'
+import { UserServiceImplementation } from '@/generated/api/v1/user'
 import { prisma } from '@/providers'
 import { AuthSession, Session } from '@/session'
+import Translator from '@/util/translator'
 import { ServerError, Status } from 'nice-grpc'
 
 export const UserService: UserServiceImplementation = {
@@ -18,20 +19,7 @@ export const UserService: UserServiceImplementation = {
     }
 
     return {
-      user: {
-        id: user.id,
-        firstName: user.firstName ?? '',
-        lastName: user.lastName ?? '',
-        email: user.email ?? '',
-        school: schoolFromJSON(user.school),
-        classOf: user.classOf,
-        avatarId: user.avatarId ?? '',
-        bannerId: user.bannerId ?? '',
-        joined: user.created,
-        updated: user.updated,
-        bio: user.bio ?? '',
-        pictureUrl: tokenInfo.picture,
-      },
+      user: Translator.prismaToProto.user(user),
     }
   },
 }

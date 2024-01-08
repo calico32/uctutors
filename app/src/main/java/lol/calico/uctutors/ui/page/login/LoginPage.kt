@@ -1,4 +1,4 @@
-package lol.calico.uctutors.ui.page
+package lol.calico.uctutors.ui.page.login
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement

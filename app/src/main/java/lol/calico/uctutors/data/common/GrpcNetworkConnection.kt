@@ -11,10 +11,6 @@ import io.grpc.Metadata
 import io.grpc.Status
 import io.grpc.TlsChannelCredentials
 import io.grpc.kotlin.AbstractCoroutineStub
-import java.util.concurrent.Executor
-import javax.inject.Inject
-import javax.inject.Singleton
-import kotlin.reflect.KClass
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.asExecutor
 import lol.calico.uctutors.BuildConfig
@@ -24,6 +20,10 @@ import lol.calico.uctutors.generated.api.v1.AuthServiceGrpcKt.AuthServiceCorouti
 import lol.calico.uctutors.generated.api.v1.MessageServiceGrpcKt.MessageServiceCoroutineStub
 import lol.calico.uctutors.generated.api.v1.StatusServiceGrpcKt.StatusServiceCoroutineStub
 import lol.calico.uctutors.generated.api.v1.UserServiceGrpcKt.UserServiceCoroutineStub
+import java.util.concurrent.Executor
+import javax.inject.Inject
+import javax.inject.Singleton
+import kotlin.reflect.KClass
 
 @Singleton
 class GrpcNetworkConnection
@@ -31,7 +31,7 @@ class GrpcNetworkConnection
 constructor(
   @ApplicationContext private val context: Context,
 ) : GrpcConnection {
-  private val uri = Uri.parse(BuildConfig.SERVER_URL)
+  private val uri = Uri.parse(BuildConfig.API_URL)
 
   companion object {
     private const val TAG = "GrpcConnection"

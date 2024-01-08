@@ -28,8 +28,7 @@ model User {
   /// where each day is an object `{ p5: boolean, p6: boolean }`
   campusAvailability Json
 
-  /// [sunday, monday, tuesday, wednesday, thursday, friday, saturday]
-  /// where each day is an object `{ times: { start: datestring, end: datestring }[] }`
+  /// where each day is an object `{ day: <day 0-6>, start: <seconds after midninght>, end: <seconds after midnight> }[]`
   virtualAvailability Json
 
   topics String[]

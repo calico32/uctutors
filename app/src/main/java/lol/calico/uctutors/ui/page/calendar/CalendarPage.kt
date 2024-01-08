@@ -1,4 +1,4 @@
-package lol.calico.uctutors.ui.page
+package lol.calico.uctutors.ui.page.calendar
 
 import android.util.Log
 import androidx.compose.foundation.layout.Column

@@ -12,14 +12,14 @@ import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavController
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
-import lol.calico.uctutors.ui.page.CalendarPage
-import lol.calico.uctutors.ui.page.CalendarPageFab
-import lol.calico.uctutors.ui.page.HomePage
-import lol.calico.uctutors.ui.page.YouPage
+import lol.calico.uctutors.ui.page.calendar.CalendarPage
+import lol.calico.uctutors.ui.page.calendar.CalendarPageFab
 import lol.calico.uctutors.ui.page.channel.ChannelPage
+import lol.calico.uctutors.ui.page.home.HomePage
 import lol.calico.uctutors.ui.page.messages.MessagesPage
 import lol.calico.uctutors.ui.page.messages.MessagesPageFab
 import lol.calico.uctutors.ui.page.messages.NewChannelPage
+import lol.calico.uctutors.ui.page.you.YouPage
 
 sealed class Route(
   val route: String,
@@ -93,4 +93,9 @@ sealed class Route(
 
 fun NavController.navigate(route: Route) {
   navigate(route.route)
+}
+
+infix fun String.and(param: Pair<String, String>): String {
+  val (key, value) = param
+  return replace("{$key}", value)
 }

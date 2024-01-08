@@ -1,5 +1,6 @@
 import { ServerCredentials } from '@grpc/grpc-js'
 import fs from 'fs'
+import https from 'https'
 import { createServer } from 'nice-grpc'
 import { ServerReflection, ServerReflectionService } from 'nice-grpc-server-reflection'
 import path from 'path'
@@ -82,8 +83,81 @@ const port = await server.listen('0.0.0.0:8000', credentials)
 
 logger.info(`🚀 gRPC started on port ${port}`)
 
+const html = (strings: TemplateStringsArray, ...values: any[]) =>
+  String.raw({ raw: strings }, ...values)
+
+const page = (content: string) => {
+  return html`
+    <html>
+      <head>
+        <title>UCTutors</title>
+        <style>
+          body {
+            font-family: monospace;
+            background-color: #0a0a0c;
+            color: #444;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            margin: 0;
+          }
+        </style>
+      </head>
+      <body>
+        ${content}
+      </body>
+    </html>
+  `
+}
+
+const contentServer = https.createServer(
+  {
+    key: fs.readFileSync(env.TLS_KEY_PATH),
+    cert: fs.readFileSync(env.TLS_CERT_PATH),
+  },
+  async (req, res) => {
+    const url = new URL(req.url!, `http://${req.headers.host}`)
+    const id = url.pathname.slice(1).trim()
+    if (url.pathname === '/' || !id) {
+      res.statusCode = 400
+      res.end(page(html`<p>Nothing to see here.</p>`))
+      return
+    }
+
+    const file = await prisma.storage.findUnique({ where: { id } })
+    if (!file) {
+      res.statusCode = 404
+      res.end(page(html`<p>File not found.</p>`))
+      return
+    }
+
+    res.setHeader('Content-Type', file.type)
+    res.setHeader('Content-Disposition', `inline; filename="${file.name}"`)
+    res.setHeader('Last-Modified', file.updated.toUTCString())
+    res.setHeader('Cache-Control', 'public, max-age=31536000, immutable')
+
+    res.end(file.data)
+  }
+)
+contentServer.listen(8001, () => {
+  logger.info(`🚀 Content server started on port ${8001}`)
+})
+
 async function stop() {
-  await server.shutdown()
+  await Promise.all([
+    new Promise<void>((resolve) => {
+      contentServer.close(() => {
+        resolve()
+      })
+      setTimeout(() => {
+        resolve()
+      }, 500)
+    }),
+    server.shutdown(),
+  ])
+
   await prisma.$disconnect()
 }
 

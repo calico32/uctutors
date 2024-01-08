@@ -22,8 +22,8 @@ import lol.calico.uctutors.ui.compose.Baseline
 import lol.calico.uctutors.ui.compose.LocalAccountHandler
 import lol.calico.uctutors.ui.compose.LocalAppController
 import lol.calico.uctutors.ui.compose.LocalTokenStorage
-import lol.calico.uctutors.ui.page.LoadingPage
-import lol.calico.uctutors.ui.page.LoginPage
+import lol.calico.uctutors.ui.page.loading.LoadingPage
+import lol.calico.uctutors.ui.page.login.LoginPage
 import lol.calico.uctutors.ui.page.register.RegisterPage
 import lol.calico.uctutors.ui.theme.UCTutorsTheme
 

@@ -23,7 +23,8 @@ android {
     fun quoted(str: String) = '"' + str.replace("\"", "\\\"") + '"'
 
     buildConfigField("String", "WEB_CLIENT_ID", quoted(env.WEB_CLIENT_ID.value))
-    buildConfigField("String", "SERVER_URL", quoted(env.SERVER_URL.value))
+    buildConfigField("String", "API_URL", quoted(env.API_URL.value))
+    buildConfigField("String", "CONTENT_URL", quoted(env.CONTENT_URL.value))
   }
 
   buildFeatures {

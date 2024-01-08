@@ -1,4 +1,4 @@
-package lol.calico.uctutors.ui.page
+package lol.calico.uctutors.ui.page.you
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Column
@@ -20,6 +20,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import kotlinx.coroutines.launch
+import lol.calico.uctutors.BuildConfig
 import lol.calico.uctutors.generated.api.v1.School
 import lol.calico.uctutors.generated.api.v1.User
 import lol.calico.uctutors.generated.api.v1.getUserRequest
@@ -46,30 +47,32 @@ fun YouPage(contentPadding: PaddingValues) {
       }
   ) {
     Row {
-      AsyncImage(
-        model = user?.pictureUrl, // URL of the image
-        contentDescription = "Image description",
-        modifier =
-          modifier {
-            size(150.dp)
-            border(BorderStroke(2.dp, Color.White), CircleShape)
-            padding(4.dp)
-            clip(CircleShape)
-          },
-        contentScale = ContentScale.Crop
-      )
-      Text(
-        user?.firstName + " " + user?.lastName,
-        style = MaterialTheme.typography.titleMedium,
-        modifier = modifier { padding(top = 60.dp, start = 30.dp) }
-      )
-      Text(
-        schoolToString(user?.school ?: School.SCHOOL_UNSPECIFIED) +
-          " '" +
-          (user?.classOf).toString().substring(2, 4),
-        style = MaterialTheme.typography.labelLarge,
-        modifier = modifier { padding(top = 65.dp, start = 10.dp) }
-      )
+      if (user != null) {
+        AsyncImage(
+          model = "${BuildConfig.CONTENT_URL}/${user!!.avatarId}", // URL of the image
+          contentDescription = "Image description",
+          modifier =
+            modifier {
+              size(150.dp)
+              border(BorderStroke(2.dp, Color.White), CircleShape)
+              padding(4.dp)
+              clip(CircleShape)
+            },
+          contentScale = ContentScale.Crop
+        )
+        Text(
+          user!!.firstName + " " + user!!.lastName,
+          style = MaterialTheme.typography.titleMedium,
+          modifier = modifier { padding(top = 60.dp, start = 30.dp) }
+        )
+        Text(
+          schoolToString(user!!.school ?: School.SCHOOL_UNSPECIFIED) +
+            " '" +
+            (user!!.classOf).toString().substring(2, 4),
+          style = MaterialTheme.typography.labelLarge,
+          modifier = modifier { padding(top = 65.dp, start = 10.dp) }
+        )
+      }
     }
   }
 }

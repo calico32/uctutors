@@ -2,7 +2,6 @@ syntax = "proto3";
 package api.v1;
 
 import "google/protobuf/empty.proto";
-import "api/v1/error.proto";
 import "api/v1/user.proto";
 
 service AuthService {

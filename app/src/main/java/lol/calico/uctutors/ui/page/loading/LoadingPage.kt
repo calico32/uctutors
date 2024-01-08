@@ -1,4 +1,4 @@
-package lol.calico.uctutors.ui.page
+package lol.calico.uctutors.ui.page.loading
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

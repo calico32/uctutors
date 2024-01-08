@@ -1,6 +1,5 @@
 package lol.calico.uctutors.ui.page.messages
 
-import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -103,13 +102,10 @@ fun ChannelList(channels: List<MessageChannelStub>, modifier: Modifier = Modifie
               )
             }
           }
-          padding(16.dp)
 
-          clickable {
-            val route = Route.Channel with ("channelId" to channel.id)
-            Log.d("MessagePage", route)
-            pageController.navigate(route)
-          }
+          clickable { pageController.navigate(Route.Channel with ("channelId" to channel.id)) }
+
+          padding(16.dp)
         }
       ) {
         ChannelIcon(channel)

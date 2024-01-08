@@ -1,7 +1,7 @@
 import { DeepPartial, Message, MessageServiceImplementation } from '@/generated/api/v1/messages'
-import { schoolFromJSON } from '@/generated/api/v1/user'
 import { prisma } from '@/providers'
 import { AuthSession, Session } from '@/session'
+import Translator from '@/util/translator'
 import { ServerError, Status } from 'nice-grpc'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -242,20 +242,7 @@ export const MessageService: MessageServiceImplementation = {
       userId: session.value.userId,
       text: request.text,
       timestamp: new Date().getTime(),
-      user: {
-        avatarId: user.avatarId ?? undefined,
-        firstName: user.firstName ?? undefined,
-        lastName: user.lastName ?? undefined,
-        bannerId: user.bannerId ?? undefined,
-        bio: user.bio ?? undefined,
-        classOf: user.classOf,
-        school: schoolFromJSON(user.school),
-        id: user.id,
-        joined: user.created,
-        tuteeScore: user.tuteeScore ?? undefined,
-        tutorScore: user.tutorScore ?? undefined,
-        updated: user.updated,
-      },
+      user: Translator.prismaToProto.user(user),
     } satisfies DeepPartial<Message>
 
     for (const [key, socket] of targets) {
