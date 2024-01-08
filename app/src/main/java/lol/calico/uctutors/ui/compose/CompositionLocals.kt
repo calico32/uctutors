@@ -13,6 +13,7 @@ import lol.calico.uctutors.data.storage.TokenStorage
 import lol.calico.uctutors.domain.AccountHandler
 import lol.calico.uctutors.ui.layout.AppLayout
 import lol.calico.uctutors.ui.theme.UCTutorsTheme
+import okhttp3.OkHttpClient
 
 val LocalGrpcConnection = compositionLocalOf<GrpcConnection> { error("No GrpcConnection provided") }
 
@@ -25,6 +26,8 @@ val LocalAppController =
 
 val LocalPageController =
   compositionLocalOf<NavController> { error("No page-level NavController provided") }
+
+val LocalHttpClient = compositionLocalOf { OkHttpClient() }
 
 @Composable
 fun BaselineLayout(

@@ -18,12 +18,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
 import kotlinx.coroutines.launch
-import lol.calico.uctutors.BuildConfig
 import lol.calico.uctutors.generated.api.v1.School
 import lol.calico.uctutors.generated.api.v1.User
 import lol.calico.uctutors.generated.api.v1.getUserRequest
+import lol.calico.uctutors.ui.components.RemoteImage
 import lol.calico.uctutors.ui.compose.LocalGrpcConnection
 import lol.calico.uctutors.util.modifier
 import lol.calico.uctutors.util.schoolToString
@@ -48,9 +47,8 @@ fun YouPage(contentPadding: PaddingValues) {
   ) {
     Row {
       if (user != null) {
-        AsyncImage(
-          model = "${BuildConfig.CONTENT_URL}/${user!!.avatarId}", // URL of the image
-          contentDescription = "Image description",
+        RemoteImage(
+          id = user!!.avatarId, // URL of the image
           modifier =
             modifier {
               size(150.dp)
@@ -58,7 +56,7 @@ fun YouPage(contentPadding: PaddingValues) {
               padding(4.dp)
               clip(CircleShape)
             },
-          contentScale = ContentScale.Crop
+          contentScale = ContentScale.Crop,
         )
         Text(
           user!!.firstName + " " + user!!.lastName,

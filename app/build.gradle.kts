@@ -108,4 +108,7 @@ dependencies {
   implementation(libs.googleid)
   ksp(libs.hilt.compiler)
   implementation(libs.coil)
+  implementation(platform(libs.okhttp.bom))
+  implementation(libs.okhttp)
+  implementation(libs.okhttp.tls)
 }

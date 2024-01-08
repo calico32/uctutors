@@ -18,14 +18,13 @@ import lol.calico.uctutors.ui.page.channel.ChannelPage
 import lol.calico.uctutors.ui.page.home.HomePage
 import lol.calico.uctutors.ui.page.messages.MessagesPage
 import lol.calico.uctutors.ui.page.messages.MessagesPageFab
-import lol.calico.uctutors.ui.page.messages.NewChannelPage
+import lol.calico.uctutors.ui.page.new_channel.NewChannelPage
 import lol.calico.uctutors.ui.page.you.YouPage
 
 sealed class Route(
   val route: String,
   val name: String,
   val icon: ImageVector?,
-  val title: @Composable () -> Unit = {},
   val arguments: List<NamedNavArgument> = emptyList(),
   val fab: (@Composable () -> Unit)? = null,
   val content: @Composable (PaddingValues) -> Unit,

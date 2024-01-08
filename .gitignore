@@ -18,3 +18,7 @@ local.properties
 !/.env.template
 
 *.jks
+
+mkcert.pem
+
+*~

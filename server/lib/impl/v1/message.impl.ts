@@ -242,7 +242,7 @@ export const MessageService: MessageServiceImplementation = {
       userId: session.value.userId,
       text: request.text,
       timestamp: new Date().getTime(),
-      user: Translator.prismaToProto.user(user),
+      user: await Translator.prismaToProto.user(user),
     } satisfies DeepPartial<Message>
 
     for (const [key, socket] of targets) {

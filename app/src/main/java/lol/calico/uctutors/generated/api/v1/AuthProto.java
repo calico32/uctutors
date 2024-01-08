@@ -65,47 +65,46 @@ public final class AuthProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\021api/v1/auth.proto\022\006api.v1\032\033google/prot" +
-      "obuf/empty.proto\032\022api/v1/error.proto\032\021ap" +
-      "i/v1/user.proto\"(\n\020GetNonceResponse\022\024\n\005n" +
-      "once\030\001 \001(\tR\005nonce\"?\n\014LoginRequest\022\031\n\010id_" +
-      "token\030\001 \001(\tR\007idToken\022\024\n\005nonce\030\002 \001(\tR\005non" +
-      "ce\"\314\001\n\rLoginResponse\022+\n\006status\030\001 \001(\0162\023.a" +
-      "pi.v1.LoginStatusR\006status\0229\n\010new_user\030\002 " +
-      "\001(\0132\034.api.v1.LoginResponseNewUserH\000R\007new" +
-      "User\022H\n\rexisting_user\030\003 \001(\0132!.api.v1.Log" +
-      "inResponseExistingUserH\000R\014existingUserB\t" +
-      "\n\007details\"E\n\024LoginResponseNewUser\022\027\n\007use" +
-      "r_id\030\001 \001(\tR\006userId\022\024\n\005token\030\002 \001(\tR\005token" +
-      "\"J\n\031LoginResponseExistingUser\022\027\n\007user_id" +
-      "\030\001 \001(\tR\006userId\022\024\n\005token\030\002 \001(\tR\005token\";\n\017" +
-      "RegisterRequest\022(\n\004data\030\001 \001(\0132\024.api.v1.R" +
-      "egisterDataR\004data\"\230\002\n\014RegisterData\022&\n\006sc" +
-      "hool\030\002 \001(\0162\016.api.v1.SchoolR\006school\022\031\n\010cl" +
-      "ass_of\030\003 \001(\rR\007classOf\022\020\n\003bio\030\004 \001(\tR\003bio\022" +
-      "K\n\023campus_availability\030\005 \003(\0132\032.api.v1.Ca" +
-      "mpusAvailabilityR\022campusAvailability\022N\n\024" +
-      "virtual_availability\030\006 \003(\0132\033.api.v1.Virt" +
-      "ualAvailabilityR\023virtualAvailability\022\026\n\006" +
-      "topics\030\007 \003(\tR\006topics\"+\n\020RegisterResponse" +
-      "\022\027\n\007user_id\030\001 \001(\tR\006userId*f\n\013LoginStatus" +
-      "\022\034\n\030LOGIN_STATUS_UNSPECIFIED\020\000\022\031\n\025LOGIN_" +
-      "STATUS_NEW_USER\020\001\022\036\n\032LOGIN_STATUS_EXISTI" +
-      "NG_USER\020\0022\202\002\n\013AuthService\022>\n\010GetNonce\022\026." +
-      "google.protobuf.Empty\032\030.api.v1.GetNonceR" +
-      "esponse\"\000\0226\n\005Login\022\024.api.v1.LoginRequest" +
-      "\032\025.api.v1.LoginResponse\"\000\022:\n\006Logout\022\026.go" +
-      "ogle.protobuf.Empty\032\026.google.protobuf.Em" +
-      "pty\"\000\022?\n\010Register\022\027.api.v1.RegisterReque" +
-      "st\032\030.api.v1.RegisterResponse\"\000Bj\n$lol.ca" +
-      "lico.uctutors.generated.api.v1B\tAuthProt" +
-      "oP\001\242\002\003AXX\252\002\006Api.V1\312\002\006Api\\V1\342\002\022Api\\V1\\GPB" +
-      "Metadata\352\002\007Api::V1b\006proto3"
+      "obuf/empty.proto\032\021api/v1/user.proto\"(\n\020G" +
+      "etNonceResponse\022\024\n\005nonce\030\001 \001(\tR\005nonce\"?\n" +
+      "\014LoginRequest\022\031\n\010id_token\030\001 \001(\tR\007idToken" +
+      "\022\024\n\005nonce\030\002 \001(\tR\005nonce\"\314\001\n\rLoginResponse" +
+      "\022+\n\006status\030\001 \001(\0162\023.api.v1.LoginStatusR\006s" +
+      "tatus\0229\n\010new_user\030\002 \001(\0132\034.api.v1.LoginRe" +
+      "sponseNewUserH\000R\007newUser\022H\n\rexisting_use" +
+      "r\030\003 \001(\0132!.api.v1.LoginResponseExistingUs" +
+      "erH\000R\014existingUserB\t\n\007details\"E\n\024LoginRe" +
+      "sponseNewUser\022\027\n\007user_id\030\001 \001(\tR\006userId\022\024" +
+      "\n\005token\030\002 \001(\tR\005token\"J\n\031LoginResponseExi" +
+      "stingUser\022\027\n\007user_id\030\001 \001(\tR\006userId\022\024\n\005to" +
+      "ken\030\002 \001(\tR\005token\";\n\017RegisterRequest\022(\n\004d" +
+      "ata\030\001 \001(\0132\024.api.v1.RegisterDataR\004data\"\230\002" +
+      "\n\014RegisterData\022&\n\006school\030\002 \001(\0162\016.api.v1." +
+      "SchoolR\006school\022\031\n\010class_of\030\003 \001(\rR\007classO" +
+      "f\022\020\n\003bio\030\004 \001(\tR\003bio\022K\n\023campus_availabili" +
+      "ty\030\005 \003(\0132\032.api.v1.CampusAvailabilityR\022ca" +
+      "mpusAvailability\022N\n\024virtual_availability" +
+      "\030\006 \003(\0132\033.api.v1.VirtualAvailabilityR\023vir" +
+      "tualAvailability\022\026\n\006topics\030\007 \003(\tR\006topics" +
+      "\"+\n\020RegisterResponse\022\027\n\007user_id\030\001 \001(\tR\006u" +
+      "serId*f\n\013LoginStatus\022\034\n\030LOGIN_STATUS_UNS" +
+      "PECIFIED\020\000\022\031\n\025LOGIN_STATUS_NEW_USER\020\001\022\036\n" +
+      "\032LOGIN_STATUS_EXISTING_USER\020\0022\202\002\n\013AuthSe" +
+      "rvice\022>\n\010GetNonce\022\026.google.protobuf.Empt" +
+      "y\032\030.api.v1.GetNonceResponse\"\000\0226\n\005Login\022\024" +
+      ".api.v1.LoginRequest\032\025.api.v1.LoginRespo" +
+      "nse\"\000\022:\n\006Logout\022\026.google.protobuf.Empty\032" +
+      "\026.google.protobuf.Empty\"\000\022?\n\010Register\022\027." +
+      "api.v1.RegisterRequest\032\030.api.v1.Register" +
+      "Response\"\000Bj\n$lol.calico.uctutors.genera" +
+      "ted.api.v1B\tAuthProtoP\001\242\002\003AXX\252\002\006Api.V1\312\002" +
+      "\006Api\\V1\342\002\022Api\\V1\\GPBMetadata\352\002\007Api::V1b\006" +
+      "proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.google.protobuf.EmptyProto.getDescriptor(),
-          lol.calico.uctutors.generated.api.v1.ErrorProto.getDescriptor(),
           lol.calico.uctutors.generated.api.v1.UserProto.getDescriptor(),
         });
     internal_static_api_v1_GetNonceResponse_descriptor =
@@ -157,7 +156,6 @@ public final class AuthProto {
         internal_static_api_v1_RegisterResponse_descriptor,
         new java.lang.String[] { "UserId", });
     com.google.protobuf.EmptyProto.getDescriptor();
-    lol.calico.uctutors.generated.api.v1.ErrorProto.getDescriptor();
     lol.calico.uctutors.generated.api.v1.UserProto.getDescriptor();
   }
 

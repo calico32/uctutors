@@ -236,23 +236,6 @@ public object UserKt {
     }
 
     /**
-     * `string picture_url = 18 [json_name = "pictureUrl"];`
-     */
-    public var pictureUrl: kotlin.String
-      @JvmName("getPictureUrl")
-      get() = _builder.getPictureUrl()
-      @JvmName("setPictureUrl")
-      set(value) {
-        _builder.setPictureUrl(value)
-      }
-    /**
-     * `string picture_url = 18 [json_name = "pictureUrl"];`
-     */
-    public fun clearPictureUrl() {
-      _builder.clearPictureUrl()
-    }
-
-    /**
      * An uninstantiable, behaviorless type to represent the field in
      * generics.
      */

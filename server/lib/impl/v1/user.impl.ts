@@ -12,14 +12,17 @@ export const UserService: UserServiceImplementation = {
     }
 
     const tokenInfo = session.value.tokenInfo
-    const user = await prisma.user.findUnique({ where: { id: tokenInfo.userId } })
+    const user = await prisma.user.findUnique({
+      where: { id: tokenInfo.userId },
+      include: { experiences: true },
+    })
 
     if (!user) {
       throw new ServerError(Status.NOT_FOUND, 'user not found')
     }
 
     return {
-      user: Translator.prismaToProto.user(user),
+      user: await Translator.prismaToProto.user(user),
     }
   },
 }

@@ -76,9 +76,6 @@ const credentials = ServerCredentials.createSsl(null, [
   },
 ])
 
-logger.$inspect(Object.getPrototypeOf(credentials))
-logger.$inspect(credentials)
-
 const port = await server.listen('0.0.0.0:8000', credentials)
 
 logger.info(`🚀 gRPC started on port ${port}`)
@@ -123,6 +120,8 @@ const contentServer = https.createServer(
     if (url.pathname === '/' || !id) {
       res.statusCode = 400
       res.end(page(html`<p>Nothing to see here.</p>`))
+
+      logger.debug(`🖼️ ${url.pathname} -> 400`)
       return
     }
 
@@ -130,6 +129,8 @@ const contentServer = https.createServer(
     if (!file) {
       res.statusCode = 404
       res.end(page(html`<p>File not found.</p>`))
+
+      logger.debug(`🖼️ ${url.pathname} -> 404`)
       return
     }
 
@@ -137,6 +138,8 @@ const contentServer = https.createServer(
     res.setHeader('Content-Disposition', `inline; filename="${file.name}"`)
     res.setHeader('Last-Modified', file.updated.toUTCString())
     res.setHeader('Cache-Control', 'public, max-age=31536000, immutable')
+
+    logger.debug(`🖼️ ${url.pathname} -> OK (${file.name}, ${file.type})`)
 
     res.end(file.data)
   }

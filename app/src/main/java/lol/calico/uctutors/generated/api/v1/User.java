@@ -25,7 +25,6 @@ private static final long serialVersionUID = 0L;
     bio_ = "";
     avatarId_ = "";
     bannerId_ = "";
-    pictureUrl_ = "";
     campusAvailability_ = java.util.Collections.emptyList();
     virtualAvailability_ = java.util.Collections.emptyList();
     topics_ =
@@ -408,45 +407,6 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int PICTURE_URL_FIELD_NUMBER = 18;
-  @SuppressWarnings("serial")
-  private volatile java.lang.Object pictureUrl_ = "";
-  /**
-   * <code>string picture_url = 18 [json_name = "pictureUrl"];</code>
-   * @return The pictureUrl.
-   */
-  @java.lang.Override
-  public java.lang.String getPictureUrl() {
-    java.lang.Object ref = pictureUrl_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      pictureUrl_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string picture_url = 18 [json_name = "pictureUrl"];</code>
-   * @return The bytes for pictureUrl.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString
-      getPictureUrlBytes() {
-    java.lang.Object ref = pictureUrl_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      pictureUrl_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
   public static final int CAMPUS_AVAILABILITY_FIELD_NUMBER = 12;
   @SuppressWarnings("serial")
   private java.util.List<lol.calico.uctutors.generated.api.v1.CampusAvailability> campusAvailability_;
@@ -694,9 +654,6 @@ private static final long serialVersionUID = 0L;
     for (int i = 0; i < experiences_.size(); i++) {
       output.writeMessage(17, experiences_.get(i));
     }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(pictureUrl_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 18, pictureUrl_);
-    }
     getUnknownFields().writeTo(output);
   }
 
@@ -771,9 +728,6 @@ private static final long serialVersionUID = 0L;
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(17, experiences_.get(i));
     }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(pictureUrl_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(18, pictureUrl_);
-    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -816,8 +770,6 @@ private static final long serialVersionUID = 0L;
         .equals(other.getAvatarId())) return false;
     if (!getBannerId()
         .equals(other.getBannerId())) return false;
-    if (!getPictureUrl()
-        .equals(other.getPictureUrl())) return false;
     if (!getCampusAvailabilityList()
         .equals(other.getCampusAvailabilityList())) return false;
     if (!getVirtualAvailabilityList()
@@ -867,8 +819,6 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getAvatarId().hashCode();
     hash = (37 * hash) + BANNER_ID_FIELD_NUMBER;
     hash = (53 * hash) + getBannerId().hashCode();
-    hash = (37 * hash) + PICTURE_URL_FIELD_NUMBER;
-    hash = (53 * hash) + getPictureUrl().hashCode();
     if (getCampusAvailabilityCount() > 0) {
       hash = (37 * hash) + CAMPUS_AVAILABILITY_FIELD_NUMBER;
       hash = (53 * hash) + getCampusAvailabilityList().hashCode();
@@ -1049,21 +999,20 @@ private static final long serialVersionUID = 0L;
       bio_ = "";
       avatarId_ = "";
       bannerId_ = "";
-      pictureUrl_ = "";
       if (campusAvailabilityBuilder_ == null) {
         campusAvailability_ = java.util.Collections.emptyList();
       } else {
         campusAvailability_ = null;
         campusAvailabilityBuilder_.clear();
       }
-      bitField0_ = (bitField0_ & ~0x00001000);
+      bitField0_ = (bitField0_ & ~0x00000800);
       if (virtualAvailabilityBuilder_ == null) {
         virtualAvailability_ = java.util.Collections.emptyList();
       } else {
         virtualAvailability_ = null;
         virtualAvailabilityBuilder_.clear();
       }
-      bitField0_ = (bitField0_ & ~0x00002000);
+      bitField0_ = (bitField0_ & ~0x00001000);
       topics_ =
           com.google.protobuf.LazyStringArrayList.emptyList();
       tutorScore_ = 0;
@@ -1074,7 +1023,7 @@ private static final long serialVersionUID = 0L;
         experiences_ = null;
         experiencesBuilder_.clear();
       }
-      bitField0_ = (bitField0_ & ~0x00020000);
+      bitField0_ = (bitField0_ & ~0x00010000);
       return this;
     }
 
@@ -1109,27 +1058,27 @@ private static final long serialVersionUID = 0L;
 
     private void buildPartialRepeatedFields(lol.calico.uctutors.generated.api.v1.User result) {
       if (campusAvailabilityBuilder_ == null) {
-        if (((bitField0_ & 0x00001000) != 0)) {
+        if (((bitField0_ & 0x00000800) != 0)) {
           campusAvailability_ = java.util.Collections.unmodifiableList(campusAvailability_);
-          bitField0_ = (bitField0_ & ~0x00001000);
+          bitField0_ = (bitField0_ & ~0x00000800);
         }
         result.campusAvailability_ = campusAvailability_;
       } else {
         result.campusAvailability_ = campusAvailabilityBuilder_.build();
       }
       if (virtualAvailabilityBuilder_ == null) {
-        if (((bitField0_ & 0x00002000) != 0)) {
+        if (((bitField0_ & 0x00001000) != 0)) {
           virtualAvailability_ = java.util.Collections.unmodifiableList(virtualAvailability_);
-          bitField0_ = (bitField0_ & ~0x00002000);
+          bitField0_ = (bitField0_ & ~0x00001000);
         }
         result.virtualAvailability_ = virtualAvailability_;
       } else {
         result.virtualAvailability_ = virtualAvailabilityBuilder_.build();
       }
       if (experiencesBuilder_ == null) {
-        if (((bitField0_ & 0x00020000) != 0)) {
+        if (((bitField0_ & 0x00010000) != 0)) {
           experiences_ = java.util.Collections.unmodifiableList(experiences_);
-          bitField0_ = (bitField0_ & ~0x00020000);
+          bitField0_ = (bitField0_ & ~0x00010000);
         }
         result.experiences_ = experiences_;
       } else {
@@ -1179,17 +1128,14 @@ private static final long serialVersionUID = 0L;
       if (((from_bitField0_ & 0x00000400) != 0)) {
         result.bannerId_ = bannerId_;
       }
-      if (((from_bitField0_ & 0x00000800) != 0)) {
-        result.pictureUrl_ = pictureUrl_;
-      }
-      if (((from_bitField0_ & 0x00004000) != 0)) {
+      if (((from_bitField0_ & 0x00002000) != 0)) {
         topics_.makeImmutable();
         result.topics_ = topics_;
       }
-      if (((from_bitField0_ & 0x00008000) != 0)) {
+      if (((from_bitField0_ & 0x00004000) != 0)) {
         result.tutorScore_ = tutorScore_;
       }
-      if (((from_bitField0_ & 0x00010000) != 0)) {
+      if (((from_bitField0_ & 0x00008000) != 0)) {
         result.tuteeScore_ = tuteeScore_;
       }
       result.bitField0_ |= to_bitField0_;
@@ -1286,16 +1232,11 @@ private static final long serialVersionUID = 0L;
         bitField0_ |= 0x00000400;
         onChanged();
       }
-      if (!other.getPictureUrl().isEmpty()) {
-        pictureUrl_ = other.pictureUrl_;
-        bitField0_ |= 0x00000800;
-        onChanged();
-      }
       if (campusAvailabilityBuilder_ == null) {
         if (!other.campusAvailability_.isEmpty()) {
           if (campusAvailability_.isEmpty()) {
             campusAvailability_ = other.campusAvailability_;
-            bitField0_ = (bitField0_ & ~0x00001000);
+            bitField0_ = (bitField0_ & ~0x00000800);
           } else {
             ensureCampusAvailabilityIsMutable();
             campusAvailability_.addAll(other.campusAvailability_);
@@ -1308,7 +1249,7 @@ private static final long serialVersionUID = 0L;
             campusAvailabilityBuilder_.dispose();
             campusAvailabilityBuilder_ = null;
             campusAvailability_ = other.campusAvailability_;
-            bitField0_ = (bitField0_ & ~0x00001000);
+            bitField0_ = (bitField0_ & ~0x00000800);
             campusAvailabilityBuilder_ = 
               com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                  getCampusAvailabilityFieldBuilder() : null;
@@ -1321,7 +1262,7 @@ private static final long serialVersionUID = 0L;
         if (!other.virtualAvailability_.isEmpty()) {
           if (virtualAvailability_.isEmpty()) {
             virtualAvailability_ = other.virtualAvailability_;
-            bitField0_ = (bitField0_ & ~0x00002000);
+            bitField0_ = (bitField0_ & ~0x00001000);
           } else {
             ensureVirtualAvailabilityIsMutable();
             virtualAvailability_.addAll(other.virtualAvailability_);
@@ -1334,7 +1275,7 @@ private static final long serialVersionUID = 0L;
             virtualAvailabilityBuilder_.dispose();
             virtualAvailabilityBuilder_ = null;
             virtualAvailability_ = other.virtualAvailability_;
-            bitField0_ = (bitField0_ & ~0x00002000);
+            bitField0_ = (bitField0_ & ~0x00001000);
             virtualAvailabilityBuilder_ = 
               com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                  getVirtualAvailabilityFieldBuilder() : null;
@@ -1346,7 +1287,7 @@ private static final long serialVersionUID = 0L;
       if (!other.topics_.isEmpty()) {
         if (topics_.isEmpty()) {
           topics_ = other.topics_;
-          bitField0_ |= 0x00004000;
+          bitField0_ |= 0x00002000;
         } else {
           ensureTopicsIsMutable();
           topics_.addAll(other.topics_);
@@ -1363,7 +1304,7 @@ private static final long serialVersionUID = 0L;
         if (!other.experiences_.isEmpty()) {
           if (experiences_.isEmpty()) {
             experiences_ = other.experiences_;
-            bitField0_ = (bitField0_ & ~0x00020000);
+            bitField0_ = (bitField0_ & ~0x00010000);
           } else {
             ensureExperiencesIsMutable();
             experiences_.addAll(other.experiences_);
@@ -1376,7 +1317,7 @@ private static final long serialVersionUID = 0L;
             experiencesBuilder_.dispose();
             experiencesBuilder_ = null;
             experiences_ = other.experiences_;
-            bitField0_ = (bitField0_ & ~0x00020000);
+            bitField0_ = (bitField0_ & ~0x00010000);
             experiencesBuilder_ = 
               com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                  getExperiencesFieldBuilder() : null;
@@ -1504,12 +1445,12 @@ private static final long serialVersionUID = 0L;
             } // case 114
             case 120: {
               tutorScore_ = input.readUInt32();
-              bitField0_ |= 0x00008000;
+              bitField0_ |= 0x00004000;
               break;
             } // case 120
             case 128: {
               tuteeScore_ = input.readUInt32();
-              bitField0_ |= 0x00010000;
+              bitField0_ |= 0x00008000;
               break;
             } // case 128
             case 138: {
@@ -1525,11 +1466,6 @@ private static final long serialVersionUID = 0L;
               }
               break;
             } // case 138
-            case 146: {
-              pictureUrl_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00000800;
-              break;
-            } // case 146
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -2378,84 +2314,12 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object pictureUrl_ = "";
-    /**
-     * <code>string picture_url = 18 [json_name = "pictureUrl"];</code>
-     * @return The pictureUrl.
-     */
-    public java.lang.String getPictureUrl() {
-      java.lang.Object ref = pictureUrl_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        pictureUrl_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string picture_url = 18 [json_name = "pictureUrl"];</code>
-     * @return The bytes for pictureUrl.
-     */
-    public com.google.protobuf.ByteString
-        getPictureUrlBytes() {
-      java.lang.Object ref = pictureUrl_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        pictureUrl_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string picture_url = 18 [json_name = "pictureUrl"];</code>
-     * @param value The pictureUrl to set.
-     * @return This builder for chaining.
-     */
-    public Builder setPictureUrl(
-        java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
-      pictureUrl_ = value;
-      bitField0_ |= 0x00000800;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string picture_url = 18 [json_name = "pictureUrl"];</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearPictureUrl() {
-      pictureUrl_ = getDefaultInstance().getPictureUrl();
-      bitField0_ = (bitField0_ & ~0x00000800);
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string picture_url = 18 [json_name = "pictureUrl"];</code>
-     * @param value The bytes for pictureUrl to set.
-     * @return This builder for chaining.
-     */
-    public Builder setPictureUrlBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) { throw new NullPointerException(); }
-      checkByteStringIsUtf8(value);
-      pictureUrl_ = value;
-      bitField0_ |= 0x00000800;
-      onChanged();
-      return this;
-    }
-
     private java.util.List<lol.calico.uctutors.generated.api.v1.CampusAvailability> campusAvailability_ =
       java.util.Collections.emptyList();
     private void ensureCampusAvailabilityIsMutable() {
-      if (!((bitField0_ & 0x00001000) != 0)) {
+      if (!((bitField0_ & 0x00000800) != 0)) {
         campusAvailability_ = new java.util.ArrayList<lol.calico.uctutors.generated.api.v1.CampusAvailability>(campusAvailability_);
-        bitField0_ |= 0x00001000;
+        bitField0_ |= 0x00000800;
        }
     }
 
@@ -2605,7 +2469,7 @@ private static final long serialVersionUID = 0L;
     public Builder clearCampusAvailability() {
       if (campusAvailabilityBuilder_ == null) {
         campusAvailability_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00001000);
+        bitField0_ = (bitField0_ & ~0x00000800);
         onChanged();
       } else {
         campusAvailabilityBuilder_.clear();
@@ -2682,7 +2546,7 @@ private static final long serialVersionUID = 0L;
         campusAvailabilityBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
             lol.calico.uctutors.generated.api.v1.CampusAvailability, lol.calico.uctutors.generated.api.v1.CampusAvailability.Builder, lol.calico.uctutors.generated.api.v1.CampusAvailabilityOrBuilder>(
                 campusAvailability_,
-                ((bitField0_ & 0x00001000) != 0),
+                ((bitField0_ & 0x00000800) != 0),
                 getParentForChildren(),
                 isClean());
         campusAvailability_ = null;
@@ -2693,9 +2557,9 @@ private static final long serialVersionUID = 0L;
     private java.util.List<lol.calico.uctutors.generated.api.v1.VirtualAvailability> virtualAvailability_ =
       java.util.Collections.emptyList();
     private void ensureVirtualAvailabilityIsMutable() {
-      if (!((bitField0_ & 0x00002000) != 0)) {
+      if (!((bitField0_ & 0x00001000) != 0)) {
         virtualAvailability_ = new java.util.ArrayList<lol.calico.uctutors.generated.api.v1.VirtualAvailability>(virtualAvailability_);
-        bitField0_ |= 0x00002000;
+        bitField0_ |= 0x00001000;
        }
     }
 
@@ -2845,7 +2709,7 @@ private static final long serialVersionUID = 0L;
     public Builder clearVirtualAvailability() {
       if (virtualAvailabilityBuilder_ == null) {
         virtualAvailability_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00002000);
+        bitField0_ = (bitField0_ & ~0x00001000);
         onChanged();
       } else {
         virtualAvailabilityBuilder_.clear();
@@ -2922,7 +2786,7 @@ private static final long serialVersionUID = 0L;
         virtualAvailabilityBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
             lol.calico.uctutors.generated.api.v1.VirtualAvailability, lol.calico.uctutors.generated.api.v1.VirtualAvailability.Builder, lol.calico.uctutors.generated.api.v1.VirtualAvailabilityOrBuilder>(
                 virtualAvailability_,
-                ((bitField0_ & 0x00002000) != 0),
+                ((bitField0_ & 0x00001000) != 0),
                 getParentForChildren(),
                 isClean());
         virtualAvailability_ = null;
@@ -2936,7 +2800,7 @@ private static final long serialVersionUID = 0L;
       if (!topics_.isModifiable()) {
         topics_ = new com.google.protobuf.LazyStringArrayList(topics_);
       }
-      bitField0_ |= 0x00004000;
+      bitField0_ |= 0x00002000;
     }
     /**
      * <code>repeated string topics = 14 [json_name = "topics"];</code>
@@ -2982,7 +2846,7 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       ensureTopicsIsMutable();
       topics_.set(index, value);
-      bitField0_ |= 0x00004000;
+      bitField0_ |= 0x00002000;
       onChanged();
       return this;
     }
@@ -2996,7 +2860,7 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       ensureTopicsIsMutable();
       topics_.add(value);
-      bitField0_ |= 0x00004000;
+      bitField0_ |= 0x00002000;
       onChanged();
       return this;
     }
@@ -3010,7 +2874,7 @@ private static final long serialVersionUID = 0L;
       ensureTopicsIsMutable();
       com.google.protobuf.AbstractMessageLite.Builder.addAll(
           values, topics_);
-      bitField0_ |= 0x00004000;
+      bitField0_ |= 0x00002000;
       onChanged();
       return this;
     }
@@ -3021,7 +2885,7 @@ private static final long serialVersionUID = 0L;
     public Builder clearTopics() {
       topics_ =
         com.google.protobuf.LazyStringArrayList.emptyList();
-      bitField0_ = (bitField0_ & ~0x00004000);;
+      bitField0_ = (bitField0_ & ~0x00002000);;
       onChanged();
       return this;
     }
@@ -3036,7 +2900,7 @@ private static final long serialVersionUID = 0L;
       checkByteStringIsUtf8(value);
       ensureTopicsIsMutable();
       topics_.add(value);
-      bitField0_ |= 0x00004000;
+      bitField0_ |= 0x00002000;
       onChanged();
       return this;
     }
@@ -3058,7 +2922,7 @@ private static final long serialVersionUID = 0L;
     public Builder setTutorScore(int value) {
 
       tutorScore_ = value;
-      bitField0_ |= 0x00008000;
+      bitField0_ |= 0x00004000;
       onChanged();
       return this;
     }
@@ -3067,7 +2931,7 @@ private static final long serialVersionUID = 0L;
      * @return This builder for chaining.
      */
     public Builder clearTutorScore() {
-      bitField0_ = (bitField0_ & ~0x00008000);
+      bitField0_ = (bitField0_ & ~0x00004000);
       tutorScore_ = 0;
       onChanged();
       return this;
@@ -3090,7 +2954,7 @@ private static final long serialVersionUID = 0L;
     public Builder setTuteeScore(int value) {
 
       tuteeScore_ = value;
-      bitField0_ |= 0x00010000;
+      bitField0_ |= 0x00008000;
       onChanged();
       return this;
     }
@@ -3099,7 +2963,7 @@ private static final long serialVersionUID = 0L;
      * @return This builder for chaining.
      */
     public Builder clearTuteeScore() {
-      bitField0_ = (bitField0_ & ~0x00010000);
+      bitField0_ = (bitField0_ & ~0x00008000);
       tuteeScore_ = 0;
       onChanged();
       return this;
@@ -3108,9 +2972,9 @@ private static final long serialVersionUID = 0L;
     private java.util.List<lol.calico.uctutors.generated.api.v1.Experience> experiences_ =
       java.util.Collections.emptyList();
     private void ensureExperiencesIsMutable() {
-      if (!((bitField0_ & 0x00020000) != 0)) {
+      if (!((bitField0_ & 0x00010000) != 0)) {
         experiences_ = new java.util.ArrayList<lol.calico.uctutors.generated.api.v1.Experience>(experiences_);
-        bitField0_ |= 0x00020000;
+        bitField0_ |= 0x00010000;
        }
     }
 
@@ -3260,7 +3124,7 @@ private static final long serialVersionUID = 0L;
     public Builder clearExperiences() {
       if (experiencesBuilder_ == null) {
         experiences_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00020000);
+        bitField0_ = (bitField0_ & ~0x00010000);
         onChanged();
       } else {
         experiencesBuilder_.clear();
@@ -3337,7 +3201,7 @@ private static final long serialVersionUID = 0L;
         experiencesBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
             lol.calico.uctutors.generated.api.v1.Experience, lol.calico.uctutors.generated.api.v1.Experience.Builder, lol.calico.uctutors.generated.api.v1.ExperienceOrBuilder>(
                 experiences_,
-                ((bitField0_ & 0x00020000) != 0),
+                ((bitField0_ & 0x00010000) != 0),
                 getParentForChildren(),
                 isClean());
         experiences_ = null;

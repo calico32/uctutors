@@ -15,15 +15,12 @@ import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.ExtendedFloatingActionButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.TransformOrigin
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
@@ -110,26 +107,26 @@ fun Pages() {
     LocalPageController provides pageController,
   ) {
     AppLayout(
-      title = {
-        val currentBackStateEntry by pageController.currentBackStackEntryAsState()
-        val currentRoute by remember {
-          derivedStateOf { currentBackStateEntry?.destination?.route }
-        }
-
-        AnimatedContent(
-          targetState = currentRoute,
-          label = "title",
-          transitionSpec = { transitionFor(initialState, targetState) }
-        ) {
-          val route = Route.find(it ?: "")
-          Text(
-            route?.name ?: it?.replaceFirstChar(Char::uppercaseChar) ?: "UCTutors",
-            style = MaterialTheme.typography.titleLarge,
-            textAlign = TextAlign.Center,
-            modifier = modifier { fillMaxWidth() }
-          )
-        }
-      },
+      // title = {
+      //   val currentBackStateEntry by pageController.currentBackStackEntryAsState()
+      //   val currentRoute by remember {
+      //     derivedStateOf { currentBackStateEntry?.destination?.route }
+      //   }
+      //
+      //   AnimatedContent(
+      //     targetState = currentRoute,
+      //     label = "title",
+      //     transitionSpec = { transitionFor(initialState, targetState) }
+      //   ) {
+      //     val route = Route.find(it ?: "")
+      //     Text(
+      //       route?.name ?: it?.replaceFirstChar(Char::uppercaseChar) ?: "UCTutors",
+      //       style = MaterialTheme.typography.titleLarge,
+      //       textAlign = TextAlign.Center,
+      //       modifier = modifier { fillMaxWidth() }
+      //     )
+      //   }
+      // },
       floatingActionButton = {
         val currentBackStateEntry by pageController.currentBackStackEntryAsState()
         val currentRoute by remember {

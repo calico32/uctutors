@@ -18,7 +18,6 @@ message User {
   string bio = 9;
   string avatar_id = 10;
   string banner_id = 11;
-  string picture_url = 18;
 
   repeated CampusAvailability campus_availability = 12;
   repeated VirtualAvailability virtual_availability = 13;

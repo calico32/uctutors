@@ -27,7 +27,12 @@ const defaultCampusAvailability = JSON.stringify([
 ])
 
 interface MappingTypes {
-  user: { proto: User; prisma: Prisma.User }
+  user: {
+    proto: User
+    prisma: Prisma.User & {
+      experiences?: Prisma.Experience[]
+    }
+  }
   experience: { proto: Experience; prisma: Prisma.Experience }
   message: { proto: Message; prisma: Prisma.Message & { user: Prisma.User } }
   channel: {
@@ -46,30 +51,37 @@ const mappings = {
     bannerId: 'bannerId',
     bio: 'bio',
     campusAvailability: (user) => {
-      return JSON.parse(user.campusAvailability?.toString() ?? defaultCampusAvailability)
+      return JSON.parse(
+        user.campusAvailability
+          ? JSON.stringify(user.campusAvailability)
+          : defaultCampusAvailability
+      )
     },
     classOf: 'classOf',
     email: 'email',
     experiences: async (user) => {
-      const experiences = await prisma.experience.findMany({
-        where: {
-          userId: user.id,
-        },
-      })
-      return experiences.map((experience) => Translator.prismaToProto.experience(experience))
+      const experiences =
+        user.experiences ??
+        (await prisma.experience.findMany({
+          where: {
+            userId: user.id,
+          },
+        }))
+      return Promise.all(
+        experiences.map((experience) => Translator.prismaToProto.experience(experience))
+      )
     },
     firstName: 'firstName',
     id: 'id',
     joined: 'created',
     lastName: 'lastName',
-    pictureUrl: (user) => '',
     school: (user) => schoolFromJSON(user.school),
     topics: 'topics',
     tuteeScore: 'tuteeScore',
     tutorScore: 'tutorScore',
     updated: 'updated',
     virtualAvailability: (user) => {
-      return JSON.parse(user.virtualAvailability?.toString() ?? '[]')
+      return JSON.parse(user.virtualAvailability ? JSON.stringify(user.virtualAvailability) : '[]')
     },
   } as const,
   experience: {
@@ -111,7 +123,9 @@ const mappings = {
 
 interface Translator {
   prismaToProto: {
-    [K in keyof MappingTypes]: (prismaObject: MappingTypes[K]['prisma']) => MappingTypes[K]['proto']
+    [K in keyof MappingTypes]: (
+      prismaObject: MappingTypes[K]['prisma']
+    ) => Promise<MappingTypes[K]['proto']>
   }
   // protoToPrisma: {
   //   [K in keyof MappingTypes]: (protoObject: MappingTypes[K]['proto']) => MappingTypes[K]['prisma']
@@ -127,15 +141,14 @@ const Translator: Translator = {
     mappingEntries.map(([key, mapping]) => {
       return [
         key,
-        (prismaObject: MappingTypes[typeof key]['prisma']) => {
+        async (prismaObject: MappingTypes[typeof key]['prisma']) => {
           const protoObject = {} as MappingTypes[typeof key]['proto']
           const map = Object.entries(mapping) as Entries<typeof mapping>
           for (const [proto, prisma] of map) {
             if (typeof prisma === 'string') {
-              protoObject[proto] = (prismaObject[prisma] ?? null) as any
+              protoObject[proto] = prismaObject[prisma] ?? null
             } else {
-              // @ts-ignore
-              protoObject[proto] = ((prisma as any)(prismaObject) ?? null) as any
+              protoObject[proto] = (await (prisma as any)(prismaObject)) ?? null
             }
           }
           return protoObject

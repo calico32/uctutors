@@ -24,9 +24,7 @@ ksp = "1.9.20-1.0.14"
 credentials = "1.2.0"
 googleid = "1.1.0"
 coil = "2.5.0"
-mockito = "5.8.0"
-bytebuddy = "1.14.10"
-objenesis = "3.3"
+okhttp-bom = "4.12.0"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -73,10 +71,13 @@ hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", v
 datastore = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
 
 coil = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
+okhttp-bom = { group = "com.squareup.okhttp3", name = "okhttp-bom", version.ref = "okhttp-bom" }
+okhttp = { group = "com.squareup.okhttp3", name = "okhttp" }
+okhttp-tls = { group = "com.squareup.okhttp3", name = "okhttp-tls" }
 
-mockito = { group = "org.mockito", name = "mockito-core", version.ref = "mockito" }
-bytebuddy = { group = "net.bytebuddy", name = "byte-buddy", version.ref = "bytebuddy" }
-objenesis = { group = "org.objenesis", name = "objenesis", version.ref = "objenesis" }
+#mockito = { group = "org.mockito", name = "mockito-core", version.ref = "mockito" }
+#bytebuddy = { group = "net.bytebuddy", name = "byte-buddy", version.ref = "bytebuddy" }
+#objenesis = { group = "org.objenesis", name = "objenesis", version.ref = "objenesis" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
