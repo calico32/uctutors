@@ -27,11 +27,11 @@ import lol.calico.uctutors.ui.components.AvailableEvent
 import lol.calico.uctutors.ui.components.AvailableEventBox
 import lol.calico.uctutors.ui.components.CurrentEventBox
 import lol.calico.uctutors.ui.components.Event
+import lol.calico.uctutors.ui.compose.BaselineLayout
 import lol.calico.uctutors.ui.compose.LocalAccountHandler
 import lol.calico.uctutors.ui.compose.LocalAppController
-import lol.calico.uctutors.ui.layout.AppLayout
+import lol.calico.uctutors.ui.compose.LocalUser
 import lol.calico.uctutors.ui.theme.Colors
-import lol.calico.uctutors.ui.theme.UCTutorsTheme
 import lol.calico.uctutors.util.modifier
 
 @Composable
@@ -40,6 +40,7 @@ fun HomePage(contentPadding: PaddingValues) {
   val navController = LocalAppController.current
   val scrollState = rememberScrollState()
   val accountHandler = LocalAccountHandler.current
+  val user = LocalUser.current
 
   var loggingOut by remember { mutableStateOf(false) }
 
@@ -52,7 +53,7 @@ fun HomePage(contentPadding: PaddingValues) {
         verticalScroll(scrollState)
       },
   ) {
-    Text("Hello World")
+    Text("Welcome back, ${user.firstName ?: "User"}!")
     if (loggingOut) {
       CircularProgressIndicator(
         modifier =
@@ -307,5 +308,5 @@ fun HomePage(contentPadding: PaddingValues) {
 @Preview(showSystemUi = true)
 @Composable
 fun HomePagePreview() {
-  UCTutorsTheme { AppLayout { HomePage(it) } }
+  BaselineLayout { HomePage(it) }
 }

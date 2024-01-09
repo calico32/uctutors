@@ -149,7 +149,14 @@ fun Pages() {
           if (fab != null) {
             Box(modifier = modifier { padding(bottom = 18.dp, end = 6.dp) }) { fab() }
           } else {
-            ExtendedFloatingActionButton(onClick = {}, modifier = modifier { alpha(0f) }) {}
+            ExtendedFloatingActionButton(
+              onClick = {},
+              modifier =
+                modifier {
+                  alpha(0f)
+                  size(0.dp)
+                }
+            ) {}
           }
         }
       }

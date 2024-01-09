@@ -18,9 +18,12 @@ import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.getErrorOr
 import lol.calico.uctutors.generated.api.v1.LoginStatus
+import lol.calico.uctutors.ui.components.ErrorSurface
+import lol.calico.uctutors.ui.components.ErrorSurfaceController
 import lol.calico.uctutors.ui.compose.Baseline
 import lol.calico.uctutors.ui.compose.LocalAccountHandler
 import lol.calico.uctutors.ui.compose.LocalAppController
+import lol.calico.uctutors.ui.compose.LocalErrorSurfaceController
 import lol.calico.uctutors.ui.compose.LocalTokenStorage
 import lol.calico.uctutors.ui.page.loading.LoadingPage
 import lol.calico.uctutors.ui.page.login.LoginPage
@@ -38,6 +41,7 @@ fun App() {
   val token = tokenStorage.token.collectAsState(initial = LOADING)
   var shouldRegister by remember { mutableStateOf(false) }
   val scope = rememberCoroutineScope()
+  val errorSurfaceController = remember { ErrorSurfaceController() }
 
   LaunchedEffect(Unit) { tokenStorage.propagateToken(scope) }
 
@@ -67,7 +71,9 @@ fun App() {
 
     CompositionLocalProvider(
       LocalAppController provides appController,
+      LocalErrorSurfaceController provides errorSurfaceController,
     ) {
+      ErrorSurface(controller = errorSurfaceController)
       NavHost(appController, startDestination = "loading") {
         composable("loading") { LoadingPage() }
 

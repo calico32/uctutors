@@ -90,6 +90,16 @@ public final class MessagesProto {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_api_v1_AddChannelMemberRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_api_v1_GetChannelInfoRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_api_v1_GetChannelInfoRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_api_v1_GetChannelInfoResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_api_v1_GetChannelInfoResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -137,24 +147,30 @@ public final class MessagesProto {
       "\030\001 \001(\0132\023.api.v1.MessageListR\013messageList" +
       "\"Q\n\027AddChannelMemberRequest\022\035\n\nchannel_i" +
       "d\030\001 \001(\tR\tchannelId\022\027\n\007user_id\030\002 \001(\tR\006use" +
-      "rId2\310\004\n\016MessageService\022B\n\013GetChannels\022\026." +
-      "google.protobuf.Empty\032\033.api.v1.GetChanne" +
-      "lsResponse\022H\n\013OpenChannel\022\032.api.v1.OpenC" +
-      "hannelRequest\032\033.api.v1.OpenChannelRespon" +
-      "se0\001\022C\n\014CloseChannel\022\033.api.v1.CloseChann" +
-      "elRequest\032\026.google.protobuf.Empty\022F\n\013Sen" +
-      "dMessage\022\032.api.v1.SendMessageRequest\032\033.a" +
-      "pi.v1.SendMessageResponse\022A\n\013JoinChannel" +
-      "\022\032.api.v1.JoinChannelRequest\032\026.google.pr" +
-      "otobuf.Empty\022C\n\014LeaveChannel\022\033.api.v1.Le" +
-      "aveChannelRequest\032\026.google.protobuf.Empt" +
-      "y\022F\n\013GetMessages\022\032.api.v1.GetMessagesReq" +
-      "uest\032\033.api.v1.GetMessagesResponse\022K\n\020Add" +
-      "ChannelMember\022\037.api.v1.AddChannelMemberR" +
-      "equest\032\026.google.protobuf.EmptyBn\n$lol.ca" +
-      "lico.uctutors.generated.api.v1B\rMessages" +
-      "ProtoP\001\242\002\003AXX\252\002\006Api.V1\312\002\006Api\\V1\342\002\022Api\\V1" +
-      "\\GPBMetadata\352\002\007Api::V1b\006proto3"
+      "rId\"6\n\025GetChannelInfoRequest\022\035\n\nchannel_" +
+      "id\030\001 \001(\tR\tchannelId\"N\n\026GetChannelInfoRes" +
+      "ponse\0224\n\007channel\030\001 \001(\0132\032.api.v1.MessageC" +
+      "hannelStubR\007channel2\231\005\n\016MessageService\022B" +
+      "\n\013GetChannels\022\026.google.protobuf.Empty\032\033." +
+      "api.v1.GetChannelsResponse\022H\n\013OpenChanne" +
+      "l\022\032.api.v1.OpenChannelRequest\032\033.api.v1.O" +
+      "penChannelResponse0\001\022C\n\014CloseChannel\022\033.a" +
+      "pi.v1.CloseChannelRequest\032\026.google.proto" +
+      "buf.Empty\022F\n\013SendMessage\022\032.api.v1.SendMe" +
+      "ssageRequest\032\033.api.v1.SendMessageRespons" +
+      "e\022A\n\013JoinChannel\022\032.api.v1.JoinChannelReq" +
+      "uest\032\026.google.protobuf.Empty\022C\n\014LeaveCha" +
+      "nnel\022\033.api.v1.LeaveChannelRequest\032\026.goog" +
+      "le.protobuf.Empty\022F\n\013GetMessages\022\032.api.v" +
+      "1.GetMessagesRequest\032\033.api.v1.GetMessage" +
+      "sResponse\022K\n\020AddChannelMember\022\037.api.v1.A" +
+      "ddChannelMemberRequest\032\026.google.protobuf" +
+      ".Empty\022O\n\016GetChannelInfo\022\035.api.v1.GetCha" +
+      "nnelInfoRequest\032\036.api.v1.GetChannelInfoR" +
+      "esponseBn\n$lol.calico.uctutors.generated" +
+      ".api.v1B\rMessagesProtoP\001\242\002\003AXX\252\002\006Api.V1\312" +
+      "\002\006Api\\V1\342\002\022Api\\V1\\GPBMetadata\352\002\007Api::V1b" +
+      "\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -252,6 +268,18 @@ public final class MessagesProto {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_api_v1_AddChannelMemberRequest_descriptor,
         new java.lang.String[] { "ChannelId", "UserId", });
+    internal_static_api_v1_GetChannelInfoRequest_descriptor =
+      getDescriptor().getMessageTypes().get(15);
+    internal_static_api_v1_GetChannelInfoRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_api_v1_GetChannelInfoRequest_descriptor,
+        new java.lang.String[] { "ChannelId", });
+    internal_static_api_v1_GetChannelInfoResponse_descriptor =
+      getDescriptor().getMessageTypes().get(16);
+    internal_static_api_v1_GetChannelInfoResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_api_v1_GetChannelInfoResponse_descriptor,
+        new java.lang.String[] { "Channel", });
     com.google.protobuf.EmptyProto.getDescriptor();
     lol.calico.uctutors.generated.api.v1.UserProto.getDescriptor();
   }

@@ -85,6 +85,14 @@ export interface AddChannelMemberRequest {
   userId: string;
 }
 
+export interface GetChannelInfoRequest {
+  channelId: string;
+}
+
+export interface GetChannelInfoResponse {
+  channel: MessageChannelStub | undefined;
+}
+
 function createBaseGetChannelsResponse(): GetChannelsResponse {
   return { channels: [] };
 }
@@ -1240,6 +1248,122 @@ export const AddChannelMemberRequest = {
   },
 };
 
+function createBaseGetChannelInfoRequest(): GetChannelInfoRequest {
+  return { channelId: "" };
+}
+
+export const GetChannelInfoRequest = {
+  encode(message: GetChannelInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.channelId !== "") {
+      writer.uint32(10).string(message.channelId);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetChannelInfoRequest {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGetChannelInfoRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.channelId = reader.string();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): GetChannelInfoRequest {
+    return { channelId: isSet(object.channelId) ? globalThis.String(object.channelId) : "" };
+  },
+
+  toJSON(message: GetChannelInfoRequest): unknown {
+    const obj: any = {};
+    if (message.channelId !== "") {
+      obj.channelId = message.channelId;
+    }
+    return obj;
+  },
+
+  create(base?: DeepPartial<GetChannelInfoRequest>): GetChannelInfoRequest {
+    return GetChannelInfoRequest.fromPartial(base ?? {});
+  },
+  fromPartial(object: DeepPartial<GetChannelInfoRequest>): GetChannelInfoRequest {
+    const message = createBaseGetChannelInfoRequest();
+    message.channelId = object.channelId ?? "";
+    return message;
+  },
+};
+
+function createBaseGetChannelInfoResponse(): GetChannelInfoResponse {
+  return { channel: undefined };
+}
+
+export const GetChannelInfoResponse = {
+  encode(message: GetChannelInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.channel !== undefined) {
+      MessageChannelStub.encode(message.channel, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetChannelInfoResponse {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGetChannelInfoResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.channel = MessageChannelStub.decode(reader, reader.uint32());
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): GetChannelInfoResponse {
+    return { channel: isSet(object.channel) ? MessageChannelStub.fromJSON(object.channel) : undefined };
+  },
+
+  toJSON(message: GetChannelInfoResponse): unknown {
+    const obj: any = {};
+    if (message.channel !== undefined) {
+      obj.channel = MessageChannelStub.toJSON(message.channel);
+    }
+    return obj;
+  },
+
+  create(base?: DeepPartial<GetChannelInfoResponse>): GetChannelInfoResponse {
+    return GetChannelInfoResponse.fromPartial(base ?? {});
+  },
+  fromPartial(object: DeepPartial<GetChannelInfoResponse>): GetChannelInfoResponse {
+    const message = createBaseGetChannelInfoResponse();
+    message.channel = (object.channel !== undefined && object.channel !== null)
+      ? MessageChannelStub.fromPartial(object.channel)
+      : undefined;
+    return message;
+  },
+};
+
 export type MessageServiceDefinition = typeof MessageServiceDefinition;
 export const MessageServiceDefinition = {
   name: "MessageService",
@@ -1309,6 +1433,14 @@ export const MessageServiceDefinition = {
       responseStream: false,
       options: {},
     },
+    getChannelInfo: {
+      name: "GetChannelInfo",
+      requestType: GetChannelInfoRequest,
+      requestStream: false,
+      responseType: GetChannelInfoResponse,
+      responseStream: false,
+      options: {},
+    },
   },
 } as const;
 
@@ -1333,6 +1465,10 @@ export interface MessageServiceImplementation<CallContextExt = {}> {
     request: AddChannelMemberRequest,
     context: CallContext & CallContextExt,
   ): Promise<DeepPartial<Empty>>;
+  getChannelInfo(
+    request: GetChannelInfoRequest,
+    context: CallContext & CallContextExt,
+  ): Promise<DeepPartial<GetChannelInfoResponse>>;
 }
 
 export interface MessageServiceClient<CallOptionsExt = {}> {
@@ -1356,6 +1492,10 @@ export interface MessageServiceClient<CallOptionsExt = {}> {
     request: DeepPartial<AddChannelMemberRequest>,
     options?: CallOptions & CallOptionsExt,
   ): Promise<Empty>;
+  getChannelInfo(
+    request: DeepPartial<GetChannelInfoRequest>,
+    options?: CallOptions & CallOptionsExt,
+  ): Promise<GetChannelInfoResponse>;
 }
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;

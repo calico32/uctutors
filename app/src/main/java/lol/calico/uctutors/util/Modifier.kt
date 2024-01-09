@@ -21,6 +21,7 @@ import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.FlowColumn
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
@@ -85,6 +86,10 @@ import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.ConstrainScope
+import androidx.constraintlayout.compose.ConstrainedLayoutReference
+import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.ConstraintLayoutScope
 
 @SuppressLint("ModifierFactoryExtensionFunction", "ComposableModifierFactory")
 fun modifier(block: ModifierDsl.() -> Unit): Modifier {
@@ -1054,5 +1059,97 @@ class ModifierDsl {
     alpha: Float
   ) {
     modifier = modifier.alpha(alpha)
+  }
+
+  /* ***************************************************************************************** *
+   *
+   * Intrinsic.kt
+   *
+   * ***************************************************************************************** */
+
+  /**
+   * Declare the preferred width of the content to be the same as the min or max intrinsic width of
+   * the content. The incoming measurement [Constraints] may override this value, forcing the
+   * content to be either smaller or larger.
+   *
+   * See [height] for options of sizing to intrinsic height. Also see [width] and [widthIn] for
+   * other options to set the preferred width.
+   *
+   * Example usage for min intrinsic:
+   *
+   * @sample androidx.compose.foundation.layout.samples.SameWidthBoxes
+   *
+   * Example usage for max intrinsic:
+   *
+   * @sample androidx.compose.foundation.layout.samples.SameWidthTextBoxes
+   */
+  @Stable
+  fun width(intrinsicSize: IntrinsicSize) {
+    modifier = modifier.width(intrinsicSize)
+  }
+
+  /**
+   * Declare the preferred height of the content to be the same as the min or max intrinsic height
+   * of the content. The incoming measurement [Constraints] may override this value, forcing the
+   * content to be either smaller or larger.
+   *
+   * See [width] for other options of sizing to intrinsic width. Also see [height] and [heightIn]
+   * for other options to set the preferred height.
+   */
+  @Stable
+  fun height(intrinsicSize: IntrinsicSize) {
+    modifier = modifier.height(intrinsicSize)
+  }
+
+  /**
+   * Declare the width of the content to be exactly the same as the min or max intrinsic width of
+   * the content. The incoming measurement [Constraints] will not override this value. If the
+   * content intrinsic width does not satisfy the incoming [Constraints], the parent layout will be
+   * reported a size coerced in the [Constraints], and the position of the content will be
+   * automatically offset to be centered on the space assigned to the child by the parent layout
+   * under the assumption that [Constraints] were respected.
+   *
+   * See [height] for options of sizing to intrinsic height. See [width] and [widthIn] for options
+   * to set the preferred width. See [requiredWidth] and [requiredWidthIn] for other options to set
+   * the required width.
+   */
+  @Stable
+  fun requiredWidth(intrinsicSize: IntrinsicSize) {
+    modifier = modifier.requiredWidth(intrinsicSize)
+  }
+
+  /**
+   * Declare the height of the content to be exactly the same as the min or max intrinsic height of
+   * the content. The incoming measurement [Constraints] will not override this value. If the
+   * content intrinsic height does not satisfy the incoming [Constraints], the parent layout will be
+   * reported a size coerced in the [Constraints], and the position of the content will be
+   * automatically offset to be centered on the space assigned to the child by the parent layout
+   * under the assumption that [Constraints] were respected.
+   *
+   * See [width] for options of sizing to intrinsic width. See [height] and [heightIn] for options
+   * to set the preferred height. See [requiredHeight] and [requiredHeightIn] for other options to
+   * set the required height.
+   */
+  @Stable
+  fun requiredHeight(intrinsicSize: IntrinsicSize) {
+    modifier = modifier.requiredHeight(intrinsicSize)
+  }
+
+  /* ***************************************************************************************** *
+   *
+   * ConstraintLayout.kt
+   *
+   * ***************************************************************************************** */
+
+  /**
+   * [Modifier] that defines the constraints, as part of a [ConstraintLayout], of the layout
+   * element.
+   */
+  @Stable
+  fun ConstraintLayoutScope.constrainAs(
+    ref: ConstrainedLayoutReference,
+    constrainBlock: ConstrainScope.() -> Unit
+  ) {
+    modifier = modifier.constrainAs(ref, constrainBlock)
   }
 }

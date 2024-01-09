@@ -79,6 +79,7 @@ dependencies {
   implementation(libs.navigation)
   implementation(libs.material3)
   implementation(libs.material.icons.extended)
+  implementation(libs.constraintlayout)
   testImplementation(libs.junit)
   androidTestImplementation(libs.androidx.test.ext.junit)
   androidTestImplementation(libs.espresso.core)

@@ -263,6 +263,37 @@ public final class MessageServiceGrpc {
     return getAddChannelMemberMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<lol.calico.uctutors.generated.api.v1.GetChannelInfoRequest,
+      lol.calico.uctutors.generated.api.v1.GetChannelInfoResponse> getGetChannelInfoMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GetChannelInfo",
+      requestType = lol.calico.uctutors.generated.api.v1.GetChannelInfoRequest.class,
+      responseType = lol.calico.uctutors.generated.api.v1.GetChannelInfoResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<lol.calico.uctutors.generated.api.v1.GetChannelInfoRequest,
+      lol.calico.uctutors.generated.api.v1.GetChannelInfoResponse> getGetChannelInfoMethod() {
+    io.grpc.MethodDescriptor<lol.calico.uctutors.generated.api.v1.GetChannelInfoRequest, lol.calico.uctutors.generated.api.v1.GetChannelInfoResponse> getGetChannelInfoMethod;
+    if ((getGetChannelInfoMethod = MessageServiceGrpc.getGetChannelInfoMethod) == null) {
+      synchronized (MessageServiceGrpc.class) {
+        if ((getGetChannelInfoMethod = MessageServiceGrpc.getGetChannelInfoMethod) == null) {
+          MessageServiceGrpc.getGetChannelInfoMethod = getGetChannelInfoMethod =
+              io.grpc.MethodDescriptor.<lol.calico.uctutors.generated.api.v1.GetChannelInfoRequest, lol.calico.uctutors.generated.api.v1.GetChannelInfoResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetChannelInfo"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  lol.calico.uctutors.generated.api.v1.GetChannelInfoRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  lol.calico.uctutors.generated.api.v1.GetChannelInfoResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new MessageServiceMethodDescriptorSupplier("GetChannelInfo"))
+              .build();
+        }
+      }
+    }
+    return getGetChannelInfoMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -366,6 +397,13 @@ public final class MessageServiceGrpc {
         io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getAddChannelMemberMethod(), responseObserver);
     }
+
+    /**
+     */
+    default void getChannelInfo(lol.calico.uctutors.generated.api.v1.GetChannelInfoRequest request,
+        io.grpc.stub.StreamObserver<lol.calico.uctutors.generated.api.v1.GetChannelInfoResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetChannelInfoMethod(), responseObserver);
+    }
   }
 
   /**
@@ -458,6 +496,14 @@ public final class MessageServiceGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getAddChannelMemberMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void getChannelInfo(lol.calico.uctutors.generated.api.v1.GetChannelInfoRequest request,
+        io.grpc.stub.StreamObserver<lol.calico.uctutors.generated.api.v1.GetChannelInfoResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getGetChannelInfoMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -532,6 +578,13 @@ public final class MessageServiceGrpc {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getAddChannelMemberMethod(), getCallOptions(), request);
     }
+
+    /**
+     */
+    public lol.calico.uctutors.generated.api.v1.GetChannelInfoResponse getChannelInfo(lol.calico.uctutors.generated.api.v1.GetChannelInfoRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getGetChannelInfoMethod(), getCallOptions(), request);
+    }
   }
 
   /**
@@ -605,6 +658,14 @@ public final class MessageServiceGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getAddChannelMemberMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<lol.calico.uctutors.generated.api.v1.GetChannelInfoResponse> getChannelInfo(
+        lol.calico.uctutors.generated.api.v1.GetChannelInfoRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getGetChannelInfoMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_GET_CHANNELS = 0;
@@ -615,6 +676,7 @@ public final class MessageServiceGrpc {
   private static final int METHODID_LEAVE_CHANNEL = 5;
   private static final int METHODID_GET_MESSAGES = 6;
   private static final int METHODID_ADD_CHANNEL_MEMBER = 7;
+  private static final int METHODID_GET_CHANNEL_INFO = 8;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -664,6 +726,10 @@ public final class MessageServiceGrpc {
         case METHODID_ADD_CHANNEL_MEMBER:
           serviceImpl.addChannelMember((lol.calico.uctutors.generated.api.v1.AddChannelMemberRequest) request,
               (io.grpc.stub.StreamObserver<com.google.protobuf.Empty>) responseObserver);
+          break;
+        case METHODID_GET_CHANNEL_INFO:
+          serviceImpl.getChannelInfo((lol.calico.uctutors.generated.api.v1.GetChannelInfoRequest) request,
+              (io.grpc.stub.StreamObserver<lol.calico.uctutors.generated.api.v1.GetChannelInfoResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -739,6 +805,13 @@ public final class MessageServiceGrpc {
               lol.calico.uctutors.generated.api.v1.AddChannelMemberRequest,
               com.google.protobuf.Empty>(
                 service, METHODID_ADD_CHANNEL_MEMBER)))
+        .addMethod(
+          getGetChannelInfoMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              lol.calico.uctutors.generated.api.v1.GetChannelInfoRequest,
+              lol.calico.uctutors.generated.api.v1.GetChannelInfoResponse>(
+                service, METHODID_GET_CHANNEL_INFO)))
         .build();
   }
 
@@ -795,6 +868,7 @@ public final class MessageServiceGrpc {
               .addMethod(getLeaveChannelMethod())
               .addMethod(getGetMessagesMethod())
               .addMethod(getAddChannelMemberMethod())
+              .addMethod(getGetChannelInfoMethod())
               .build();
         }
       }

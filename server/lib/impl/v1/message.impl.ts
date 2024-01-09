@@ -1,5 +1,5 @@
 import { DeepPartial, Message, MessageServiceImplementation } from '@/generated/api/v1/messages'
-import { prisma } from '@/providers'
+import { logger, prisma } from '@/providers'
 import { AuthSession, Session } from '@/session'
 import Translator from '@/util/translator'
 import { ServerError, Status } from 'nice-grpc'
@@ -69,6 +69,57 @@ export const MessageService: MessageServiceImplementation = {
           userIds: channel.users.map((user) => user.id),
         }
       }),
+    }
+  },
+
+  async getChannelInfo(request, context) {
+    const session = await Session.get<AuthSession>(context.metadata)
+    if (!session.ok) {
+      throw new ServerError(Status.UNAUTHENTICATED, '')
+    }
+
+    if (!request.channelId) {
+      throw new ServerError(Status.INVALID_ARGUMENT, '')
+    }
+
+    const channel = await prisma.messageChannel.findUnique({
+      where: {
+        id: request.channelId,
+      },
+      include: {
+        users: { select: { id: true, firstName: true } },
+        messages: {
+          orderBy: { created: 'desc' },
+          take: 1,
+          include: { user: { select: { firstName: true, lastName: true } } },
+        },
+        pins: { orderBy: { created: 'desc' }, take: 1 },
+      },
+    })
+
+    if (
+      !channel ||
+      (!channel.public && !channel.users.some((user) => user.id === session.value.userId))
+    ) {
+      throw new ServerError(Status.NOT_FOUND, '')
+    }
+
+    const m = channel.messages[0]
+
+    return {
+      channel: {
+        id: channel.id,
+        name:
+          channel.name ??
+          (channel.users.map((user) => user.firstName).join(', ') || 'Unnamed Channel'),
+        description: channel.description ?? undefined,
+        public: channel.public,
+        latestMessage: m
+          ? `${m.user.firstName} ${m.user.lastName}: ${m.content}`
+          : `No messages yet`,
+        pinnedMessageId: channel.pins[0]?.id,
+        userIds: channel.users.map((user) => user.id),
+      },
     }
   },
 
@@ -174,7 +225,7 @@ export const MessageService: MessageServiceImplementation = {
       },
       include: {
         users: { select: { id: true } },
-        messages: { orderBy: { created: 'desc' }, take: 50 },
+        messages: { orderBy: { created: 'desc' }, take: 50, include: { user: true } },
       },
     })
 
@@ -185,19 +236,18 @@ export const MessageService: MessageServiceImplementation = {
       throw new ServerError(Status.NOT_FOUND, '')
     }
 
-    return {
+    const result = {
       messageList: {
-        messages: channel.messages.map((m) => ({
-          channelId: m.channelId,
-          id: m.id,
-          text: m.content,
-          timestamp: m.created.getTime(),
-          userId: m.userId,
-        })),
+        messages: await Promise.all(
+          channel.messages.map((m) => Translator.prismaToProto.message(m))
+        ),
         count: channel.messages.length,
         nextPage: channel.messages[channel.messages.length - 1]?.created.getTime() ?? null,
       },
     }
+
+    logger.$inspect(result)
+    return result
   },
 
   async sendMessage(request, context) {

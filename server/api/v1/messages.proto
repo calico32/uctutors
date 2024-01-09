@@ -13,6 +13,7 @@ service MessageService {
   rpc LeaveChannel(LeaveChannelRequest) returns (google.protobuf.Empty);
   rpc GetMessages(GetMessagesRequest) returns (GetMessagesResponse);
   rpc AddChannelMember(AddChannelMemberRequest) returns (google.protobuf.Empty);
+  rpc GetChannelInfo(GetChannelInfoRequest) returns (GetChannelInfoResponse);
 }
 
 message GetChannelsResponse {
@@ -93,4 +94,12 @@ message GetMessagesResponse {
 message AddChannelMemberRequest {
   string channel_id = 1;
   string user_id = 2;
+}
+
+message GetChannelInfoRequest {
+  string channel_id = 1;
+}
+
+message GetChannelInfoResponse {
+  MessageChannelStub channel = 1;
 }

@@ -1,10 +1,10 @@
 import { ServerCredentials } from '@grpc/grpc-js'
 import fs from 'fs'
-import https from 'https'
 import { createServer } from 'nice-grpc'
 import { ServerReflection, ServerReflectionService } from 'nice-grpc-server-reflection'
 import path from 'path'
 
+import { contentServer } from '@/content'
 import env from '@/env'
 import { ApiInfoServiceDefinition } from '@/generated/api/info'
 import { AuthServiceDefinition } from '@/generated/api/v1/auth'
@@ -18,6 +18,8 @@ import { StatusService } from '@/impl/v1/status.impl'
 import { UserService } from '@/impl/v1/user.impl'
 import { middleware } from '@/middleware'
 import { logger, prisma } from '@/providers'
+
+if (import.meta.hot) await import.meta.hot.data.stopping
 
 prisma.$connect()
 
@@ -80,70 +82,6 @@ const port = await server.listen('0.0.0.0:8000', credentials)
 
 logger.info(`🚀 gRPC started on port ${port}`)
 
-const html = (strings: TemplateStringsArray, ...values: any[]) =>
-  String.raw({ raw: strings }, ...values)
-
-const page = (content: string) => {
-  return html`
-    <html>
-      <head>
-        <title>UCTutors</title>
-        <style>
-          body {
-            font-family: monospace;
-            background-color: #0a0a0c;
-            color: #444;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            margin: 0;
-          }
-        </style>
-      </head>
-      <body>
-        ${content}
-      </body>
-    </html>
-  `
-}
-
-const contentServer = https.createServer(
-  {
-    key: fs.readFileSync(env.TLS_KEY_PATH),
-    cert: fs.readFileSync(env.TLS_CERT_PATH),
-  },
-  async (req, res) => {
-    const url = new URL(req.url!, `http://${req.headers.host}`)
-    const id = url.pathname.slice(1).trim()
-    if (url.pathname === '/' || !id) {
-      res.statusCode = 400
-      res.end(page(html`<p>Nothing to see here.</p>`))
-
-      logger.debug(`🖼️ ${url.pathname} -> 400`)
-      return
-    }
-
-    const file = await prisma.storage.findUnique({ where: { id } })
-    if (!file) {
-      res.statusCode = 404
-      res.end(page(html`<p>File not found.</p>`))
-
-      logger.debug(`🖼️ ${url.pathname} -> 404`)
-      return
-    }
-
-    res.setHeader('Content-Type', file.type)
-    res.setHeader('Content-Disposition', `inline; filename="${file.name}"`)
-    res.setHeader('Last-Modified', file.updated.toUTCString())
-    res.setHeader('Cache-Control', 'public, max-age=31536000, immutable')
-
-    logger.debug(`🖼️ ${url.pathname} -> OK (${file.name}, ${file.type})`)
-
-    res.end(file.data)
-  }
-)
 contentServer.listen(8001, () => {
   logger.info(`🚀 Content server started on port ${8001}`)
 })
@@ -164,7 +102,6 @@ async function stop() {
   await prisma.$disconnect()
 }
 
-if (import.meta.hot) await import.meta.hot.data.stopping
 if (import.meta.hot) {
   let reload = () => {
     logger.info('Performing an HMR reload...')

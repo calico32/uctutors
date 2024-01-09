@@ -68,6 +68,10 @@ public object MessageServiceGrpcKt {
     @JvmStatic
     get() = MessageServiceGrpc.getAddChannelMemberMethod()
 
+  public val getChannelInfoMethod: MethodDescriptor<GetChannelInfoRequest, GetChannelInfoResponse>
+    @JvmStatic
+    get() = MessageServiceGrpc.getGetChannelInfoMethod()
+
   /**
    * A stub for issuing RPCs to a(n) api.v1.MessageService service as suspending coroutines.
    */
@@ -254,6 +258,28 @@ public object MessageServiceGrpcKt {
       callOptions,
       headers
     )
+
+    /**
+     * Executes this RPC and returns the response message, suspending until the RPC completes
+     * with [`Status.OK`][io.grpc.Status].  If the RPC completes with another status, a
+     * corresponding
+     * [StatusException] is thrown.  If this coroutine is cancelled, the RPC is also cancelled
+     * with the corresponding exception as a cause.
+     *
+     * @param request The request message to send to the server.
+     *
+     * @param headers Metadata to attach to the request.  Most users will not need this.
+     *
+     * @return The single response from the server.
+     */
+    public suspend fun getChannelInfo(request: GetChannelInfoRequest, headers: Metadata =
+        Metadata()): GetChannelInfoResponse = unaryRpc(
+      channel,
+      MessageServiceGrpc.getGetChannelInfoMethod(),
+      request,
+      callOptions,
+      headers
+    )
   }
 
   /**
@@ -375,6 +401,21 @@ public object MessageServiceGrpcKt {
     public open suspend fun addChannelMember(request: AddChannelMemberRequest): Empty = throw
         StatusException(UNIMPLEMENTED.withDescription("Method api.v1.MessageService.AddChannelMember is unimplemented"))
 
+    /**
+     * Returns the response to an RPC for api.v1.MessageService.GetChannelInfo.
+     *
+     * If this method fails with a [StatusException], the RPC will fail with the corresponding
+     * [io.grpc.Status].  If this method fails with a [java.util.concurrent.CancellationException],
+     * the RPC will fail
+     * with status `Status.CANCELLED`.  If this method fails for any other reason, the RPC will
+     * fail with `Status.UNKNOWN` with the exception as a cause.
+     *
+     * @param request The request from the client.
+     */
+    public open suspend fun getChannelInfo(request: GetChannelInfoRequest): GetChannelInfoResponse =
+        throw
+        StatusException(UNIMPLEMENTED.withDescription("Method api.v1.MessageService.GetChannelInfo is unimplemented"))
+
     final override fun bindService(): ServerServiceDefinition = builder(getServiceDescriptor())
       .addMethod(unaryServerMethodDefinition(
       context = this.context,
@@ -415,6 +456,11 @@ public object MessageServiceGrpcKt {
       context = this.context,
       descriptor = MessageServiceGrpc.getAddChannelMemberMethod(),
       implementation = ::addChannelMember
+    ))
+      .addMethod(unaryServerMethodDefinition(
+      context = this.context,
+      descriptor = MessageServiceGrpc.getGetChannelInfoMethod(),
+      implementation = ::getChannelInfo
     )).build()
   }
 }

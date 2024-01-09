@@ -13,18 +13,17 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import kotlinx.coroutines.launch
 import lol.calico.uctutors.generated.api.v1.School
 import lol.calico.uctutors.generated.api.v1.User
 import lol.calico.uctutors.generated.api.v1.getUserRequest
 import lol.calico.uctutors.ui.components.RemoteImage
 import lol.calico.uctutors.ui.compose.LocalGrpcConnection
 import lol.calico.uctutors.util.modifier
+import lol.calico.uctutors.util.rememberContextualCoroutineScope
 import lol.calico.uctutors.util.schoolToString
 
 @Composable
@@ -32,9 +31,11 @@ fun YouPage(contentPadding: PaddingValues) {
   val grpc = LocalGrpcConnection.current
   val scrollState = rememberScrollState()
   var user by remember { mutableStateOf<User?>(null) }
-  val scope = rememberCoroutineScope()
+  val scope = rememberContextualCoroutineScope()
 
-  LaunchedEffect(Unit) { scope.launch { user = grpc.user.getUser(getUserRequest {}).user } }
+  LaunchedEffect(Unit) {
+    scope.tryLaunch("Failed to load user info") { user = grpc.user.getUser(getUserRequest {}).user }
+  }
 
   Column(
     modifier =
