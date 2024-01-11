@@ -7,19 +7,24 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.LocalInspectionMode
 import lol.calico.uctutors.generated.api.v1.User
 import lol.calico.uctutors.generated.api.v1.getUserRequest
+import lol.calico.uctutors.util.TestData
 import lol.calico.uctutors.util.rememberContextualCoroutineScope
 
 @Composable
 fun UserProvider(content: @Composable () -> Unit) {
-  var user by remember { mutableStateOf<User?>(null) }
-  val scope = rememberContextualCoroutineScope()
-  val grpc = LocalGrpcConnection.current
+  if (LocalInspectionMode.current) {
+    CompositionLocalProvider(LocalUser provides TestData.user) { content() }
+  } else {
+    var user by remember { mutableStateOf<User?>(null) }
+    val scope = rememberContextualCoroutineScope()
+    val grpc = LocalGrpcConnection.current
 
-  LaunchedEffect(Unit) {
-    scope.tryLaunch("Error getting user") { user = grpc.user.getUser(getUserRequest {}).user }
+    LaunchedEffect(Unit) {
+      scope.tryLaunch("Error getting user") { user = grpc.user.getUser(getUserRequest {}).user }
+    }
+    CompositionLocalProvider(LocalUser provides user) { content() }
   }
-
-  CompositionLocalProvider(LocalUser provides user) { content() }
 }
