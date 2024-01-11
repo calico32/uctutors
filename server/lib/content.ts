@@ -44,7 +44,7 @@ export const contentServer = https.createServer(
       res.statusCode = 400
       res.end(page(html`<p>Nothing to see here.</p>`))
 
-      logger.debug(`🖼️ ${url.pathname} -> 400`)
+      logger.debug(`🖼️  ${url.pathname} -> 400`)
       return
     }
 
@@ -53,7 +53,7 @@ export const contentServer = https.createServer(
       res.statusCode = 404
       res.end(page(html`<p>File not found.</p>`))
 
-      logger.debug(`🖼️ ${url.pathname} -> 404`)
+      logger.debug(`🖼️  ${url.pathname} -> 404`)
       return
     }
 
@@ -62,7 +62,7 @@ export const contentServer = https.createServer(
     res.setHeader('Last-Modified', file.updated.toUTCString())
     res.setHeader('Cache-Control', 'public, max-age=31536000, immutable')
 
-    logger.debug(`🖼️ ${url.pathname} -> OK (${file.name}, ${file.type})`)
+    logger.debug(`🖼️  ${url.pathname} -> OK (${file.name}, ${file.type})`)
 
     res.end(file.data)
   }

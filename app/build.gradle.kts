@@ -104,6 +104,7 @@ dependencies {
   implementation(libs.hilt)
   implementation(libs.hilt.navigation)
   implementation(libs.datastore)
+  implementation(libs.datastore.preferences)
   implementation(libs.credentials)
   implementation(libs.credentials.playservices)
   implementation(libs.googleid)

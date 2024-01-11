@@ -1,6 +1,7 @@
 import { Message, MessageChannelStub } from '@/generated/api/v1/messages'
-import { Experience, User, schoolFromJSON } from '@/generated/api/v1/user'
+import { Experience, User } from '@/generated/api/v1/user'
 import { prisma } from '@/providers'
+import { prismaSchoolToProtoSchool } from '@/util/school'
 import type * as Prisma from '@prisma/client'
 
 type FilterKeysByValue<T, U> = { [K in keyof T]: T[K] extends U | null ? K : never }[keyof T]
@@ -75,7 +76,7 @@ const mappings = {
     id: 'id',
     joined: 'created',
     lastName: 'lastName',
-    school: (user) => schoolFromJSON(user.school),
+    school: (user) => prismaSchoolToProtoSchool(user.school),
     topics: 'topics',
     tuteeScore: 'tuteeScore',
     tutorScore: 'tutorScore',

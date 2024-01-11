@@ -2,13 +2,16 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+      <entry key="AppBarPreview">
+        <State />
+      </entry>
       <entry key="AppPreview">
         <State />
       </entry>
       <entry key="MessagesPagePreview">
         <State />
       </entry>
-      <entry key="RegisterPageVirtualAvailabilityPreview">
+      <entry key="YouPageLayoutPreview">
         <State />
       </entry>
       <entry key="app">

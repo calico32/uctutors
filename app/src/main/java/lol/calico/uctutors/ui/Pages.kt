@@ -29,7 +29,9 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import lol.calico.uctutors.ui.compose.Baseline
 import lol.calico.uctutors.ui.compose.LocalPageController
+import lol.calico.uctutors.ui.compose.LocalUser
 import lol.calico.uctutors.ui.layout.AppLayout
+import lol.calico.uctutors.util.TestData.user
 import lol.calico.uctutors.util.modifier
 
 private const val TAG = "@Pages"
@@ -105,6 +107,7 @@ fun Pages() {
 
   CompositionLocalProvider(
     LocalPageController provides pageController,
+    LocalUser provides user,
   ) {
     AppLayout(
       // title = {
@@ -154,7 +157,7 @@ fun Pages() {
               modifier =
                 modifier {
                   alpha(0f)
-                  size(0.dp)
+                  size(1.dp)
                 }
             ) {}
           }

@@ -18,6 +18,7 @@ import androidx.compose.runtime.remember
 import lol.calico.uctutors.ui.components.AppBar
 import lol.calico.uctutors.ui.compose.LocalPageController
 import lol.calico.uctutors.ui.compose.LocalSnackbarHostState
+import lol.calico.uctutors.ui.compose.UserProvider
 import lol.calico.uctutors.util.modifier
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -30,42 +31,44 @@ fun AppLayout(
   val snackbarHostState = remember { SnackbarHostState() }
 
   CompositionLocalProvider(
-      LocalSnackbarHostState provides snackbarHostState,
+    LocalSnackbarHostState provides snackbarHostState,
   ) {
-    Surface(modifier = modifier { fillMaxSize() }, color = MaterialTheme.colorScheme.background) {
-      Scaffold(
-        snackbarHost = {
-          SnackbarHost(
-            hostState = snackbarHostState,
-            //          modifier = modifier { fillMaxWidth() },
-            //          snackbar = { data ->
-            //            Snackbar(
-            //              snackbarData = data,
-            //              modifier = modifier { fillMaxWidth() },
-            //              onDismiss = { snackbarHostState.currentSnackbarData?.dismiss() },
-            //            )
-            //          },
-          )
-        },
-        topBar = {
-          if (title != null) {
-            val pageController = LocalPageController.current
-            CenterAlignedTopAppBar(
-              title = { title() },
-              navigationIcon = {
-                if (pageController.previousBackStackEntry != null) {
-                  IconButton(onClick = { pageController.popBackStack() }) {
-                    Icon(Icons.Outlined.ArrowBack, contentDescription = "Back")
-                  }
-                }
-              },
+    UserProvider {
+      Surface(modifier = modifier { fillMaxSize() }, color = MaterialTheme.colorScheme.background) {
+        Scaffold(
+          snackbarHost = {
+            SnackbarHost(
+              hostState = snackbarHostState,
+              //          modifier = modifier { fillMaxWidth() },
+              //          snackbar = { data ->
+              //            Snackbar(
+              //              snackbarData = data,
+              //              modifier = modifier { fillMaxWidth() },
+              //              onDismiss = { snackbarHostState.currentSnackbarData?.dismiss() },
+              //            )
+              //          },
             )
-          }
-        },
-        floatingActionButton = { floatingActionButton() },
-        bottomBar = { AppBar() },
-      ) {
-        content(it)
+          },
+          topBar = {
+            if (title != null) {
+              val pageController = LocalPageController.current
+              CenterAlignedTopAppBar(
+                title = { title() },
+                navigationIcon = {
+                  if (pageController.previousBackStackEntry != null) {
+                    IconButton(onClick = { pageController.popBackStack() }) {
+                      Icon(Icons.Outlined.ArrowBack, contentDescription = "Back")
+                    }
+                  }
+                },
+              )
+            }
+          },
+          floatingActionButton = { floatingActionButton() },
+          bottomBar = { AppBar() },
+        ) {
+          content(it)
+        }
       }
     }
   }

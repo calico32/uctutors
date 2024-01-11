@@ -53,7 +53,7 @@ fun HomePage(contentPadding: PaddingValues) {
         verticalScroll(scrollState)
       },
   ) {
-    Text("Welcome back, ${user.firstName ?: "User"}!")
+    Text("Welcome back, ${user?.firstName ?: "User"}!")
     if (loggingOut) {
       CircularProgressIndicator(
         modifier =

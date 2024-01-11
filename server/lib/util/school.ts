@@ -16,3 +16,19 @@ export function protoSchoolToPrismaSchool(school: School): PrismaSchool {
 
   throw new Error(`Invalid school: ${school}`)
 }
+
+export function prismaSchoolToProtoSchool(school: PrismaSchool): School {
+  const map = {
+    [PrismaSchool.AAHS]: School.SCHOOL_AAHS,
+    [PrismaSchool.AIT]: School.SCHOOL_AIT,
+    [PrismaSchool.APA]: School.SCHOOL_APA,
+    [PrismaSchool.MHS]: School.SCHOOL_MHS,
+    [PrismaSchool.UCTECH]: School.SCHOOL_UCTECH,
+  } satisfies Partial<Record<PrismaSchool, School>>
+
+  if (school in map) {
+    return map[school as keyof typeof map]
+  }
+
+  throw new Error(`Invalid school: ${school}`)
+}

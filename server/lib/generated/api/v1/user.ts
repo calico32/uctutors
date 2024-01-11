@@ -45,6 +45,7 @@ export function schoolFromJSON(object: any): School {
 }
 
 export function schoolToJSON(object: School): string {
+  console.log(object)
   switch (object) {
     case School.SCHOOL_UNSPECIFIED:
       return "SCHOOL_UNSPECIFIED";

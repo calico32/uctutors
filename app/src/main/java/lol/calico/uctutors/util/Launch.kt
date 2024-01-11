@@ -5,8 +5,6 @@ import androidx.compose.material3.SnackbarResult
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import kotlin.coroutines.CoroutineContext
-import kotlin.coroutines.EmptyCoroutineContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Job
@@ -14,6 +12,8 @@ import kotlinx.coroutines.launch
 import lol.calico.uctutors.ui.components.ErrorSurfaceController
 import lol.calico.uctutors.ui.compose.LocalErrorSurfaceController
 import lol.calico.uctutors.ui.compose.LocalSnackbarHostState
+import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.EmptyCoroutineContext
 
 fun CoroutineScope.tryLaunch(
   onError: suspend (Throwable) -> Unit = {},
@@ -28,7 +28,7 @@ fun CoroutineScope.tryLaunch(
 }
 
 data class ContextualCoroutineScope(
-  val scope: CoroutineScope,
+  val coroutineScope: CoroutineScope,
   val errorSurfaceController: ErrorSurfaceController,
   val snackbarHostState: SnackbarHostState,
 ) {
@@ -39,7 +39,7 @@ data class ContextualCoroutineScope(
     start: CoroutineStart = CoroutineStart.DEFAULT,
     block: suspend CoroutineScope.() -> Unit
   ): Job {
-    return scope.launch(context, start) {
+    return coroutineScope.launch(context, start) {
       runCatching { block() }
         .onFailure {
           val result =
